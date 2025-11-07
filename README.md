@@ -7,8 +7,8 @@ Website quản lý shop quần áo - ASP.NET MVC5
 - Nguyễn Phát Huy
 
 ## 🛠️ Công nghệ sử dụng
-- ASP.NET MVC5
-- SQL Server
+- ASP.NET MVC5 (VS 2022)
+- SQL Server 2014
 - Entity Framework
 - Bootstrap / jQuery
 
@@ -19,6 +19,6 @@ Website quản lý shop quần áo - ASP.NET MVC5
 - Quản lý đơn hàng
 
 ## 📦 Cách chạy dự án
-1. Khôi phục database từ `/Database/QLShopQuanAoNu.bak`
+1. Chay sql server khuyến nghị 2014
 2. Update string connection trong `Web.config`
-3. Build & Run
+3. Build & Run 
