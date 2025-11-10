@@ -9,14 +9,14 @@ GO
 CREATE DATABASE QL_ShopQuanAoNu
 ON PRIMARY (
     NAME = N'QL_ShopQuanAoNu',
-    FILENAME = 'D:\University\HK1 (2025-2026)\Web_Development\DoAnCuoiMon\Data\QLShopQuanAoNu.mdf',
+    FILENAME = 'D:\University\HK1 (2025-2026)\Web_Development\DoAnCuoiMon\LTW_MVC5_ShopQuanAo\QLShopQuanAoNu.mdf',
     SIZE = 50MB,
     MAXSIZE = 300MB,
     FILEGROWTH = 5%
 )
 LOG ON (
     NAME = N'QL_ShopQuanAoNu_LOG',
-    FILENAME = 'D:\University\HK1 (2025-2026)\Web_Development\DoAnCuoiMon\Data\QLShopQuanAoNu.ldf',
+    FILENAME = 'D:\University\HK1 (2025-2026)\Web_Development\DoAnCuoiMon\LTW_MVC5_ShopQuanAo\QLShopQuanAoNu.ldf',
     SIZE = 10MB,
     MAXSIZE = 200MB,
     FILEGROWTH = 5%
