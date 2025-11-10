@@ -1,0 +1,401 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95B56A28-A358-4F50-97EE-0B0F4472E9E3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebsiteShopQuanAo</RootNamespace>
+    <AssemblyName>WebsiteShopQuanAo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44384</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Start\QL_ShopQuanAoNu.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+      <LastGenOutput>QL_ShopQuanAoNu.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_Start\QL_ShopQuanAoNu.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+      <LastGenOutput>QL_ShopQuanAoNu.cs</LastGenOutput>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="UI_Admin\401.html" />
+    <Content Include="UI_Admin\404.html" />
+    <Content Include="UI_Admin\500.html" />
+    <Content Include="UI_Admin\assets\demo\chart-area-demo.js" />
+    <Content Include="UI_Admin\assets\demo\chart-bar-demo.js" />
+    <Content Include="UI_Admin\assets\demo\chart-pie-demo.js" />
+    <Content Include="UI_Admin\assets\demo\datatables-demo.js" />
+    <Content Include="UI_Admin\assets\img\error-404-monochrome.svg" />
+    <Content Include="UI_Admin\charts.html" />
+    <Content Include="UI_Admin\css\styles.css" />
+    <Content Include="UI_Admin\index.html" />
+    <Content Include="UI_Admin\js\datatables-simple-demo.js" />
+    <Content Include="UI_Admin\js\scripts.js" />
+    <Content Include="UI_Admin\layout-sidenav-light.html" />
+    <Content Include="UI_Admin\layout-static.html" />
+    <Content Include="UI_Admin\login.html" />
+    <Content Include="UI_Admin\password.html" />
+    <Content Include="UI_Admin\register.html" />
+    <Content Include="UI_Admin\tables.html" />
+    <Content Include="UI_User\assets\css\animate.css" />
+    <Content Include="UI_User\assets\css\font.awesome.css" />
+    <Content Include="UI_User\assets\css\ionicons.min.css" />
+    <Content Include="UI_User\assets\css\jquery-ui.min.css" />
+    <Content Include="UI_User\assets\css\magnific-popup.css" />
+    <Content Include="UI_User\assets\css\nice-select.css" />
+    <Content Include="UI_User\assets\css\simple-line-icons.css" />
+    <Content Include="UI_User\assets\css\slick.css" />
+    <Content Include="UI_User\assets\css\style.css" />
+    <Content Include="UI_User\assets\css\vendor\bootstrap.min.css" />
+    <Content Include="UI_User\assets\css\vendor\vendor.min.css" />
+    <Content Include="UI_User\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="UI_User\assets\fonts\ionicons.svg" />
+    <Content Include="UI_User\assets\fonts\Simple-Line-Icons.svg" />
+    <Content Include="UI_User\assets\img\bg\bg1.jpg" />
+    <Content Include="UI_User\assets\img\bg\bg2.jpg" />
+    <Content Include="UI_User\assets\img\bg\bg3.jpg" />
+    <Content Include="UI_User\assets\img\bg\bg4.jpg" />
+    <Content Include="UI_User\assets\img\bg\shop_bg.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog1.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog2.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog3.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog4.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog5.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog6.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog7.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog8.jpg" />
+    <Content Include="UI_User\assets\img\blog\blog9.jpg" />
+    <Content Include="UI_User\assets\img\blog\blogbig.jpg" />
+    <Content Include="UI_User\assets\img\blog\comment2.jpg" />
+    <Content Include="UI_User\assets\img\blog\post-comment1.png" />
+    <Content Include="UI_User\assets\img\blog\post-comment2.png" />
+    <Content Include="UI_User\assets\img\blog\related1.jpg" />
+    <Content Include="UI_User\assets\img\blog\related2.jpg" />
+    <Content Include="UI_User\assets\img\favicon.ico" />
+    <Content Include="UI_User\assets\img\icon\owl.video.play.png" />
+    <Content Include="UI_User\assets\img\logo\Icon metro-list.png" />
+    <Content Include="UI_User\assets\img\logo\Icon open-grid-three-up.png" />
+    <Content Include="UI_User\assets\img\logo\logo.png" />
+    <Content Include="UI_User\assets\img\others\instagram1.png" />
+    <Content Include="UI_User\assets\img\others\instagram2.png" />
+    <Content Include="UI_User\assets\img\others\instagram3.png" />
+    <Content Include="UI_User\assets\img\others\instagram4.png" />
+    <Content Include="UI_User\assets\img\others\instagram5.png" />
+    <Content Include="UI_User\assets\img\others\instagram6.png" />
+    <Content Include="UI_User\assets\img\others\instagram7.png" />
+    <Content Include="UI_User\assets\img\others\instagram8.png" />
+    <Content Include="UI_User\assets\img\paypal.jpg" />
+    <Content Include="UI_User\assets\img\product\big-product\product1.png" />
+    <Content Include="UI_User\assets\img\product\product1.jpg" />
+    <Content Include="UI_User\assets\img\product\product2.jpg" />
+    <Content Include="UI_User\assets\img\product\product2.jpg.png" />
+    <Content Include="UI_User\assets\img\product\product3.jpg" />
+    <Content Include="UI_User\assets\img\product\product4.jpg" />
+    <Content Include="UI_User\assets\img\product\product5.jpg" />
+    <Content Include="UI_User\assets\img\product\product6.jpg" />
+    <Content Include="UI_User\assets\img\product\product7.jpg" />
+    <Content Include="UI_User\assets\img\product\product8.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\product1.png" />
+    <Content Include="UI_User\assets\img\product\small-product\product2.png" />
+    <Content Include="UI_User\assets\img\product\small-product\product3.png" />
+    <Content Include="UI_User\assets\img\product\small-product\product4.png" />
+    <Content Include="UI_User\assets\img\slider\slider1.jpg" />
+    <Content Include="UI_User\assets\js\images-loaded.min.js" />
+    <Content Include="UI_User\assets\js\isotope.pkgd.min.js" />
+    <Content Include="UI_User\assets\js\jquery-ui.min.js" />
+    <Content Include="UI_User\assets\js\jquery.instagramFeed.min.js" />
+    <Content Include="UI_User\assets\js\jquery.magnific-popup.min.js" />
+    <Content Include="UI_User\assets\js\jquery.nice-select.js" />
+    <Content Include="UI_User\assets\js\jquery.scrollup.min.js" />
+    <Content Include="UI_User\assets\js\mailchimp-ajax.js" />
+    <Content Include="UI_User\assets\js\main.js" />
+    <Content Include="UI_User\assets\js\slick.min.js" />
+    <Content Include="UI_User\assets\js\tippy-bundle.umd.js" />
+    <Content Include="UI_User\assets\js\vendor\bootstrap.min.js" />
+    <Content Include="UI_User\assets\js\vendor\jquery-3.4.1.min.js" />
+    <Content Include="UI_User\assets\js\vendor\modernizr-3.7.1.min.js" />
+    <Content Include="UI_User\assets\js\vendor\popper.js" />
+    <Content Include="UI_User\assets\js\vendor\vendor.min.js" />
+    <Content Include="UI_User\assets\js\wow.min.js" />
+    <Content Include="UI_User\blog-details.html" />
+    <Content Include="UI_User\blog.html" />
+    <Content Include="UI_User\cart.html" />
+    <Content Include="UI_User\checkout.html" />
+    <Content Include="UI_User\index.html" />
+    <Content Include="UI_User\product-details.html" />
+    <Content Include="UI_User\shop.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\CHI_TIET_SP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\CT_DON_HANG.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\CT_GIO_HANG.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\CT_PHIEU_NHAP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\DANH_MUC.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\DON_HANG.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\GIO_HANG.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\HINH_ANH_SP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\KHACH_HANG.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\KICH_THUOC.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\MAU_SAC.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\NHA_CUNG_CAP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\PHIEU_NHAP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\QL_ShopQuanAoNu.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_ShopQuanAoNu.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\QL_ShopQuanAoNu.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\QL_ShopQuanAoNu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SAN_PHAM.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\SP_DANGNHAP_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\SP_DM_LIST_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\SP_SP_TIMKIEM_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\TAI_KHOAN.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\VAI_TRO.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <EntityDeploy Include="App_Start\QL_ShopQuanAoNu.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="App_Start\QL_ShopQuanAoNu.edmx.diagram">
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Views\Shared\_MainUserLayout.cshtml" />
+    <Content Include="UI_User\assets\css\style" />
+    <Content Include="UI_User\assets\css\style.css.map" />
+    <Content Include="UI_User\assets\css\style.map" />
+    <Content Include="UI_User\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="UI_User\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="UI_User\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="UI_User\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="UI_User\assets\fonts\FontAwesome.otf" />
+    <Content Include="UI_User\assets\fonts\ionicons.eot" />
+    <Content Include="UI_User\assets\fonts\ionicons.ttf" />
+    <Content Include="UI_User\assets\fonts\ionicons.woff" />
+    <Content Include="UI_User\assets\fonts\Simple-Line-Icons.eot" />
+    <Content Include="UI_User\assets\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="UI_User\assets\fonts\Simple-Line-Icons.woff" />
+    <Content Include="UI_User\assets\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="UI_User\assets\mail.php" />
+    <Content Include="UI_User\assets\scss\section\_banner.scss" />
+    <Content Include="UI_User\assets\scss\section\_blog-details.scss" />
+    <Content Include="UI_User\assets\scss\section\_blog.scss" />
+    <Content Include="UI_User\assets\scss\section\_cart-page.scss" />
+    <Content Include="UI_User\assets\scss\section\_checkout.scss" />
+    <Content Include="UI_User\assets\scss\section\_footer.scss" />
+    <Content Include="UI_User\assets\scss\section\_header.scss" />
+    <Content Include="UI_User\assets\scss\section\_other.scss" />
+    <Content Include="UI_User\assets\scss\section\_product-details.scss" />
+    <Content Include="UI_User\assets\scss\section\_product.scss" />
+    <Content Include="UI_User\assets\scss\section\_quick-view.scss" />
+    <Content Include="UI_User\assets\scss\section\_shop.scss" />
+    <Content Include="UI_User\assets\scss\section\_slider.scss" />
+    <Content Include="UI_User\assets\scss\style.scss" />
+    <Content Include="UI_User\assets\scss\_common.scss" />
+    <Content Include="UI_User\assets\scss\_variabls.scss" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Home\Blank.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51935</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44384/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html class="no-js" lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Uthr – Fashion eCommerce HTML Template </title>
+    <meta name="description" content="Uthr Fashion eCommerce Bootstrap 5 Template is an innovative and modern e-commerce online store website template." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="canonical" href="Replace_with_your_PAGE_URL" />
+
+    <!-- Open Graph (OG) meta tags are snippets of code that control how URLs are displayed when shared on social media  -->
+    <!-- <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Uthr – Fashion eCommerce HTML Template" />
+    <meta property="og:url" content="PAGE_URL" />
+    <meta property="og:site_name" content="SITE_NAME" /> -->
+    <!-- For the og:image content, replace the # with a link of an image -->
+    <!-- <meta property="og:image" content="#" />
+    <meta property="og:description"
+        content="240+ Best Bootstrap Templates are available on this website. Find your template for your project compatible with the most popular HTML library in the world." /> -->
+    <!-- Add site Favicon -->
+    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-192x192.png"
+          sizes="192x192" />
+    <link rel="apple-touch-icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-180x180.png" />
+    <meta name="msapplication-TileImage"
+          content="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-270x270.png" />
+
+    <!-- CSS
+    ========================= -->
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/vendor/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/slick.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/simple-line-icons.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/ionicons.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/font.awesome.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/animate.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/nice-select.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/jquery-ui.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/magnific-popup.css")">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/UI_User/assets/css/style.css")">
+
+    <!--modernizr min js here-->
+    <script src="@Url.Content("~/UI_User/assets/js/vendor/modernizr-3.7.1.min.js")"></script>
+
+
+    <!-- Structured Data  -->
+    <script type="application/ld+json">
+        {
+        "@@context": "http://schema.org",
+        "@@type": "WebSite",
+        "name": "Replace_with_your_site_title",
+        "url": "Replace_with_your_site_URL"
+        }
+    </script>
+
+</head>
+
+<body>
+
+    @Html.Partial("_Header")
+
+    <main style="min-height: calc(100vh - 300px);">
+        @RenderBody()
+    </main>
+
+
+    @Html.Partial("_Footer")
+
+    <script src="@Url.Content("~/UI_User/assets/js/vendor/jquery-3.4.1.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/vendor/popper.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/vendor/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/slick.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/wow.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/jquery.scrollup.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/images-loaded.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/isotope.pkgd.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/jquery.nice-select.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/tippy-bundle.umd.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/jquery-ui.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/jquery.instagramFeed.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/jquery.magnific-popup.min.js")"></script>
+    <script src="@Url.Content("~/UI_User/assets/js/mailchimp-ajax.js")"></script>
+
+    <!-- Main JS -->
+    <script src="@Url.Content("~/UI_User/assets/js/main.js")"></script>
+
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
