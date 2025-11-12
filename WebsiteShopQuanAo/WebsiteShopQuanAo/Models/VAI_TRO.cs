@@ -7,28 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class KHACH_HANG
+    public partial class VAI_TRO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KHACH_HANG()
+        public VAI_TRO()
         {
-            this.DON_HANG = new HashSet<DON_HANG>();
+            this.TAI_KHOAN = new HashSet<TAI_KHOAN>();
         }
     
-        public string MAKH { get; set; }
-        public string HOTEN { get; set; }
-        public string SDT { get; set; }
-        public string EMAIL { get; set; }
-        public string DIACHI { get; set; }
-        public string USERNAME { get; set; }
-        public Nullable<bool> TRANGTHAI { get; set; }
+        public string MAVT { get; set; }
+        public string TENVAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DON_HANG> DON_HANG { get; set; }
+        public virtual ICollection<TAI_KHOAN> TAI_KHOAN { get; set; }
     }
 }

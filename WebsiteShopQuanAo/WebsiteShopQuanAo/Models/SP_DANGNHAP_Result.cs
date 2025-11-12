@@ -7,20 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CT_GIO_HANG
+    public partial class SP_DANGNHAP_Result
     {
-        public string MAGH { get; set; }
-        public string MASP { get; set; }
-        public string MAMAU { get; set; }
-        public string MASIZE { get; set; }
-        public Nullable<int> SOLUONG { get; set; }
-    
-        public virtual CHI_TIET_SP CHI_TIET_SP { get; set; }
-        public virtual GIO_HANG GIO_HANG { get; set; }
+        public string USERNAME { get; set; }
+        public string TENVAI { get; set; }
     }
 }

@@ -7,26 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class GIO_HANG
+    public partial class DON_HANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GIO_HANG()
+        public DON_HANG()
         {
-            this.CT_GIO_HANG = new HashSet<CT_GIO_HANG>();
+            this.CT_DON_HANG = new HashSet<CT_DON_HANG>();
         }
     
-        public string MAGH { get; set; }
-        public string USERNAME { get; set; }
-        public Nullable<System.DateTime> NGAYTAO { get; set; }
+        public string MADH { get; set; }
+        public string MAKH { get; set; }
+        public Nullable<System.DateTime> NGAYDAT { get; set; }
+        public string HINHTHUCTHANHTOAN { get; set; }
+        public string DIACHIGIAO { get; set; }
+        public Nullable<int> GIAMGIA { get; set; }
+        public Nullable<int> TONGSOLUONG { get; set; }
+        public Nullable<decimal> TONGTHANHTIEN { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_GIO_HANG> CT_GIO_HANG { get; set; }
-        public virtual TAI_KHOAN TAI_KHOAN { get; set; }
+        public virtual ICollection<CT_DON_HANG> CT_DON_HANG { get; set; }
+        public virtual KHACH_HANG KHACH_HANG { get; set; }
     }
 }

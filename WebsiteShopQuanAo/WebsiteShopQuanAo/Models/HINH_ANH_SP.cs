@@ -7,13 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class SP_DANGNHAP_Result
+    public partial class HINH_ANH_SP
     {
-        public string USERNAME { get; set; }
-        public string TENVAI { get; set; }
+        public string MAHINH { get; set; }
+        public string MASP { get; set; }
+        public string TENHINHANH { get; set; }
+        public Nullable<bool> TRANGTHAI { get; set; }
+    
+        public virtual SAN_PHAM SAN_PHAM { get; set; }
     }
 }

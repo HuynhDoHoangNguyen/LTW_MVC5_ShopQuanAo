@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MAU_SAC
+    public partial class KICH_THUOC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MAU_SAC()
+        public KICH_THUOC()
         {
             this.CHI_TIET_SP = new HashSet<CHI_TIET_SP>();
         }
     
-        public string MAMAU { get; set; }
-        public string TENMAU { get; set; }
+        public string MASIZE { get; set; }
+        public string TENSIZE { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

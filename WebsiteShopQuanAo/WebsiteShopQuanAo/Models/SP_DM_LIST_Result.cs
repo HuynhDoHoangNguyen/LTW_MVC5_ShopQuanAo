@@ -7,14 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     
-    public partial class SP_SP_TIMKIEM_Result
+    public partial class SP_DM_LIST_Result
     {
-        public string MASP { get; set; }
-        public string TENSP { get; set; }
-        public Nullable<int> SOLUONGTON { get; set; }
+        public string MADM { get; set; }
+        public string TENDM { get; set; }
+        public Nullable<bool> TRANGTHAI { get; set; }
     }
 }

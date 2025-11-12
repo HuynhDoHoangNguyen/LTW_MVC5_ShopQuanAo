@@ -7,31 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SAN_PHAM
+    public partial class NHA_CUNG_CAP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SAN_PHAM()
+        public NHA_CUNG_CAP()
         {
-            this.CHI_TIET_SP = new HashSet<CHI_TIET_SP>();
-            this.HINH_ANH_SP = new HashSet<HINH_ANH_SP>();
+            this.PHIEU_NHAP = new HashSet<PHIEU_NHAP>();
         }
     
-        public string MASP { get; set; }
-        public string TENSP { get; set; }
-        public string MADM { get; set; }
-        public string MOTA { get; set; }
-        public Nullable<int> SOLUONGTON { get; set; }
+        public string MANCC { get; set; }
+        public string TENNCC { get; set; }
+        public string SDT { get; set; }
+        public string DIACHI { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CHI_TIET_SP> CHI_TIET_SP { get; set; }
-        public virtual DANH_MUC DANH_MUC { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HINH_ANH_SP> HINH_ANH_SP { get; set; }
+        public virtual ICollection<PHIEU_NHAP> PHIEU_NHAP { get; set; }
     }
 }
