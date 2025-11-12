@@ -97,17 +97,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Start\QL_ShopQuanAoNu.Context.tt">
+    <Content Include="Global.asax" />
+    <Content Include="Models\QL_ShopQuanAoNu.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
       <LastGenOutput>QL_ShopQuanAoNu.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Start\QL_ShopQuanAoNu.tt">
+    <Content Include="Models\QL_ShopQuanAoNu.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
       <LastGenOutput>QL_ShopQuanAoNu.cs</LastGenOutput>
     </Content>
-    <Content Include="Global.asax" />
     <Content Include="UI_Admin\401.html" />
     <Content Include="UI_Admin\404.html" />
     <Content Include="UI_Admin\500.html" />
@@ -217,92 +217,92 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\CHI_TIET_SP.cs">
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CHI_TIET_SP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\CT_DON_HANG.cs">
+    <Compile Include="Models\CT_DON_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\CT_GIO_HANG.cs">
+    <Compile Include="Models\CT_GIO_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\CT_PHIEU_NHAP.cs">
+    <Compile Include="Models\CT_PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\DANH_MUC.cs">
+    <Compile Include="Models\DANH_MUC.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\DON_HANG.cs">
+    <Compile Include="Models\DON_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\GIO_HANG.cs">
+    <Compile Include="Models\GIO_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\HINH_ANH_SP.cs">
+    <Compile Include="Models\HINH_ANH_SP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\KHACH_HANG.cs">
+    <Compile Include="Models\KHACH_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\KICH_THUOC.cs">
+    <Compile Include="Models\KICH_THUOC.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\MAU_SAC.cs">
+    <Compile Include="Models\MAU_SAC.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\NHA_CUNG_CAP.cs">
+    <Compile Include="Models\NHA_CUNG_CAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\PHIEU_NHAP.cs">
+    <Compile Include="Models\PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\QL_ShopQuanAoNu.Context.cs">
+    <Compile Include="Models\QL_ShopQuanAoNu.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QL_ShopQuanAoNu.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\QL_ShopQuanAoNu.cs">
+    <Compile Include="Models\QL_ShopQuanAoNu.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\QL_ShopQuanAoNu.Designer.cs">
+    <Compile Include="Models\QL_ShopQuanAoNu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SAN_PHAM.cs">
+    <Compile Include="Models\SAN_PHAM.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\SP_DANGNHAP_Result.cs">
+    <Compile Include="Models\SP_DANGNHAP_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\SP_DM_LIST_Result.cs">
+    <Compile Include="Models\SP_DM_LIST_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\SP_SP_TIMKIEM_Result.cs">
+    <Compile Include="Models\SP_SP_TIMKIEM_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\TAI_KHOAN.cs">
+    <Compile Include="Models\TAI_KHOAN.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\VAI_TRO.cs">
+    <Compile Include="Models\VAI_TRO.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="App_Start\QL_ShopQuanAoNu.edmx">
+    <EntityDeploy Include="Models\QL_ShopQuanAoNu.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="App_Start\QL_ShopQuanAoNu.edmx.diagram">
+    <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
@@ -352,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

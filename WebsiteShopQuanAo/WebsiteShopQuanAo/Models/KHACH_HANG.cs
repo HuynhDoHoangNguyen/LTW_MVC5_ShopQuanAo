@@ -7,29 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteShopQuanAo.App_Start
+namespace WebsiteShopQuanAo.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PHIEU_NHAP
+    public partial class KHACH_HANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PHIEU_NHAP()
+        public KHACH_HANG()
         {
-            this.CT_PHIEU_NHAP = new HashSet<CT_PHIEU_NHAP>();
+            this.DON_HANG = new HashSet<DON_HANG>();
         }
     
-        public string MAPN { get; set; }
-        public string MANCC { get; set; }
-        public Nullable<System.DateTime> NGAYLAP { get; set; }
-        public Nullable<int> TONGSOLUONG { get; set; }
-        public Nullable<decimal> TONGTHANHTIEN { get; set; }
-        public string GHICHU { get; set; }
+        public string MAKH { get; set; }
+        public string HOTEN { get; set; }
+        public string SDT { get; set; }
+        public string EMAIL { get; set; }
+        public string DIACHI { get; set; }
+        public string USERNAME { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_PHIEU_NHAP> CT_PHIEU_NHAP { get; set; }
-        public virtual NHA_CUNG_CAP NHA_CUNG_CAP { get; set; }
+        public virtual ICollection<DON_HANG> DON_HANG { get; set; }
     }
 }
