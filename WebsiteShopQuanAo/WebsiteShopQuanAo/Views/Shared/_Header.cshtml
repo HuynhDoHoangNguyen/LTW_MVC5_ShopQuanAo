@@ -136,7 +136,7 @@
                         </div>
                         <div class="free_shipping_text">
                             <p class="text-white">
-                                Free shipping worldwide for orders over $99 
+                                Free shipping worldwide for orders over $99
                                 <a href="#">
                                     Learn More
                                 </a>
@@ -166,31 +166,16 @@
                             <a href="javascript:void(0)"><i class="ion-navicon"></i></a>
                         </div>
                         <div class="header_logo">
-                            <a class="sticky_none" href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a class="sticky_none" href="index.html"><img src="~/UI_User/assets/img/logo/logo.png" alt=""></a>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
                             <nav>
                                 <ul class="d-flex">
-                                    <li><a class="active" href="index.html">demo</a> </li>
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="product-details.html">product</a></li>
-                                    <li><a href="#">sale</a></li>
-                                    <li>
-                                        <a href="#">pages</a>
-                                        <ul class="sub_menu">
-                                            <li><a href="cart.html">Cart Pages</a></li>
-                                            <li><a href="checkout.html">Checkout Pages</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="blog.html">blog</a>
-                                        <ul class="sub_menu">
-                                            <li><a href="blog.html">Blog Pages</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">buy</a></li>
+                                    <li> <a href="@Url.Action("Index","Home")">Trang chủ</a> </li>
+                                    <li><a href="@Url.Action("Index","Products")">Sản phẩm</a></li>
+                                    <li><a href="@Url.Action("Index","Cart")">Giỏ hàng</a></li>
+                                    <li><a href="@Url.Action("Index","Account")">Tài khoản</a></li>
                                 </ul>
                             </nav>
                         </div>
