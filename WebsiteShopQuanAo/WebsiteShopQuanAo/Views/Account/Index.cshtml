@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.TAI_KHOAN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainUserLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MATKHAU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VAI_TRO.TENVAI)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MATKHAU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRANGTHAI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VAI_TRO.TENVAI)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.USERNAME }) |
+            @Html.ActionLink("Details", "Details", new { id=item.USERNAME }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.USERNAME })
+        </td>
+    </tr>
+}
+
+</table>
