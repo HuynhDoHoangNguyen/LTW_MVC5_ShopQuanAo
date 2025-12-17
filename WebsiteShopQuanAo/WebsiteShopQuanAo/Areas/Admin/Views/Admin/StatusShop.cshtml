@@ -1,0 +1,248 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.SAN_PHAM>
+
+@{
+    ViewBag.Title = "StatusShop";
+}
+
+<h2>StatusShop</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOLUONGTON)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONGTON)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRANGTHAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DANH_MUC.TENDM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MASP }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MASP }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MASP })
+            </td>
+        </tr>
+    }
+
+</table>
+<main>
+    <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mt-4 fw-light">PRODUCT <span class="fw-bold">INVENTORY</span></h2>
+            <div class="mt-4">
+                <button class="btn btn-dark-admin shadow-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                    <i class="fas fa-plus me-2"></i> NEW PRODUCT
+                </button>
+            </div>
+        </div>
+
+        <hr class="mb-4 opacity-10">
+
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Tất cả sản phẩm</div>
+                                <div class="h3 fw-bold mb-0">482</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-boxes fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4" style="border-left-color: #d1d1d1;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Sắp hết hàng (< 10)</div>
+                                <div class="h3 fw-bold mb-0 text-danger">12</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Danh mục sản phẩm</div>
+                                <div class="h3 fw-bold mb-0">10</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-tags fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Giá trị kho hàng</div>
+                                <div class="h3 fw-bold mb-0">2.4B</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-warehouse fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center py-3">
+                <span class="small">PRODUCT LISTING</span>
+                <div class="d-flex gap-2">
+                    <input type="text" class="form-control form-control-sm" placeholder="Tìm kiếm mã hoặc tên...">
+                    <button class="btn btn-outline-admin btn-sm"><i class="fas fa-filter"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>CODE</th>
+                                <th>ProductName</th>
+                                <th>CategoryName</th>
+                                <th class="text-center">StockQuantity</th>
+                                <th>Status</th>
+                                <th class="text-end">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="fw-bold">@item.MASP</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-2 bg-light me-3" style="width: 40px; height: 40px; border: 1px solid #eee;"></div>
+                                            <span>@item.TENSP</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-muted small">@item.DANH_MUC.TENDM</span></td>
+                                    <td class="text-center font-monospace">@item.SOLUONGTON</td>
+                                    <td><span class="badge-status bg-active text-uppercase" style="font-size: 0.65rem;">@item.TRANGTHAI</span></td>
+                                    <td class="text-end">
+                                        <!-- SỬA -->
+                                        <a href="@Url.Action("Edit", "Admin", new { id = item.MASP })"
+                                           class="btn btn-sm btn-outline-admin me-1">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+
+                                        <!-- XEM CHI TIẾT -->
+                                        <a href="@Url.Action("Details", "Admin", new { id = item.MASP })"
+                                           class="btn btn-sm btn-outline-info me-1">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <!-- XÓA (POST + CONFIRM) -->
+                                        @using (Html.BeginForm("Delete", "Admin", new { id = item.MASP }, FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                                @*<tr>
+                                    <td class="fw-bold">#SP001</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-2 bg-light me-3" style="width: 40px; height: 40px; border: 1px solid #eee;"></div>
+                                            <span>Áo sơ mi lụa cao cấp</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-muted small">Sơ mi</span></td>
+                                    <td class="text-center font-monospace">124</td>
+                                    <td><span class="badge-status bg-active text-uppercase" style="font-size: 0.65rem;">Available</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-outline-admin me-1"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-sm btn-outline-admin text-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">#SP002</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-2 bg-light me-3" style="width: 40px; height: 40px; border: 1px solid #eee;"></div>
+                                            <span>Chân váy chữ A đen</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-muted small">Chân váy</span></td>
+                                    <td class="text-center font-monospace text-danger fw-bold">05</td>
+                                    <td><span class="badge-status bg-light text-muted text-uppercase" style="font-size: 0.65rem;">Low Stock</span></td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-outline-admin me-1"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="btn btn-sm btn-outline-admin text-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>*@
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white py-3 border-top-0">
+                <div class="d-flex justify-content-between align-items-center small text-muted">
+                    <span>Hiển thị 1 đến 10 của 482 sản phẩm</span>
+                    <nav aria-label="Product Page Navigation">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="0">Trước đó</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link border-0 bg-dark text-white shadow-sm btn-pagination" href="#" data-page="1">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">Kế tiếp</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
