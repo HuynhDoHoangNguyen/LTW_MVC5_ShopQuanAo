@@ -4,8 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/admin-forms-complete.css.css")" rel="stylesheet" />
+}
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>SAN_PHAM</h4>
@@ -53,7 +54,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

@@ -97,7 +97,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Boot\css\Admin.css" />
+    <Content Include="Areas\Admin\Boot\css\admin-forms-complete.css" />
+    <Content Include="Areas\Admin\Boot\css\ShopStatus.css" />
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Admin\Boot\assets\demo\chart-area-demo.js" />

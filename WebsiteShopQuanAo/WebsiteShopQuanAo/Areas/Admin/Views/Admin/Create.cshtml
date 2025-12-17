@@ -4,13 +4,13 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
+@*@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/admin-forms-complete.css.css")" rel="stylesheet" />
+}*@
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>SAN_PHAM</h4>
         <hr />
