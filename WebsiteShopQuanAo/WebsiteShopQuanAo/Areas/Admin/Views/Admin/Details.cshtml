@@ -1,59 +1,174 @@
-﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
+﻿﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết sản phẩm";
 }
 
 @section Styles {
-    <link href="@Url.Content("~/Areas/Admin/Boot/css/admin-forms-complete.css.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/admin-forms-complete.css")" rel="stylesheet" />
 }
-<div>
-    <h4>SAN_PHAM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TENSP)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TENSP)
-        </dd>
+<div class="create-page-body">
+    <div class="create-container">
+        <!-- Header -->
+        <div class="create-header">
+            <div class="create-title-section">
+                <h1 class="create-main-title">
+                    <i class="fas fa-eye"></i>
+                    Chi tiết sản phẩm
+                </h1>
+                <p class="create-subtitle">Thông tin chi tiết về sản phẩm</p>
+                <a href="@Url.Action("Index")" class="back-to-list-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại danh sách
+                </a>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MOTA)
-        </dt>
+        <!-- Details Card -->
+        <div class="form-card-create">
+            <div class="card-header-create">
+                <h4><i class="fas fa-info-circle"></i> Thông tin sản phẩm</h4>
+            </div>
+            <div class="card-body-create">
+                <div class="details-section">
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-barcode"></i> Mã sản phẩm
+                        </div>
+                        <div class="form-input-create">
+                            <div class="detail-value">@Html.DisplayFor(model => model.MASP)</div>
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MOTA)
-        </dd>
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-tag"></i> Tên sản phẩm
+                        </div>
+                        <div class="form-input-create">
+                            <div class="detail-value">@Html.DisplayFor(model => model.TENSP)</div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SOLUONGTON)
-        </dt>
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-list"></i> Danh mục
+                        </div>
+                        <div class="form-input-create">
+                            <div class="detail-value">@Html.DisplayFor(model => model.DANH_MUC.TENDM)</div>
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SOLUONGTON)
-        </dd>
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-align-left"></i> Mô tả
+                        </div>
+                        <div class="form-input-create">
+                            <div class="detail-value">@Html.DisplayFor(model => model.MOTA)</div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TRANGTHAI)
-        </dt>
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-boxes"></i> Số lượng tồn
+                        </div>
+                        <div class="form-input-create">
+                            <div class="detail-value">@Html.DisplayFor(model => model.SOLUONGTON)</div>
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TRANGTHAI)
-        </dd>
+                    <div class="form-group-create">
+                        <div class="control-label-create">
+                            <i class="fas fa-toggle-on"></i> Trạng thái
+                        </div>
+                        <div class="form-input-create">
+                            @if (Model.TRANGTHAI == true)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
-        </dt>
+                            {
+                                <span class="status-badge active">
+                                    <i class="fas fa-check-circle"></i> Đang hoạt động
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-badge inactive">
+                                    <i class="fas fa-times-circle"></i> Ngừng hoạt động
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DANH_MUC.TENDM)
-        </dd>
+                <!-- Action Buttons -->
+                <div class="form-actions-create">
+                    <a href="@Url.Action("Edit", new { id = Model.MASP })" class="btn-create btn-create-primary">
+                        <i class="fas fa-edit"></i>
+                        Chỉnh sửa
+                    </a>
+                    <a href="@Url.Action("Index")" class="btn-create btn-create-secondary">
+                        <i class="fas fa-list"></i>
+                        Danh sách
+                    </a>
+                </div>
+            </div>
+        </div>
 
-    </dl>
+        <!-- Footer -->
+        <div class="create-footer">
+            <div class="footer-logo-create">
+                <i class="fas fa-tshirt"></i>
+                <span>ShopQuanAo</span>
+            </div>
+            <p class="footer-text-create">Hệ thống quản lý sản phẩm chuyên nghiệp</p>
+            <div class="footer-meta-create">
+                <span><i class="fas fa-calendar"></i> @DateTime.Now.ToString("dd/MM/yyyy")</span>
+                <span class="divider-create">|</span>
+                <span><i class="fas fa-user-shield"></i> Quản trị viên</span>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MASP }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<style>
+    .detail-value {
+        padding: 14px 16px;
+        background: var(--bg-tertiary);
+        border: 2px solid transparent;
+        border-radius: var(--border-radius);
+        font-size: 15px;
+        color: var(--text-primary);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+        .status-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-badge.inactive {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .status-badge i {
+            font-size: 16px;
+        }
+
+    .details-section {
+        margin-bottom: 30px;
+    }
+</style>

@@ -10,9 +10,14 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mt-4 fw-light">PRODUCT <span class="fw-bold">INVENTORY</span></h2>
             <div class="mt-4">
-                <button class="btn btn-dark-admin shadow-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                    <i class="fas fa-plus me-2"></i> NEW PRODUCT
-                </button>
+              
+                    <!-- Nếu bạn muốn điều hướng đến trang Create thay vì modal -->
+                    @Html.ActionLink("THÊM SẢN PHẨM MỚI", "Create", "Admin", null, new
+                    {
+                        @class = "btn btn-dark-admin shadow-sm",
+                        @style = "text-decoration: none; color: white;"
+                    })
+          
             </div>
         </div>
 

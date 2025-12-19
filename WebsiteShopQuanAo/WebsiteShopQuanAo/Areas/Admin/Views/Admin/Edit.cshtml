@@ -1,74 +1,196 @@
-﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
+﻿﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa sản phẩm";
 }
 
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/ShopStatus.css")" rel="stylesheet" />
+}
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>SAN_PHAM</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MASP)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TENSP, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
+<div class="create-page-body">
+    <div class="create-container">
+        <!-- Header -->
+        <div class="create-header">
+            <div class="create-title-section">
+                <h1 class="create-main-title">
+                    <i class="fas fa-edit"></i>
+                    Chỉnh sửa sản phẩm
+                </h1>
+                <p class="create-subtitle">Cập nhật thông tin sản phẩm</p>
+                <a href="@Url.Action("Index")" class="back-to-list-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại danh sách
+                </a>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MADM, "MADM", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MADM", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MADM, "", new { @class = "text-danger" })
+        <!-- Form Card -->
+        <div class="form-card-create">
+            <div class="card-header-create">
+                <h4><i class="fas fa-pencil-alt"></i> Chỉnh sửa thông tin</h4>
+            </div>
+            <div class="card-body-create">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.MASP)
+
+                    @Html.ValidationSummary(true, "", new { @class = "validation-summary-create" })
+
+                    <div class="form-horizontal-create">
+                        <!-- Mã sản phẩm (readonly) -->
+                        <div class="form-group-create">
+                            <div class="control-label-create">
+                                <i class="fas fa-barcode"></i> Mã sản phẩm
+                            </div>
+                            <div class="form-input-create">
+                                <input type="text" class="form-control-create" value="@Model.MASP" readonly>
+                                <div class="form-hint">Mã sản phẩm không thể thay đổi</div>
+                            </div>
+                        </div>
+
+                        <!-- Tên sản phẩm -->
+                        <div class="form-group-create">
+                            @Html.LabelFor(model => model.TENSP, htmlAttributes: new { @class = "control-label-create required" })
+                            <div class="form-input-create">
+                                @Html.EditorFor(model => model.TENSP, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                    @class = "form-control-create",
+                                    placeholder = "Nhập tên sản phẩm"
+                                    }
+                                })
+                                @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger-create" })
+                            </div>
+                        </div>
+
+                        <!-- Danh mục -->
+                        <div class="form-group-create">
+                            @Html.LabelFor(model => model.MADM, "Danh mục", htmlAttributes: new { @class = "control-label-create required" })
+                            <div class="form-input-create">
+                                @Html.DropDownList("MADM", null, "-- Chọn danh mục --", htmlAttributes: new { @class = "form-control-create" })
+                                @Html.ValidationMessageFor(model => model.MADM, "", new { @class = "text-danger-create" })
+                            </div>
+                        </div>
+
+                        <!-- Mô tả -->
+                        <div class="form-group-create">
+                            @Html.LabelFor(model => model.MOTA, htmlAttributes: new { @class = "control-label-create" })
+                            <div class="form-input-create">
+                                @Html.EditorFor(model => model.MOTA, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control-create",
+                                   placeholder = "Mô tả chi tiết về sản phẩm...",
+                                   rows = "4"
+                               }
+                           })
+                                @Html.ValidationMessageFor(model => model.MOTA, "", new { @class = "text-danger-create" })
+                            </div>
+                        </div>
+
+                        <!-- Số lượng tồn -->
+                        <div class="form-group-create">
+                            @Html.LabelFor(model => model.SOLUONGTON, htmlAttributes: new { @class = "control-label-create required" })
+                            <div class="form-input-create">
+                                @Html.EditorFor(model => model.SOLUONGTON, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @class = "form-control-create",
+                                   placeholder = "0",
+                                   type = "number",
+                                   min = "0"
+                               }
+                           })
+                                @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger-create" })
+                            </div>
+                        </div>
+
+                        <!-- Trạng thái -->
+                        <div class="form-group-create">
+                            @Html.LabelFor(model => model.TRANGTHAI, htmlAttributes: new { @class = "control-label-create" })
+                            <div class="form-input-create">
+                                <div class="checkbox-create">
+                                    @Html.EditorFor(model => model.TRANGTHAI)
+                                    <label for="TRANGTHAI">Sản phẩm đang hoạt động</label>
+                                    @Html.ValidationMessageFor(model => model.TRANGTHAI, "", new { @class = "text-danger-create" })
+                                </div>
+                                <div class="form-hint">
+                                    <i class="fas fa-info-circle"></i> Khi bật, sản phẩm sẽ hiển thị trên website và khách hàng có thể đặt mua.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions-create">
+                            <a href="@Url.Action("Index")" class="btn-create btn-create-secondary">
+                                <i class="fas fa-times"></i>
+                                Hủy bỏ
+                            </a>
+                            <button type="submit" class="btn-create btn-create-primary">
+                                <i class="fas fa-save"></i>
+                                Lưu thay đổi
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MOTA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MOTA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MOTA, "", new { @class = "text-danger" })
+        <!-- Footer -->
+        <div class="create-footer">
+            <div class="footer-logo-create">
+                <i class="fas fa-tshirt"></i>
+                <span>ShopQuanAo</span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SOLUONGTON, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TRANGTHAI, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.TRANGTHAI)
-                    @Html.ValidationMessageFor(model => model.TRANGTHAI, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <p class="footer-text-create">Hệ thống quản lý sản phẩm chuyên nghiệp</p>
+            <div class="footer-meta-create">
+                <span><i class="fas fa-calendar"></i> @DateTime.Now.ToString("dd/MM/yyyy")</span>
+                <span class="divider-create">|</span>
+                <span><i class="fas fa-user-shield"></i> Quản trị viên</span>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Hiệu ứng focus
+            $('.form-control-create').focus(function () {
+                $(this).css('border-color', '#0088FF');
+            }).blur(function () {
+                $(this).css('border-color', '#e9ecef');
+            });
+
+            // Form submit loading
+            $('form').submit(function (e) {
+                if ($(this).valid()) {
+                    var submitBtn = $(this).find('.btn-create-primary');
+                    var originalText = submitBtn.html();
+
+                    submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Đang lưu...');
+                    submitBtn.prop('disabled', true);
+
+                    // Simulate loading (remove in production)
+                    setTimeout(function () {
+                        submitBtn.html(originalText);
+                        submitBtn.prop('disabled', false);
+                    }, 1500);
+                }
+            });
+
+            // Number input validation
+            $('input[type="number"]').on('input', function () {
+                var value = parseInt($(this).val());
+                if (value < 0) {
+                    $(this).val(0);
+                }
+            });
+        });
+    </script>
+}

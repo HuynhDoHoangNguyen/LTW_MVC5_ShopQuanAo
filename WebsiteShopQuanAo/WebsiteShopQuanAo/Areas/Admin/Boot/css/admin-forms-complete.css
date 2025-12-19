@@ -1,674 +1,472 @@
-﻿/* ===================================
-   ADMIN FORMS - MODERN PROFESSIONAL DESIGN
-   Redesigned with professional web structure
-   =================================== */
+﻿/* create-form.css - Xanh đen chuyên nghiệp */
 
+/* ===== BIẾN MÀU XANH ĐEN ===== */
 :root {
-    --primary-black: #1a1a2e;
-    --secondary-black: #16213e;
-    --dark-navy: #0f3460;
-    --gold: #f39c12;
-    --light-gold: #f1c40f;
-    --dark-gold: #d68910;
-    --white: #ffffff;
-    --light-bg: #f8f9fc;
-    --light-blue: #e8f4f8;
-    --sky-blue: #d4e9f7;
-    --border-color: #e0e6ed;
-    --text-dark: #2c3e50;
-    --text-gray: #5a6c7d;
-    --danger-red: #e74c3c;
-    --success-green: #27ae60;
-    --shadow-gold: rgba(243, 156, 18, 0.3);
-    --shadow-blue: rgba(15, 52, 96, 0.1);
+    /* Xanh đen chủ đạo */
+    --primary-dark: #0A1929;
+    --primary-main: #1E3A5F;
+    --primary-light: #2D4A7A;
+    --primary-lighter: #3A5A8C;
+    /* Xanh nhấn */
+    --accent-dark: #0066CC;
+    --accent-main: #0088FF;
+    --accent-light: #4DA6FF;
+    --accent-lighter: #80C1FF;
+    /* Màu nền */
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    /* Văn bản */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-tertiary: #64748B;
+    --text-light: #94A3B8;
+    /* Trạng thái */
+    --success: #10B981;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    --info: #3B82F6;
+    /* Hiệu ứng */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* Viền */
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
 }
 
-/* ===================================
-   RESET & GLOBAL STYLES
-   =================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: linear-gradient(135deg, #f8f9fc 0%, #e8f4f8 100%);
-    color: var(--text-dark);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+/* ===== BODY VÀ NỀN ===== */
+.create-page-body {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #e8f4ff 100%);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* ===================================
-   MAIN CONTAINER - MODERN LAYOUT
-   =================================== */
-main {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.container {
-    max-width: 100%;
-}
-
-/* ===================================
-   PAGE HEADER SECTION
-   =================================== */
-.page-header {
-    background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%);
-    padding: 40px 50px;
-    border-radius: 20px 20px 0 0;
-    margin-bottom: 0;
-    box-shadow: 0 5px 20px var(--shadow-blue);
-    border: 3px solid var(--gold);
-    border-bottom: none;
-}
-
-h2 {
-    color: var(--white);
-    font-size: 3rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin: 0;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-    h2::before {
+    .create-page-body::before {
         content: '';
-        width: 8px;
-        height: 60px;
-        background: linear-gradient(180deg, var(--gold) 0%, var(--light-gold) 100%);
-        border-radius: 4px;
-        box-shadow: 0 0 20px var(--shadow-gold);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 80%, rgba(0, 136, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(30, 58, 95, 0.08) 0%, transparent 50%);
+        z-index: -1;
+        pointer-events: none;
     }
 
-/* ===================================
-   ALERT/WARNING MESSAGE (for Delete page)
-   =================================== */
-h3 {
-    color: var(--white);
-    background: linear-gradient(135deg, var(--danger-red) 0%, #c0392b 100%);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
-    padding: 25px 50px;
-    border-radius: 0;
-    border: 3px solid var(--danger-red);
-    border-top: none;
-    border-bottom: none;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.2);
-    text-align: center;
-    letter-spacing: 1px;
+/* ===== CONTAINER CHÍNH ===== */
+.create-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-    h3::before {
-        content: '⚠️ ';
-        font-size: 1.8rem;
-        margin-right: 10px;
-    }
-
-/* ===================================
-   FORM SECTION HEADER
-   =================================== */
-h4 {
-    color: var(--white);
-    background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
-    font-size: 1.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 20px 50px;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: 0 4px 15px var(--shadow-gold);
-    border: 3px solid var(--gold);
-    border-top: none;
-    border-bottom: none;
-}
-
-hr {
-    display: none;
-}
-
-/* ===================================
-   MODERN FORM CONTAINER
-   =================================== */
-.form-horizontal,
-div > .form-horizontal {
-    background: var(--white);
-    padding: 0;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 15px 50px var(--shadow-blue);
-    border: 3px solid var(--gold);
-    border-top: none;
-    margin-bottom: 40px;
-    overflow: hidden;
-}
-
-/* ===================================
-   FORM INNER CONTENT
-   =================================== */
-.form-content {
-    padding: 50px;
-}
-
-/* ===================================
-   MODERN FORM GROUPS - CARD STYLE
-   =================================== */
-.form-group {
-    margin-bottom: 0;
-    display: block;
-    background: var(--light-bg);
-    padding: 25px 30px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    border: 2px solid var(--border-color);
-    transition: all 0.3s ease;
+/* ===== HEADER CỦA TRANG CREATE ===== */
+.create-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-main) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    margin-bottom: 30px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-lg);
 }
 
-    .form-group::before {
+    .create-header::before {
         content: '';
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 5px;
-        height: 100%;
-        background: linear-gradient(180deg, var(--gold) 0%, var(--light-gold) 100%);
-        transform: scaleY(0);
-        transition: transform 0.3s ease;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at center, rgba(0, 136, 255, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
     }
 
-    .form-group:hover {
-        border-color: var(--gold);
-        box-shadow: 0 5px 20px var(--shadow-gold);
-        transform: translateY(-2px);
-    }
+.create-title-section {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
 
-        .form-group:hover::before {
-            transform: scaleY(1);
-        }
-
-/* ===================================
-   LABELS - MODERN STYLE
-   =================================== */
-.control-label {
-    color: var(--primary-black);
-    font-size: 1rem;
+.create-main-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 28px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    display: block;
-    margin-bottom: 12px;
-    text-align: left;
-    padding: 0;
+    margin-bottom: 10px;
 }
 
-    .control-label::after {
-        content: '';
-        display: none;
+    .create-main-title i {
+        font-size: 32px;
+        color: var(--accent-light);
     }
 
-    /* Badge style for labels */
-    .control-label::before {
-        content: '●';
-        color: var(--gold);
-        margin-right: 10px;
-        font-size: 0.7rem;
-    }
-
-/* ===================================
-   MODERN FORM CONTROLS
-   =================================== */
-.col-md-10,
-.col-md-2 {
-    width: 100%;
-    padding: 0;
+.create-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 25px;
 }
 
-.form-control {
-    background: var(--white);
-    border: 2px solid var(--border-color);
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 18px 25px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    width: 100%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-    .form-control:focus {
-        background: var(--white);
-        border-color: var(--gold);
-        box-shadow: 0 0 0 4px var(--shadow-gold), 0 4px 20px var(--shadow-gold);
-        outline: none;
-        transform: translateY(-2px);
-    }
-
-    .form-control:hover {
-        border-color: var(--light-gold);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-/* Textarea */
-textarea.form-control {
-    min-height: 150px;
-    resize: vertical;
-    line-height: 1.8;
-}
-
-/* Select Dropdown - Premium Style */
-select.form-control {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23f39c12' d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 20px center;
-    background-size: 18px;
-    padding-right: 55px;
-}
-
-    select.form-control option {
-        padding: 15px;
-        font-size: 1.05rem;
-    }
-
-/* ===================================
-   CHECKBOX - MODERN TOGGLE STYLE
-   =================================== */
-.checkbox {
-    display: flex;
+.back-to-list-btn {
+    display: inline-flex;
     align-items: center;
-    padding: 20px 25px;
-    background: var(--white);
-    border-radius: 12px;
-    border: 2px solid var(--border-color);
-    transition: all 0.3s ease;
-}
-
-    .checkbox:hover {
-        border-color: var(--gold);
-        box-shadow: 0 4px 15px var(--shadow-gold);
-    }
-
-    .checkbox input[type="checkbox"] {
-        width: 50px;
-        height: 28px;
-        cursor: pointer;
-        margin-right: 20px;
-        accent-color: var(--gold);
-        position: relative;
-    }
-
-    .checkbox label {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-/* ===================================
-   VALIDATION MESSAGES - PREMIUM STYLE
-   =================================== */
-.text-danger {
-    color: var(--danger-red);
-    font-size: 0.95rem;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
     font-weight: 600;
-    margin-top: 12px;
-    display: flex;
-    align-items: center;
-    padding: 12px 18px;
-    background: rgba(231, 76, 60, 0.1);
-    border-left: 4px solid var(--danger-red);
-    border-radius: 8px;
-    animation: shake 0.5s;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-    .text-danger::before {
-        content: '⚠';
-        font-size: 1.3rem;
-        margin-right: 10px;
+    .back-to-list-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    75% {
-        transform: translateX(5px);
-    }
-}
-
-.validation-summary-errors {
-    background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
-    border: 3px solid var(--danger-red);
-    border-left: 8px solid var(--danger-red);
-    padding: 30px 35px;
-    border-radius: 15px;
+/* ===== CARD FORM ===== */
+.form-card-create {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
     margin-bottom: 30px;
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.2);
 }
 
-    .validation-summary-errors ul {
-        margin: 15px 0 0 0;
-        list-style: none;
+.card-header-create {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-main) 100%);
+    padding: 25px 30px;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+    .card-header-create h4 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
-    .validation-summary-errors li {
-        color: var(--danger-red);
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 10px 15px;
-        background: rgba(255,255,255,0.5);
-        margin-bottom: 8px;
-        border-radius: 8px;
-    }
-
-        .validation-summary-errors li::before {
-            content: '✖ ';
-            margin-right: 10px;
-            font-size: 1.2rem;
-            font-weight: 900;
+        .card-header-create h4 i {
+            font-size: 22px;
+            color: var(--accent-lighter);
         }
 
-/* ===================================
-   BUTTONS - MODERN GRADIENT DESIGN
-   =================================== */
-.form-group:last-child {
-    background: transparent;
-    border: none;
-    padding: 30px 0 0 0;
+.card-body-create {
+    padding: 40px;
+}
+
+/* ===== FORM STYLING ===== */
+.form-horizontal-create {
     margin-top: 20px;
 }
 
-.col-md-offset-2 {
-    margin-left: 0;
+.form-group-create {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-.btn {
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 18px 50px;
-    border-radius: 12px;
-    border: 3px solid transparent;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-    box-shadow: 0 6px 20px var(--shadow-blue);
-    position: relative;
-    overflow: hidden;
+.control-label-create {
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding-top: 12px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.3);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-    }
-
-    .btn:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-
-/* Primary Button */
-.btn-default,
-input[type="submit"] {
-    background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%);
-    border: 3px solid var(--gold);
-    color: var(--white);
-    position: relative;
-}
-
-    .btn-default:hover,
-    input[type="submit"]:hover {
-        background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
-        border-color: var(--light-gold);
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 15px 40px var(--shadow-gold);
-    }
-
-/* Success Button */
-.btn-success {
-    background: linear-gradient(135deg, var(--success-green) 0%, #229954 100%);
-    border: 3px solid var(--success-green);
-    color: var(--white);
-}
-
-    .btn-success:hover {
-        background: linear-gradient(135deg, #229954 0%, #1e8449 100%);
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 15px 40px rgba(39, 174, 96, 0.4);
-    }
-
-/* Danger Button */
-.btn-danger {
-    background: linear-gradient(135deg, var(--danger-red) 0%, #c0392b 100%);
-    border: 3px solid var(--danger-red);
-    color: var(--white);
-}
-
-    .btn-danger:hover {
-        background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
-        transform: translateY(-5px) scale(1.05);
-        box-shadow: 0 15px 40px rgba(231, 76, 60, 0.4);
-    }
-
-/* ===================================
-   ACTION LINKS - MODERN BUTTONS
-   =================================== */
-div > a,
-p > a {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 15px 35px;
-    background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
-    border: 3px solid var(--border-color);
-    border-radius: 12px;
-    margin-right: 20px;
-    color: var(--primary-black);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.05rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--shadow-blue);
-}
-
-    div > a:hover,
-    p > a:hover {
-        background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
-        border-color: var(--gold);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px var(--shadow-gold);
-        color: var(--gold);
-    }
-
-    div > a::before,
-    p > a::before {
-        content: '← ';
-        font-size: 1.3rem;
-        margin-right: 8px;
-    }
-
-/* ===================================
-   DETAILS PAGE - PROFESSIONAL CARD LAYOUT
-   =================================== */
-.dl-horizontal {
-    background: var(--white);
-    padding: 0;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 15px 50px var(--shadow-blue);
-    border: 3px solid var(--gold);
-    border-top: none;
-    margin-bottom: 40px;
-    overflow: hidden;
-}
-
-    .dl-horizontal dt {
-        color: var(--white);
-        background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%);
-        font-size: 1rem;
+    .control-label-create.required::after {
+        content: " *";
+        color: var(--error);
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        padding: 20px 50px;
-        margin: 0;
-        width: 100%;
-        border-bottom: 3px solid var(--gold);
     }
 
-        .dl-horizontal dt::before {
-            content: '▸ ';
-            color: var(--gold);
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
+.form-input-create {
+    width: 100%;
+}
 
-    .dl-horizontal dd {
-        color: var(--text-dark);
-        font-size: 1.3rem;
-        font-weight: 600;
-        padding: 30px 50px;
+.form-control-create {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-tertiary);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+    .form-control-create:hover {
+        background: var(--bg-secondary);
+        border-color: var(--primary-lighter);
+    }
+
+    .form-control-create:focus {
+        outline: none;
+        background: white;
+        border-color: var(--accent-main);
+        box-shadow: 0 0 0 3px rgba(0, 136, 255, 0.15);
+        transform: translateY(-1px);
+    }
+
+/* Textarea */
+textarea.form-control-create {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Select Dropdown */
+select.form-control-create {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231E3A5F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-color: var(--bg-tertiary);
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+    select.form-control-create:hover {
+        background-color: var(--bg-secondary);
+    }
+
+/* Checkbox Styling */
+.checkbox-create {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+    .checkbox-create input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: var(--accent-main);
+    }
+
+    .checkbox-create label {
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--text-secondary);
+        user-select: none;
+    }
+
+/* ===== VALIDATION ===== */
+.text-danger-create {
+    color: var(--error) !important;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 8px;
+    display: block;
+}
+
+.validation-summary-create {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+    .validation-summary-create ul {
+        list-style: none;
+        padding: 0;
         margin: 0;
-        width: 100%;
-        background: var(--white);
-        border-bottom: 2px solid var(--border-color);
-        min-height: 80px;
+    }
+
+    .validation-summary-create li {
+        color: var(--error);
+        font-weight: 500;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
+        gap: 10px;
     }
 
-        .dl-horizontal dd:last-of-type {
-            border-bottom: none;
+        .validation-summary-create li:last-child {
+            margin-bottom: 0;
         }
 
-        .dl-horizontal dd:nth-of-type(even) {
-            background: var(--light-bg);
+        .validation-summary-create li::before {
+            content: '⚠';
+            font-size: 16px;
         }
 
-/* ===================================
-   DELETE PAGE - FORM ACTIONS
-   =================================== */
-.form-actions {
-    margin-top: 0;
-    padding: 40px 50px;
+/* ===== FORM ACTIONS ===== */
+.form-actions-create {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-create {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 30px;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    min-width: 140px;
+}
+
+.btn-create-primary {
+    background: linear-gradient(135deg, var(--accent-main) 0%, var(--accent-dark) 100%);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+    .btn-create-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+.btn-create-secondary {
+    background: white;
+    color: var(--text-secondary);
+    border: 2px solid var(--bg-tertiary);
+}
+
+    .btn-create-secondary:hover {
+        background: var(--bg-tertiary);
+        border-color: var(--primary-light);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+/* ===== FOOTER CREATE ===== */
+.create-footer {
     text-align: center;
-    background: var(--light-bg);
-    border-top: 3px solid var(--gold);
+    padding: 25px;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-main));
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
 }
 
-    .form-actions.no-color {
-        background: var(--light-bg);
-    }
-
-    .form-actions input[type="submit"] {
-        margin-right: 20px;
-    }
-
-/* ===================================
-   RESPONSIVE DESIGN
-   =================================== */
-@media (max-width: 992px) {
-    .page-header,
-    h4,
-    .form-content,
-    .dl-horizontal dt,
-    .dl-horizontal dd,
-    .form-actions {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    h2 {
-        font-size: 2.5rem;
-    }
+.footer-logo-create {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
+    .footer-logo-create i {
+        color: var(--accent-light);
+        font-size: 20px;
+    }
+
+.footer-text-create {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+.footer-meta-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+    .footer-meta-create i {
+        margin-right: 6px;
+        font-size: 12px;
+    }
+
+.divider-create {
+    opacity: 0.4;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-    h2 {
-        font-size: 2rem;
+    .create-container {
+        padding: 15px;
     }
 
-        h2::before {
-            width: 5px;
-            height: 40px;
-        }
-
-    h3 {
-        font-size: 1.2rem;
-        padding: 20px 25px;
+    .create-header {
+        padding: 20px;
+        text-align: center;
     }
 
-    h4 {
-        font-size: 1.3rem;
+    .create-main-title {
+        justify-content: center;
+        font-size: 24px;
     }
 
-    .page-header,
-    h4,
-    .form-content,
-    .dl-horizontal dt,
-    .dl-horizontal dd,
-    .form-actions {
-        padding-left: 20px;
-        padding-right: 20px;
+    .card-body-create {
+        padding: 25px;
     }
 
-    .form-group {
+    .form-actions-create {
+        flex-direction: column;
+    }
+
+    .btn-create {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .footer-meta-create {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .divider-create {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .create-main-title {
+        font-size: 20px;
+    }
+
+    .card-header-create {
         padding: 20px;
     }
 
-    .btn {
-        padding: 15px 35px;
-        font-size: 1rem;
-    }
+        .card-header-create h4 {
+            font-size: 18px;
+        }
 
-    .form-control {
-        font-size: 1rem;
-        padding: 15px 20px;
-    }
-
-    div > a,
-    p > a {
-        display: block;
-        text-align: center;
-        margin-bottom: 15px;
+    .form-control-create {
+        padding: 12px;
     }
 }
 
-/* ===================================
-   ANIMATIONS
-   =================================== */
+/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(20px);
     }
 
     to {
@@ -677,74 +475,82 @@ p > a {
     }
 }
 
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.form-card-create {
+    animation: fadeInUp 0.5s ease-out;
 }
 
-.form-horizontal,
-.dl-horizontal {
-    animation: fadeInUp 0.7s ease-out;
-}
-
-.form-group {
-    animation: slideInRight 0.5s ease-out;
+.form-group-create {
+    animation: fadeInUp 0.5s ease-out;
     animation-fill-mode: both;
 }
 
-    .form-group:nth-child(1) {
+    .form-group-create:nth-child(1) {
         animation-delay: 0.1s;
     }
 
-    .form-group:nth-child(2) {
+    .form-group-create:nth-child(2) {
         animation-delay: 0.2s;
     }
 
-    .form-group:nth-child(3) {
+    .form-group-create:nth-child(3) {
         animation-delay: 0.3s;
     }
 
-    .form-group:nth-child(4) {
+    .form-group-create:nth-child(4) {
         animation-delay: 0.4s;
     }
 
-    .form-group:nth-child(5) {
+    .form-group-create:nth-child(5) {
         animation-delay: 0.5s;
     }
 
-    .form-group:nth-child(6) {
+    .form-group-create:nth-child(6) {
         animation-delay: 0.6s;
     }
 
-h2 {
-    animation: slideInRight 0.6s ease-out;
+/* ===== FORM HINTS ===== */
+.form-hint {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+    display: block;
 }
 
-/* ===================================
-   SCROLLBAR
-   =================================== */
+/* ===== CHECKBOX ENHANCEMENT ===== */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+    .checkbox-container:hover {
+        background: var(--bg-secondary);
+        border-color: var(--primary-lighter);
+    }
+
+    .checkbox-container input[type="checkbox"]:checked {
+        accent-color: var(--accent-main);
+    }
+
+/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
-    width: 14px;
-    height: 14px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--light-bg);
+    background: var(--bg-tertiary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--gold) 0%, var(--dark-gold) 100%);
-    border-radius: 10px;
-    border: 3px solid var(--light-bg);
+    background: var(--primary-light);
+    border-radius: 4px;
 }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, var(--light-gold) 0%, var(--gold) 100%);
+        background: var(--accent-main);
     }
