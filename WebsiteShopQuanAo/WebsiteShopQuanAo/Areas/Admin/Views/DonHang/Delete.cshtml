@@ -1,0 +1,88 @@
+﻿@model WebsiteShopQuanAo.Models.DON_HANG
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DON_HANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NGAYDAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGAYDAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HINHTHUCTHANHTOAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HINHTHUCTHANHTOAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIACHIGIAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHIGIAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GIAMGIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIAMGIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TONGSOLUONG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONGSOLUONG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TONGTHANHTIEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TONGTHANHTIEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TRANGTHAI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TRANGTHAI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KHACH_HANG.HOTEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KHACH_HANG.HOTEN)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

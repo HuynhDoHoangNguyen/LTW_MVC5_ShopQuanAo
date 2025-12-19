@@ -1,0 +1,279 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.DON_HANG>
+@{
+    ViewBag.Title = "Quản Lý Đơn Hàng";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/DonHang.css")" rel="stylesheet" />
+}
+
+<main class="py-5">
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h2 class="mb-3">
+                QUẢN LÝ <span class="fw-bold">ĐƠN HÀNG</span>
+            </h2>
+            <hr class="w-25 mx-auto mb-4">
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="stat-card card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shopping-cart fa-3x stat-icon"></i>
+                        <p class="text-muted mb-1">Tổng Đơn Hàng</p>
+                        <h3 class="h3 mb-0">@Model.Count()</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-3x stat-icon"></i>
+                        <p class="text-muted mb-1">Chờ Xử Lý</p>
+                        <!-- Sửa: TRANGTHAI thay vì TrangThai -->
+                        <h3 class="h3 mb-0">@Model.Count(x => x.TRANGTHAI == false)</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shipping-fast fa-3x stat-icon"></i>
+                        <p class="text-muted mb-1">Đang Giao</p>
+                        <!-- Đang giao = null (hoặc bạn cần định nghĩa lại logic) -->
+                        <h3 class="h3 mb-0">@Model.Count(x => x.TRANGTHAI == null)</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- CLICKABLE REVENUE CARD -->
+                <a href="@Url.Action("DoanhThu", "ThongKe")" class="text-decoration-none" style="cursor: pointer;">
+                    <div class="stat-card card revenue-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-dollar-sign fa-3x stat-icon"></i>
+                            <p class="text-muted mb-1">Tổng Doanh Thu</p>
+                            <!-- Sửa: TRANGTHAI == true (đã hoàn thành) -->
+                            <h3 class="h3 mb-0">@(Model.Where(x => x.TRANGTHAI == true).Sum(x => (decimal?)x.TONGTHANHTIEN ?? 0).ToString("N0")) đ</h3>
+                            <small class="text-muted d-block mt-2">
+                                <i class="fas fa-chart-line"></i> Xem chi tiết
+                            </small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>DANH SÁCH ĐƠN HÀNG</span>
+                @Html.ActionLink("THÊM ĐƠN HÀNG MỚI", "Create", null, new { @class = "btn btn-dark-admin" })
+            </div>
+
+            <div class="card-body">
+                <!-- Search & Filter -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm theo khách hàng, địa chỉ...">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="statusFilter">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="false">Chờ xử lý</option>
+                            <option value="null">Đang giao</option>
+                            <option value="true">Hoàn thành</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-admin w-100" onclick="resetFilters()">
+                            <i class="fas fa-redo"></i> Đặt lại
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover" id="ordersTable">
+                        <thead>
+                            <tr>
+                                <th>MÃ ĐƠN</th>
+                                <th>NGÀY ĐẶT</th>
+                                <th>KHÁCH HÀNG</th>
+                                <th>ĐỊA CHỈ GIAO</th>
+                                <th>TỔNG TIỀN</th>
+                                <th>TRẠNG THÁI</th>
+                                <th class="text-center">THAO TÁC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="fw-bold">#@item.MADH</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">@(item.NGAYDAT != null ? item.NGAYDAT.Value.ToString("dd/MM/yyyy") : "")</span><br>
+                                        <small class="text-muted">@(item.NGAYDAT != null ? item.NGAYDAT.Value.ToString("HH:mm") : "")</small>
+                                    </td>
+                                    <td>
+                                        @if (item.KHACH_HANG != null)
+                                        {
+                                            <div class="fw-bold">@item.KHACH_HANG.HOTEN</div>
+                                            <!-- Giả sử có Email hoặc SĐT -->
+                                            <small class="text-muted">@item.KHACH_HANG.MAKH</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Không có thông tin</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="text-muted">@item.DIACHIGIAO</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-monospace">@((item.TONGTHANHTIEN ?? 0).ToString("N0")) đ</span>
+                                    </td>
+                                    <td>
+                                        @{
+                                            var statusClass = "";
+                                            string statusText = "";
+
+                                            // Xử lý trạng thái boolean
+                                            if (item.TRANGTHAI == null)
+                                            {
+                                                statusClass = "bg-info text-white";
+                                                statusText = "Đang giao";
+                                            }
+                                            else if (item.TRANGTHAI == true)
+                                            {
+                                                statusClass = "bg-active";
+                                                statusText = "Hoàn thành";
+                                            }
+                                            else // false
+                                            {
+                                                statusClass = "bg-warning text-dark";
+                                                statusText = "Chờ xử lý";
+                                            }
+                                        }
+                                        <span class="badge badge-status @statusClass">@statusText</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a href="@Url.Action("Details", new { id = item.MADH })" class="btn btn-sm btn-outline-info" title="Chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="@Url.Action("Edit", new { id = item.MADH })" class="btn btn-sm btn-outline-warning" title="Sửa">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="@Url.Action("Delete", new { id = item.MADH })" class="btn btn-sm btn-outline-danger" title="Xóa" onclick="return confirm('Bạn có chắc muốn xóa đơn hàng này?');">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="card-footer">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small">
+                        Hiển thị <strong>@Model.Count()</strong> đơn hàng
+                    </span>
+                    <nav>
+                        <ul class="pagination mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            filterTable();
+        });
+
+        // Status filter
+        document.getElementById('statusFilter').addEventListener('change', function () {
+            filterTable();
+        });
+
+        function filterTable() {
+            var searchValue = document.getElementById('searchInput').value.toLowerCase();
+            var statusValue = document.getElementById('statusFilter').value;
+            var table = document.getElementById('ordersTable');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var customerCell = row.getElementsByTagName('td')[2];
+                var addressCell = row.getElementsByTagName('td')[3];
+                var statusCell = row.getElementsByTagName('td')[5]; // Cột trạng thái là thứ 6 (index 5)
+
+                if (customerCell && addressCell && statusCell) {
+                    var customerText = customerCell.textContent.toLowerCase();
+                    var addressText = addressCell.textContent.toLowerCase();
+                    var statusText = statusCell.textContent.toLowerCase();
+
+                    var matchesSearch = searchValue === '' ||
+                        customerText.indexOf(searchValue) > -1 ||
+                        addressText.indexOf(searchValue) > -1;
+
+                    // So sánh trạng thái dựa trên giá trị boolean
+                    var matchesStatus = true;
+                    if (statusValue !== '') {
+                        var statusBadge = statusCell.querySelector('.badge');
+                        var actualStatus = '';
+
+                        if (statusBadge) {
+                            var badgeText = statusBadge.textContent.toLowerCase();
+                            if (badgeText.includes('chờ')) {
+                                actualStatus = 'false';
+                            } else if (badgeText.includes('đang giao')) {
+                                actualStatus = 'null';
+                            } else if (badgeText.includes('hoàn thành')) {
+                                actualStatus = 'true';
+                            }
+                        }
+
+                        matchesStatus = (actualStatus === statusValue);
+                    }
+
+                    row.style.display = (matchesSearch && matchesStatus) ? '' : 'none';
+                }
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            filterTable();
+        }
+    </script>
+}
