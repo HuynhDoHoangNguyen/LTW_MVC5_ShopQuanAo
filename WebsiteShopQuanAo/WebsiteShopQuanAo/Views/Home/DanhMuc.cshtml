@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.DANH_MUC>
+<h2>Categories</h2>
+<ul>
+    <li class="widget_sub_categories">
+        <a href="javascript:void(0)" data-toggle="collapse" data-target="#men">Men</a>
+        <ul class="widget_dropdown_categories collapse show" id="men">
+            @foreach (var item in Model)
+            {
+                <li><a href="@Url.Action("Products", "Home", new {id = item.MADM})"> @item.TENDM <span>@item.SAN_PHAM.Count(x => x.MADM == item.MADM)</span></a></li>
+
+            }
+        </ul>
+    </li>
+</ul>

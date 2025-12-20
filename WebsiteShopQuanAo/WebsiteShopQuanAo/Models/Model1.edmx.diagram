@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a1a0aa0321714c9a826fb223d5ca4d7d" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="77d96393bb8b4b33850a66e43d2fc4a1" Name="Diagram1">
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CHI_TIET_SP" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_DON_HANG" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_GIO_HANG" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
@@ -19,23 +19,24 @@
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHA_CUNG_CAP" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.PHIEU_NHAP" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.SAN_PHAM" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.sysdiagram" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.TAI_KHOAN" Width="1.5" PointX="6" PointY="21" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.VAI_TRO" Width="1.5" PointX="3.75" PointY="21.375" IsExpanded="true" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MAMAU__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MASIZ__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET_S__MASP__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HANG__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HANG__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_NHAP__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HAN__MADH__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HAN__MAGH__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_N__MAPN__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__SAN_PHAM__MADM__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__DON_HANG__MAKH__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__GIO_HANG__USERNA__6D0D32F4" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__HINH_ANH_S__MASP__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MAMAU__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MASIZ__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET_S__MASP__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HANG__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HANG__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_NHAP__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HAN__MADH__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HAN__MAGH__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_N__MAPN__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__SAN_PHAM__MADM__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__DON_HANG__MAKH__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__GIO_HANG__USERNA__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__HINH_ANH_S__MASP__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__0C85DE4D" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
