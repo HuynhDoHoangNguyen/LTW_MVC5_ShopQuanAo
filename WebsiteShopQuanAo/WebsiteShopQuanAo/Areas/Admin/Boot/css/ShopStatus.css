@@ -1,0 +1,473 @@
+﻿/* ===================================
+   ADMIN PRODUCT INVENTORY - PROFESSIONAL LIGHT THEME
+   =================================== */
+
+:root {
+    --primary-black: #1a1a2e;
+    --secondary-black: #16213e;
+    --dark-navy: #0f3460;
+    --gold: #f39c12;
+    --light-gold: #f1c40f;
+    --dark-gold: #d68910;
+    --white: #ffffff;
+    --light-bg: #f8f9fc;
+    --light-blue: #e8f4f8;
+    --sky-blue: #d4e9f7;
+    --border-color: #e0e6ed;
+    --text-dark: #2c3e50;
+    --text-gray: #5a6c7d;
+    --danger-red: #e74c3c;
+    --shadow-gold: rgba(243, 156, 18, 0.3);
+    --shadow-blue: rgba(15, 52, 96, 0.1);
+}
+
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
+body {
+    background: linear-gradient(135deg, #f8f9fc 0%, #e8f4f8 100%);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+main {
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.container-fluid {
+    max-width: 1400px;
+}
+
+/* ===================================
+   HEADER & TITLE
+   =================================== */
+h2 {
+    color: var(--primary-black);
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+    h2 .fw-bold {
+        color: var(--gold);
+        font-weight: 700;
+        text-shadow: 0 2px 4px var(--shadow-gold);
+    }
+
+hr {
+    border-color: var(--gold);
+    opacity: 0.4;
+    border-width: 2px;
+}
+
+/* ===================================
+   BUTTONS
+   =================================== */
+.btn-dark-admin {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+    border: 2px solid var(--gold);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 14px 32px;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px var(--shadow-blue);
+}
+
+    .btn-dark-admin:hover {
+        background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+        border-color: var(--light-gold);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px var(--shadow-gold);
+    }
+
+    .btn-dark-admin i {
+        font-size: 1.15rem;
+    }
+
+/* ===================================
+   STATISTICS CARDS
+   =================================== */
+.stat-card {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+    border: 2px solid var(--border-color);
+    border-left: 5px solid var(--gold);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 5px 15px var(--shadow-blue);
+}
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent 0%, rgba(243, 156, 18, 0.08) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px var(--shadow-gold);
+        border-left-color: var(--light-gold);
+        border-left-width: 6px;
+    }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+    .stat-card .card-body {
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .stat-card .text-muted {
+        color: var(--text-gray) !important;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+    }
+
+    .stat-card .h3 {
+        color: var(--primary-black);
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-top: 10px;
+    }
+
+    .stat-card .text-danger {
+        color: var(--danger-red) !important;
+    }
+
+.stat-icon {
+    color: var(--gold);
+    opacity: 0.25;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+    opacity: 0.5;
+    transform: scale(1.15) rotate(5deg);
+    color: var(--dark-gold);
+}
+
+/* ===================================
+   MAIN CARD (PRODUCT LISTING)
+   =================================== */
+.card {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow-blue);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%);
+    border-bottom: 3px solid var(--gold);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    padding: 1.5rem 1.75rem;
+}
+
+.card-footer {
+    background: var(--light-bg) !important;
+    border-top: 2px solid var(--border-color);
+}
+
+/* ===================================
+   SEARCH & FILTER
+   =================================== */
+.form-control {
+    background: var(--light-bg);
+    border: 2px solid var(--border-color);
+    color: var(--text-dark);
+    font-size: 1rem;
+    padding: 10px 18px;
+    font-weight: 500;
+}
+
+    .form-control:focus {
+        background: var(--white);
+        border-color: var(--gold);
+        color: var(--text-dark);
+        box-shadow: 0 0 15px var(--shadow-gold);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-gray);
+    }
+
+.btn-outline-admin {
+    border: 2px solid var(--primary-black);
+    color: var(--primary-black);
+    background: transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn-outline-admin:hover {
+        background: var(--primary-black);
+        color: var(--white);
+        box-shadow: 0 4px 15px var(--shadow-blue);
+        border-color: var(--gold);
+    }
+
+/* ===================================
+   TABLE STYLING
+   =================================== */
+.table {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+}
+
+    .table thead {
+        background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%);
+        border-bottom: 3px solid var(--gold);
+    }
+
+        .table thead th {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 1.5rem 1.25rem;
+            border: none;
+        }
+
+    .table tbody tr {
+        background: var(--white);
+        border-bottom: 2px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+
+        .table tbody tr:hover {
+            background: var(--sky-blue);
+            box-shadow: 0 3px 12px var(--shadow-gold);
+            transform: scale(1.005);
+        }
+
+    .table tbody td {
+        padding: 1.5rem 1.25rem;
+        vertical-align: middle;
+        border: none;
+        font-size: 1.05rem;
+        font-weight: 500;
+    }
+
+    .table .fw-bold {
+        color: var(--primary-black);
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .table .text-muted {
+        color: var(--text-gray) !important;
+        font-weight: 500;
+    }
+
+.font-monospace {
+    font-family: 'Courier New', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* ===================================
+   PRODUCT IMAGE PLACEHOLDER
+   =================================== */
+.rounded-2.bg-light {
+    background: var(--light-blue) !important;
+    border: 2px solid var(--gold) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+    .rounded-2.bg-light::after {
+        content: '\f03e';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: var(--gold);
+        opacity: 0.4;
+        font-size: 1.3rem;
+    }
+
+/* ===================================
+   STATUS BADGES
+   =================================== */
+.badge-status {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem !important;
+    letter-spacing: 1.2px;
+    display: inline-block;
+    border: 2px solid var(--gold);
+}
+
+.bg-active {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+    color: var(--white) !important;
+    box-shadow: 0 4px 12px var(--shadow-gold);
+}
+
+/* ===================================
+   ACTION BUTTONS
+   =================================== */
+.btn-sm {
+    padding: 10px 14px;
+    font-size: 1rem;
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-info {
+    border-color: var(--primary-black);
+    color: var(--primary-black);
+    background: transparent;
+}
+
+    .btn-outline-info:hover {
+        background: var(--primary-black);
+        color: var(--white);
+        border-color: var(--gold);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px var(--shadow-blue);
+    }
+
+/* ===================================
+   PAGINATION
+   =================================== */
+.pagination {
+    gap: 10px;
+}
+
+.page-link {
+    background: var(--white) !important;
+    border: 2px solid var(--border-color) !important;
+    color: var(--primary-black) !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+    .page-link:hover {
+        background: var(--light-blue) !important;
+        border-color: var(--gold) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px var(--shadow-gold);
+    }
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-navy) 100%) !important;
+    border-color: var(--gold) !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 15px var(--shadow-blue);
+}
+
+.text-muted.small {
+    color: var(--text-gray) !important;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .stat-card .h3 {
+        font-size: 2rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+    .btn-dark-admin {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--light-gold);
+    }
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+.text-gold {
+    color: var(--gold);
+}
+
+.bg-gold {
+    background: var(--gold);
+}
+
+.border-gold {
+    border-color: var(--gold);
+}
+
+.shadow-gold {
+    box-shadow: 0 4px 20px var(--shadow-gold);
+}
