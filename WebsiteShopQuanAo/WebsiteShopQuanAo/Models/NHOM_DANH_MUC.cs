@@ -12,21 +12,19 @@ namespace WebsiteShopQuanAo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GIO_HANG
+    public partial class NHOM_DANH_MUC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GIO_HANG()
+        public NHOM_DANH_MUC()
         {
-            this.CT_GIO_HANG = new HashSet<CT_GIO_HANG>();
+            this.DANH_MUC = new HashSet<DANH_MUC>();
         }
     
-        public string MAGH { get; set; }
-        public string USERNAME { get; set; }
-        public Nullable<System.DateTime> NGAYTAO { get; set; }
+        public string MANHOM { get; set; }
+        public string TENNHOM { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_GIO_HANG> CT_GIO_HANG { get; set; }
-        public virtual TAI_KHOAN TAI_KHOAN { get; set; }
+        public virtual ICollection<DANH_MUC> DANH_MUC { get; set; }
     }
 }

@@ -22,8 +22,10 @@ namespace WebsiteShopQuanAo.Models
     
         public string MADM { get; set; }
         public string TENDM { get; set; }
+        public string MANHOM { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
+        public virtual NHOM_DANH_MUC NHOM_DANH_MUC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SAN_PHAM> SAN_PHAM { get; set; }
     }

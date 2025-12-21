@@ -232,10 +232,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,9 +243,6 @@
     <Compile Include="Models\CT_DON_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CT_GIO_HANG.cs">
-      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CT_PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
@@ -256,9 +250,6 @@
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DON_HANG.cs">
-      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GIO_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HINH_ANH_SP.cs">
@@ -274,6 +265,9 @@
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NHA_CUNG_CAP.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NHOM_DANH_MUC.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHIEU_NHAP.cs">
@@ -316,13 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\QL_ShopQuanAoNu.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
-      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Admin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Details.cshtml" />
@@ -332,6 +319,13 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <EntityDeploy Include="Models\QL_ShopQuanAoNu.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_MainUserLayout.cshtml" />
     <Content Include="UI_User\assets\css\style" />
@@ -380,16 +374,6 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Cart\Create.cshtml" />
-    <Content Include="Views\Cart\Delete.cshtml" />
-    <Content Include="Views\Cart\Details.cshtml" />
-    <Content Include="Views\Cart\Edit.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Order\Create.cshtml" />
-    <Content Include="Views\Order\Delete.cshtml" />
-    <Content Include="Views\Order\Details.cshtml" />
-    <Content Include="Views\Order\Edit.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
