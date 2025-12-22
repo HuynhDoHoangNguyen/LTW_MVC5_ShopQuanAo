@@ -19,7 +19,7 @@ namespace WebsiteShopQuanAo.Models
         public string MAMAU { get; set; }
         public string MASIZE { get; set; }
         public string MACTDH { get; set; }
-        public Nullable<int> SOLUONG { get; set; }
+        public int SOLUONG { get; set; }
         public Nullable<decimal> GIALUCBAN { get; set; }
         public Nullable<decimal> THANHTIEN { get; set; }
     

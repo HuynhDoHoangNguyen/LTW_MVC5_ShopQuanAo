@@ -29,20 +29,82 @@ namespace WebsiteShopQuanAo.Models
     
         public virtual DbSet<CHI_TIET_SP> CHI_TIET_SP { get; set; }
         public virtual DbSet<CT_DON_HANG> CT_DON_HANG { get; set; }
-        public virtual DbSet<CT_GIO_HANG> CT_GIO_HANG { get; set; }
         public virtual DbSet<CT_PHIEU_NHAP> CT_PHIEU_NHAP { get; set; }
         public virtual DbSet<DANH_MUC> DANH_MUC { get; set; }
         public virtual DbSet<DON_HANG> DON_HANG { get; set; }
-        public virtual DbSet<GIO_HANG> GIO_HANG { get; set; }
         public virtual DbSet<HINH_ANH_SP> HINH_ANH_SP { get; set; }
         public virtual DbSet<KHACH_HANG> KHACH_HANG { get; set; }
         public virtual DbSet<KICH_THUOC> KICH_THUOC { get; set; }
         public virtual DbSet<MAU_SAC> MAU_SAC { get; set; }
         public virtual DbSet<NHA_CUNG_CAP> NHA_CUNG_CAP { get; set; }
+        public virtual DbSet<NHOM_DANH_MUC> NHOM_DANH_MUC { get; set; }
         public virtual DbSet<PHIEU_NHAP> PHIEU_NHAP { get; set; }
         public virtual DbSet<SAN_PHAM> SAN_PHAM { get; set; }
         public virtual DbSet<TAI_KHOAN> TAI_KHOAN { get; set; }
         public virtual DbSet<VAI_TRO> VAI_TRO { get; set; }
+    
+        public virtual int SP_CTDH_ADD(string mADH, string mASP, string mAMAU, string mASIZE, Nullable<int> sOLUONG)
+        {
+            var mADHParameter = mADH != null ?
+                new ObjectParameter("MADH", mADH) :
+                new ObjectParameter("MADH", typeof(string));
+    
+            var mASPParameter = mASP != null ?
+                new ObjectParameter("MASP", mASP) :
+                new ObjectParameter("MASP", typeof(string));
+    
+            var mAMAUParameter = mAMAU != null ?
+                new ObjectParameter("MAMAU", mAMAU) :
+                new ObjectParameter("MAMAU", typeof(string));
+    
+            var mASIZEParameter = mASIZE != null ?
+                new ObjectParameter("MASIZE", mASIZE) :
+                new ObjectParameter("MASIZE", typeof(string));
+    
+            var sOLUONGParameter = sOLUONG.HasValue ?
+                new ObjectParameter("SOLUONG", sOLUONG) :
+                new ObjectParameter("SOLUONG", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CTDH_ADD", mADHParameter, mASPParameter, mAMAUParameter, mASIZEParameter, sOLUONGParameter);
+        }
+    
+        public virtual int SP_CTPN_ADD(string mAPN, string mASP, string mAMAU, string mASIZE, Nullable<int> sOLUONG, Nullable<decimal> dONGIANHAP)
+        {
+            var mAPNParameter = mAPN != null ?
+                new ObjectParameter("MAPN", mAPN) :
+                new ObjectParameter("MAPN", typeof(string));
+    
+            var mASPParameter = mASP != null ?
+                new ObjectParameter("MASP", mASP) :
+                new ObjectParameter("MASP", typeof(string));
+    
+            var mAMAUParameter = mAMAU != null ?
+                new ObjectParameter("MAMAU", mAMAU) :
+                new ObjectParameter("MAMAU", typeof(string));
+    
+            var mASIZEParameter = mASIZE != null ?
+                new ObjectParameter("MASIZE", mASIZE) :
+                new ObjectParameter("MASIZE", typeof(string));
+    
+            var sOLUONGParameter = sOLUONG.HasValue ?
+                new ObjectParameter("SOLUONG", sOLUONG) :
+                new ObjectParameter("SOLUONG", typeof(int));
+    
+            var dONGIANHAPParameter = dONGIANHAP.HasValue ?
+                new ObjectParameter("DONGIANHAP", dONGIANHAP) :
+                new ObjectParameter("DONGIANHAP", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CTPN_ADD", mAPNParameter, mASPParameter, mAMAUParameter, mASIZEParameter, sOLUONGParameter, dONGIANHAPParameter);
+        }
+    
+        public virtual int SP_CTSP_INIT(string mASP)
+        {
+            var mASPParameter = mASP != null ?
+                new ObjectParameter("MASP", mASP) :
+                new ObjectParameter("MASP", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CTSP_INIT", mASPParameter);
+        }
     
         public virtual int SP_DANGKY(string uSER, string pASS, string hOTEN, string eMAIL, string sDT, string dIACHI)
         {
@@ -86,13 +148,30 @@ namespace WebsiteShopQuanAo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DANGNHAP_Result>("SP_DANGNHAP", uSERParameter, pASSParameter);
         }
     
-        public virtual int SP_DM_ADD(string tEN)
+        public virtual int SP_DANHMUC_ADD(string tENDM, string mANHOM)
+        {
+            var tENDMParameter = tENDM != null ?
+                new ObjectParameter("TENDM", tENDM) :
+                new ObjectParameter("TENDM", typeof(string));
+    
+            var mANHOMParameter = mANHOM != null ?
+                new ObjectParameter("MANHOM", mANHOM) :
+                new ObjectParameter("MANHOM", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DANHMUC_ADD", tENDMParameter, mANHOMParameter);
+        }
+    
+        public virtual int SP_DM_ADD(string tEN, string mANHOM)
         {
             var tENParameter = tEN != null ?
                 new ObjectParameter("TEN", tEN) :
                 new ObjectParameter("TEN", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DM_ADD", tENParameter);
+            var mANHOMParameter = mANHOM != null ?
+                new ObjectParameter("MANHOM", mANHOM) :
+                new ObjectParameter("MANHOM", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DM_ADD", tENParameter, mANHOMParameter);
         }
     
         public virtual int SP_DM_DELETE(string mADM)
@@ -109,7 +188,7 @@ namespace WebsiteShopQuanAo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DM_LIST_Result>("SP_DM_LIST");
         }
     
-        public virtual int SP_DM_UPDATE(string mADM, string tEN, Nullable<bool> tT)
+        public virtual int SP_DM_UPDATE(string mADM, string tEN, string mANHOM, Nullable<bool> tT)
         {
             var mADMParameter = mADM != null ?
                 new ObjectParameter("MADM", mADM) :
@@ -119,36 +198,88 @@ namespace WebsiteShopQuanAo.Models
                 new ObjectParameter("TEN", tEN) :
                 new ObjectParameter("TEN", typeof(string));
     
+            var mANHOMParameter = mANHOM != null ?
+                new ObjectParameter("MANHOM", mANHOM) :
+                new ObjectParameter("MANHOM", typeof(string));
+    
             var tTParameter = tT.HasValue ?
                 new ObjectParameter("TT", tT) :
                 new ObjectParameter("TT", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DM_UPDATE", mADMParameter, tENParameter, tTParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DM_UPDATE", mADMParameter, tENParameter, mANHOMParameter, tTParameter);
         }
     
-        public virtual int SP_GH_ADD(string uSERNAME, string mASP, string mAMAU, string mASIZE, Nullable<int> sOLUONG)
+        public virtual int SP_DONHANG_CREATE(string mAKH, string dIACHIGIAO, string hTTT)
         {
-            var uSERNAMEParameter = uSERNAME != null ?
-                new ObjectParameter("USERNAME", uSERNAME) :
-                new ObjectParameter("USERNAME", typeof(string));
+            var mAKHParameter = mAKH != null ?
+                new ObjectParameter("MAKH", mAKH) :
+                new ObjectParameter("MAKH", typeof(string));
     
-            var mASPParameter = mASP != null ?
-                new ObjectParameter("MASP", mASP) :
-                new ObjectParameter("MASP", typeof(string));
+            var dIACHIGIAOParameter = dIACHIGIAO != null ?
+                new ObjectParameter("DIACHIGIAO", dIACHIGIAO) :
+                new ObjectParameter("DIACHIGIAO", typeof(string));
     
-            var mAMAUParameter = mAMAU != null ?
-                new ObjectParameter("MAMAU", mAMAU) :
-                new ObjectParameter("MAMAU", typeof(string));
+            var hTTTParameter = hTTT != null ?
+                new ObjectParameter("HTTT", hTTT) :
+                new ObjectParameter("HTTT", typeof(string));
     
-            var mASIZEParameter = mASIZE != null ?
-                new ObjectParameter("MASIZE", mASIZE) :
-                new ObjectParameter("MASIZE", typeof(string));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DONHANG_CREATE", mAKHParameter, dIACHIGIAOParameter, hTTTParameter);
+        }
     
-            var sOLUONGParameter = sOLUONG.HasValue ?
-                new ObjectParameter("SOLUONG", sOLUONG) :
-                new ObjectParameter("SOLUONG", typeof(int));
+        public virtual int SP_NCC_ADD(string tENNCC, string sDT, string dIACHI)
+        {
+            var tENNCCParameter = tENNCC != null ?
+                new ObjectParameter("TENNCC", tENNCC) :
+                new ObjectParameter("TENNCC", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GH_ADD", uSERNAMEParameter, mASPParameter, mAMAUParameter, mASIZEParameter, sOLUONGParameter);
+            var sDTParameter = sDT != null ?
+                new ObjectParameter("SDT", sDT) :
+                new ObjectParameter("SDT", typeof(string));
+    
+            var dIACHIParameter = dIACHI != null ?
+                new ObjectParameter("DIACHI", dIACHI) :
+                new ObjectParameter("DIACHI", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_NCC_ADD", tENNCCParameter, sDTParameter, dIACHIParameter);
+        }
+    
+        public virtual int SP_NHOMDM_ADD(string tENNHOM)
+        {
+            var tENNHOMParameter = tENNHOM != null ?
+                new ObjectParameter("TENNHOM", tENNHOM) :
+                new ObjectParameter("TENNHOM", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_NHOMDM_ADD", tENNHOMParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> SP_PHIEUNHAP_CREATE(string mANCC, string gHICHU)
+        {
+            var mANCCParameter = mANCC != null ?
+                new ObjectParameter("MANCC", mANCC) :
+                new ObjectParameter("MANCC", typeof(string));
+    
+            var gHICHUParameter = gHICHU != null ?
+                new ObjectParameter("GHICHU", gHICHU) :
+                new ObjectParameter("GHICHU", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("SP_PHIEUNHAP_CREATE", mANCCParameter, gHICHUParameter);
+        }
+    
+        public virtual int SP_SANPHAM_ADD(string tENSP, string mADM, string mOTA)
+        {
+            var tENSPParameter = tENSP != null ?
+                new ObjectParameter("TENSP", tENSP) :
+                new ObjectParameter("TENSP", typeof(string));
+    
+            var mADMParameter = mADM != null ?
+                new ObjectParameter("MADM", mADM) :
+                new ObjectParameter("MADM", typeof(string));
+    
+            var mOTAParameter = mOTA != null ?
+                new ObjectParameter("MOTA", mOTA) :
+                new ObjectParameter("MOTA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SANPHAM_ADD", tENSPParameter, mADMParameter, mOTAParameter);
         }
     
         public virtual ObjectResult<SP_SP_TIMKIEM_Result> SP_SP_TIMKIEM(string kEY)

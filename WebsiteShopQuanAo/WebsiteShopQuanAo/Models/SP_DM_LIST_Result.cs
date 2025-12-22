@@ -15,6 +15,8 @@ namespace WebsiteShopQuanAo.Models
     {
         public string MADM { get; set; }
         public string TENDM { get; set; }
+        public string MANHOM { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
+        public string TENNHOM { get; set; }
     }
 }
