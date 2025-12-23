@@ -6,21 +6,96 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebsiteShopQuanAo.Models;
 
 namespace WebsiteShopQuanAo.Controllers
 {
     public class ProductsController : Controller
     {
-        private QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
+        private readonly QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
+
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string kw, string khoanggia, string maDanhMuc, int page = 1)
         {
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            return View(sAN_PHAM.ToList());
+            decimal minPrice = 0;
+            decimal maxPrice = 0;
+            int pageSize = 6;
+
+            // lấy khoảng giá
+            if (!string.IsNullOrEmpty(khoanggia))
+            {
+                var parts = khoanggia.Split('-');
+                if (parts.Length == 2)
+                {
+                    minPrice = decimal.Parse(parts[0].Replace("₫", "").Replace(".", "").Replace(",", "").Trim());
+                    maxPrice = decimal.Parse(parts[1].Replace("₫", "").Replace(".", "").Replace(",", "").Trim());
+                }
+            }
+
+            // lấy sản phẩm
+            var query = db.SAN_PHAM.Where(sp => sp.TRANGTHAI == true);
+
+            if (!string.IsNullOrEmpty(kw))
+                query = query.Where(sp => sp.TENSP.Contains(kw));
+
+            if (!string.IsNullOrEmpty(maDanhMuc))
+                query = query.Where(sp => sp.MADM == maDanhMuc);
+
+            var sanPhams = query.ToList();
+
+            var products = new List<ProductItemVM>();
+
+            foreach (var sp in sanPhams)
+            {
+                var ctsp = sp.CHI_TIET_SP
+                    .Where(ct => ct.TRANGTHAI == true && ct.GIABAN.HasValue)
+                    .ToList();
+
+                if (!ctsp.Any())
+                    continue;
+
+                decimal giaGoc = ctsp.Min(ct => ct.GIABAN.Value);
+
+                // ====== LỌC GIÁ (KHÔNG KHUYẾN MÃI) ======
+                if (minPrice > 0 && giaGoc < minPrice)
+                    continue;
+
+                if (maxPrice > 0 && giaGoc > maxPrice)
+                    continue;
+
+                // lấy 1 ảnh đầu tiên (nếu có)
+                // đổi x.DUONG_DAN thành đúng tên cột đường dẫn ảnh của bạn (Url/TENHINH/...)
+                ////string image = sp.HINH_ANH_SP?
+                ////    .Select(x => x.DUONG_DAN)
+                ////    .FirstOrDefault();
+
+                products.Add(new ProductItemVM
+                {
+                    MaSanPham = sp.MASP,
+                    TenSanPham = sp.TENSP,
+                    TenDanhMuc = sp.DANH_MUC?.TENDM,
+                    GiaGoc = giaGoc,
+                    GiaBan = giaGoc,
+                 
+                });
+            }
+
+            // TODO: phân trang tuỳ bạn (Skip/Take)
+            return View(products);
         }
 
+
+
+        public PartialViewResult Sidebar()
+        {
+            var data = db.NHOM_DANH_MUC
+                .Where(n => n.TRANGTHAI == true)
+                .ToList();
+
+            return PartialView("_Sidebar", data);
+        }
         // GET: Products/Details/5
         public ActionResult Details(string id)
         {

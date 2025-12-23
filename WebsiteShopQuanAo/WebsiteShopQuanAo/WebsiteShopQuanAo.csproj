@@ -109,6 +109,28 @@
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Areas\Admin\Boot\js\datatables-simple-demo.js" />
     <Content Include="Areas\Admin\Boot\js\scripts.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\Products\hoang-tu-quy-main.jpg" />
+    <Content Include="Content\Images\Products\Main_639018407564046878_350x495-jjk_1.jpg" />
+    <Content Include="Content\Images\Products\Nitro_Wallpaper_01_3840x2400.jpg" />
+    <Content Include="Content\Images\Products\Sub_639018410496018194_images.jpg" />
+    <Content Include="Content\Images\Products\Sub_639018410496338994_hoang-tu-quy-main.jpg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\QL_ShopQuanAoNu.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -273,6 +295,9 @@
     <Compile Include="Models\PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductDetailVM.cs" />
+    <Compile Include="Models\ProductItemVM.cs" />
+    <Compile Include="Models\ProductTabVM.cs" />
     <Compile Include="Models\QL_ShopQuanAoNu.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -326,6 +351,22 @@
     <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_MainUserLayout.cshtml" />
     <Content Include="UI_User\assets\css\style" />
@@ -374,6 +415,9 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Products\_Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

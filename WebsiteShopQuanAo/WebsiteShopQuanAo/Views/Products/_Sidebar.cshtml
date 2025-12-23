@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.NHOM_DANH_MUC>
+
+@{
+    ViewBag.Title = "_Sidebar";
+}
+
+
+<!--sidebar widget start-->
+<aside class="sidebar_widget">
+    <div class="widget_inner">
+        <div class="widget_list widget_categories">
+            <h2>Categories</h2>
+            <ul>
+                @foreach (var nhom in Model)
+                {
+                    <li class="widget_sub_categories">
+                        <a href="javascript:void(0)" data-toggle="collapse" data-target="#nhom_@nhom.MANHOM"> @nhom.MANHOM</a>
+                        <ul class="widget_dropdown_categories collapse show" id="#nhom_@nhom.MANHOM">
+                            @foreach (var dm in nhom.DANH_MUC.Where(x => x.TRANGTHAI == true))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index","Product", new { maDanhMuc = dm.MADM })">
+                                        @dm.TENDM
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="widget_list widget_filter">
+            <h2>Filter By</h2>
+
+            <form method="get" action="@Url.Action("Index","Products")">
+
+                <!-- PRICE RANGE -->
+                <div class="filter__list slider_range">
+                    <h3>price</h3>
+
+                    <div id="slider-range"></div>
+
+                    <span>Range:</span>
+                    <input type="text" name="khoanggia" id="amount" style="width:100%;" readonly />
+
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-sm btn-dark">
+                            Apply
+                        </button>
+
+                        <a href="@Url.Action("Index","Products")" class="btn btn-sm btn-dark">
+                            Reset
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</aside>
+<!--sidebar widget end-->
+@*<h2>_Sidebar</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TENNHOM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TRANGTHAI)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENNHOM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRANGTHAI)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MANHOM }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MANHOM }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MANHOM })
+            </td>
+        </tr>
+    }
+
+    </table>*@
