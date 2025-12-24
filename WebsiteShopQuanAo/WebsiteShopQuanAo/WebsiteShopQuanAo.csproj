@@ -108,11 +108,8 @@
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Areas\Admin\Boot\js\datatables-simple-demo.js" />
     <Content Include="Areas\Admin\Boot\js\scripts.js" />
-<<<<<<< Updated upstream
     <Content Include="Content\Site.css" />
-=======
     <Content Include="Areas\Admin\Views\HtmlPage1.html" />
->>>>>>> Stashed changes
     <Content Include="Global.asax" />
     <Content Include="Models\QL_ShopQuanAoNu.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -397,7 +394,6 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-<<<<<<< Updated upstream
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Products\_Related.cshtml" />
@@ -406,10 +402,8 @@
     <Content Include="Views\Cart\Details.cshtml" />
     <Content Include="Views\Cart\Edit.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
-=======
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
     <None Include="packages.config" />
->>>>>>> Stashed changes
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
