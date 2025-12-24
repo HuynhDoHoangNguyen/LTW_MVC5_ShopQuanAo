@@ -1,0 +1,377 @@
+﻿@model WebsiteShopQuanAo.Models.ThongKeSP
+
+@{
+    ViewBag.Title = "Thống Kê Doanh Thu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/ThongKe.css")" rel="stylesheet" />
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <!-- HEADER -->
+        <div class="page-header">
+            <div class="container-fluid">
+                <h1><i class="fas fa-chart-line me-2"></i>THỐNG KÊ DOANH THU</h1>
+                <p class="mb-0">Phân tích và theo dõi doanh thu chi tiết</p>
+            </div>
+        </div>
+
+        <!-- BỘ LỌC -->
+        <div class="card filter-card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-filter me-2"></i>BỘ LỌC THỐNG KÊ
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="get" action="@Url.Action("Index", "ThongKe")" id="filterForm">
+                    <div class="row g-3">
+                        <!-- Loại thống kê -->
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">Loại Thống Kê</label>
+                            <select class="form-select" name="filterType" id="filterType">
+                                <option value="day" @(Model.FilterType == "day" ? "selected" : "")>Theo Ngày (24 giờ)</option>
+                                <option value="month" @(Model.FilterType == "month" ? "selected" : "")>Theo Tháng (30 ngày)</option>
+                                <option value="year" @(Model.FilterType == "year" ? "selected" : "")>Theo Năm (12 tháng)</option>
+                            </select>
+                        </div>
+
+                        <!-- Chọn ngày -->
+                        <div class="col-md-3" id="dayFilter" style="display: @(Model.FilterType == "day" ? "block" : "none")">
+                            <label class="form-label fw-bold">Chọn Ngày</label>
+                            <input type="date" class="form-control" name="selectedDate"
+                                   value="@(Model.SelectedDate?.ToString("yyyy-MM-dd") ?? DateTime.Now.ToString("yyyy-MM-dd"))" />
+                        </div>
+
+                        <!-- Chọn tháng -->
+                        <div class="col-md-3" id="monthFilter" style="display: @(Model.FilterType == "month" ? "block" : "none")">
+                            <label class="form-label fw-bold">Chọn Tháng</label>
+                            <input type="month" class="form-control" name="selectedMonth"
+                                   value="@(Model.SelectedMonth?.ToString("yyyy-MM") ?? DateTime.Now.ToString("yyyy-MM"))" />
+                        </div>
+
+                        <!-- Chọn năm -->
+                        <div class="col-md-3" id="yearFilter" style="display: @(Model.FilterType == "year" ? "block" : "none")">
+                            <label class="form-label fw-bold">Chọn Năm</label>
+                            <select class="form-select" name="selectedYear">
+                                @for (int year = DateTime.Now.Year; year >= 2020; year--)
+                                {
+                                    <option value="@year" @(Model.SelectedYear == year ? "selected" : "")>@year</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Nút xem -->
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-dark-admin w-100">
+                                <i class="fas fa-search me-2"></i>XEM THỐNG KÊ
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 4 THẺ THỐNG KÊ -->
+        <div class="row g-4 mb-4">
+            <!-- Thẻ 1: Đơn thành công -->
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card bg-success text-white">
+                    <div class="card-body">
+                        <i class="fas fa-check-circle stat-icon"></i>
+                        <p>ĐƠN HÀNG THÀNH CÔNG</p>
+                        <h3>@Model.TotalSuccessOrders.ToString("N0")</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ 2: Đơn hủy -->
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card bg-danger text-white">
+                    <div class="card-body">
+                        <i class="fas fa-times-circle stat-icon"></i>
+                        <p>ĐƠN HÀNG ĐÃ HỦY</p>
+                        <h3>@Model.TotalCancelledOrders.ToString("N0")</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ 3: Tổng doanh thu -->
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card bg-primary text-white">
+                    <div class="card-body">
+                        <i class="fas fa-dollar-sign stat-icon"></i>
+                        <p>TỔNG DOANH THU</p>
+                        <h3>@Model.TotalRevenue.ToString("N0") đ</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ 4: Trung bình -->
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card bg-info text-white">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line stat-icon"></i>
+                        <p>DOANH THU TB</p>
+                        <h3>@Model.AverageOrderValue.ToString("N0") đ</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIỂU ĐỒ -->
+        <div class="row g-4 mb-4">
+            <!-- Biểu đồ cột -->
+            <div class="col-xl-8">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>BIỂU ĐỒ DOANH THU
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biểu đồ tròn -->
+            <div class="col-xl-4">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>TỶ LỆ TRẠNG THÁI
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BẢNG CHI TIẾT DOANH THU -->
+        <div class="card data-table">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>
+                    CHI TIẾT DOANH THU THEO
+                    @if (Model.FilterType == "day")
+                    {
+                        <text>GIỜ</text>
+                    }
+                    else if (Model.FilterType == "month")
+                    {
+                        <text>NGÀY</text>
+                    }
+                    else
+                    {
+                        <text>THÁNG</text>
+                    }
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>KHOẢNG THỜI GIAN</th>
+                                <th class="text-center">TỔNG ĐƠN</th>
+                                <th class="text-center">THÀNH CÔNG</th>
+                                <th class="text-center">ĐÃ HỦY</th>
+                                <th class="text-end">DOANH THU</th>
+                                <th class="text-end">TB / ĐƠN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.RevenueDetails)
+                            {
+                                <tr>
+                                    <td><strong>@item.Period</strong></td>
+                                    <td class="text-center">@item.TotalOrders</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-success">@item.SuccessOrders</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-danger">@item.CancelledOrders</span>
+                                    </td>
+                                    <td class="text-end font-monospace">
+                                        @item.Revenue.ToString("N0") đ
+                                    </td>
+                                    <td class="text-end font-monospace">
+                                        @item.AvgRevenue.ToString("N0") đ
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <td class="fw-bold">TỔNG CỘNG</td>
+                                <td class="fw-bold text-center">@Model.RevenueDetails.Sum(x => x.TotalOrders)</td>
+                                <td class="fw-bold text-center">@Model.TotalSuccessOrders</td>
+                                <td class="fw-bold text-center">@Model.TotalCancelledOrders</td>
+                                <td class="fw-bold text-end font-monospace">@Model.TotalRevenue.ToString("N0") đ</td>
+                                <td class="fw-bold text-end font-monospace">@Model.AverageOrderValue.ToString("N0") đ</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOP SẢN PHẨM BÁN CHẠY -->
+        <div class="card data-table mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-trophy me-2"></i>SẢN PHẨM BÁN CHẠY NHẤT
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th width="10%">HẠNG</th>
+                                <th>TÊN SẢN PHẨM</th>
+                                <th class="text-center">SỐ LƯỢNG</th>
+                                <th class="text-end">DOANH THU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.TopProducts)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (product.Rank == 1)
+                                        {
+                                            <span class="badge badge-rank-1">
+                                                <i class="fas fa-crown me-1"></i>#1
+                                            </span>
+                                        }
+                                        else if (product.Rank == 2)
+                                        {
+                                            <span class="badge badge-rank-2">
+                                                <i class="fas fa-medal me-1"></i>#2
+                                            </span>
+                                        }
+                                        else if (product.Rank == 3)
+                                        {
+                                            <span class="badge badge-rank-3">
+                                                <i class="fas fa-medal me-1"></i>#3
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-rank-other">#@product.Rank</span>
+                                        }
+                                    </td>
+                                    <td class="fw-bold">@product.ProductName</td>
+                                    <td class="text-center">@product.QuantitySold</td>
+                                    <td class="text-end font-monospace">@product.Revenue.ToString("N0") đ</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("=== Bắt đầu khởi tạo biểu đồ ===");
+
+            // 1. Xử lý ẩn hiện bộ lọc
+            $('#filterType').change(function () {
+                var val = $(this).val();
+                $('#dayFilter, #monthFilter, #yearFilter').hide();
+                $('#' + val + 'Filter').show();
+            });
+
+            // 2. Lấy dữ liệu từ Model (Sử dụng ToLower() và Raw để tránh lỗi JS)
+            var labels = [];
+            var dataValues = [];
+
+            @if (Model.RevenueDetails != null)
+            {
+                foreach (var item in Model.RevenueDetails)
+                {
+                    // Sử dụng định dạng bất biến (Invariant Culture) để chắc chắn số có dấu chấm thập phân
+                    <text>
+                    labels.push('@Html.Raw(item.Period)');
+                    dataValues.push(@item.Revenue.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    </text>
+                }
+            }
+
+            // 3. Khởi tạo Biểu đồ Doanh thu
+            var canvasRevenue = document.getElementById('revenueChart');
+            if (canvasRevenue) {
+                var ctx = canvasRevenue.getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Doanh Thu (VNĐ)',
+                            data: dataValues,
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('vi-VN') + ' đ';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 4. Khởi tạo Biểu đồ Tròn
+            var canvasPie = document.getElementById('statusChart');
+            if (canvasPie) {
+                var ctxPie = canvasPie.getContext('2d');
+                new Chart(ctxPie, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Thành Công', 'Đã Hủy'],
+                        datasets: [{
+                            // Ép kiểu về số nguyên để tránh lỗi render
+                            data: [@(Model.TotalSuccessOrders), @(Model.TotalCancelledOrders)],
+                            backgroundColor: ['#28a745', '#dc3545']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+            console.log("=== Khởi tạo thành công ===");
+        });
+    </script>
+}

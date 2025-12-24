@@ -5,6 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="QL_ShopQuanAoNuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+
         <EntityType Name="CHI_TIET_SP">
           <Key>
             <PropertyRef Name="MASP" />
@@ -20,6 +21,7 @@
           <Property Name="GIABAN" Type="decimal" Precision="18" Scale="3" />
           <Property Name="TRANGTHAI" Type="bit" />
         </EntityType>
+
         <EntityType Name="CT_DON_HANG">
           <Key>
             <PropertyRef Name="MADH" />
@@ -52,6 +54,7 @@
           <Property Name="DONGIANHAP" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="THANHTIEN" Type="decimal" Precision="18" Scale="3" />
         </EntityType>
+
         <EntityType Name="DANH_MUC">
           <Key>
             <PropertyRef Name="MADM" />
@@ -84,6 +87,14 @@
           <Property Name="TENHINHANH" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="TRANGTHAI" Type="bit" />
         </EntityType>
+        <EntityType Name="KICH_THUOC">
+          <Key>
+            <PropertyRef Name="MASIZE" />
+          </Key>
+          <Property Name="MASIZE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENSIZE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TRANGTHAI" Type="bit" />
+        </EntityType>
         <EntityType Name="KHACH_HANG">
           <Key>
             <PropertyRef Name="MAKH" />
@@ -94,14 +105,6 @@
           <Property Name="SDT" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="200" />
-          <Property Name="TRANGTHAI" Type="bit" />
-        </EntityType>
-        <EntityType Name="KICH_THUOC">
-          <Key>
-            <PropertyRef Name="MASIZE" />
-          </Key>
-          <Property Name="MASIZE" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TENSIZE" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TRANGTHAI" Type="bit" />
         </EntityType>
         <EntityType Name="MAU_SAC">
@@ -179,43 +182,7 @@
           <Property Name="MAVT" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TENVAI" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CHI_TIET___MAMAU__4BAC3F29">
-          <End Role="MAU_SAC" Type="Self.MAU_SAC" Multiplicity="1" />
-          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MAU_SAC">
-              <PropertyRef Name="MAMAU" />
-            </Principal>
-            <Dependent Role="CHI_TIET_SP">
-              <PropertyRef Name="MAMAU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CHI_TIET___MASIZ__4CA06362">
-          <End Role="KICH_THUOC" Type="Self.KICH_THUOC" Multiplicity="1" />
-          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KICH_THUOC">
-              <PropertyRef Name="MASIZE" />
-            </Principal>
-            <Dependent Role="CHI_TIET_SP">
-              <PropertyRef Name="MASIZE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CHI_TIET_S__MASP__4AB81AF0">
-          <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
-          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SAN_PHAM">
-              <PropertyRef Name="MASP" />
-            </Principal>
-            <Dependent Role="CHI_TIET_SP">
-              <PropertyRef Name="MASP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CT_DON_HAN__MADH__75A278F5">
+        <Association Name="FK__CT_DON_HAN__MADH__1CBC4616">
           <End Role="DON_HANG" Type="Self.DON_HANG" Multiplicity="1" />
           <End Role="CT_DON_HANG" Type="Self.CT_DON_HANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,7 +194,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CT_DON_HANG__76969D2E">
+        <Association Name="FK__CT_DON_HANG__1DB06A4F">
           <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="1" />
           <End Role="CT_DON_HANG" Type="Self.CT_DON_HANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -243,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CT_PHIEU_N__MAPN__628FA481">
+        <Association Name="FK__CT_PHIEU_N__MAPN__09A971A2">
           <End Role="PHIEU_NHAP" Type="Self.PHIEU_NHAP" Multiplicity="1" />
           <End Role="CT_PHIEU_NHAP" Type="Self.CT_PHIEU_NHAP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CT_PHIEU_NHAP__6383C8BA">
+        <Association Name="FK__CT_PHIEU_NHAP__0A9D95DB">
           <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="1" />
           <End Role="CT_PHIEU_NHAP" Type="Self.CT_PHIEU_NHAP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -271,7 +238,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DANH_MUC__MANHOM__31EC6D26">
+        <Association Name="FK__CHI_TIET___MAMAU__72C60C4A">
+          <End Role="MAU_SAC" Type="Self.MAU_SAC" Multiplicity="1" />
+          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MAU_SAC">
+              <PropertyRef Name="MAMAU" />
+            </Principal>
+            <Dependent Role="CHI_TIET_SP">
+              <PropertyRef Name="MAMAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CHI_TIET___MASIZ__73BA3083">
+          <End Role="KICH_THUOC" Type="Self.KICH_THUOC" Multiplicity="1" />
+          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KICH_THUOC">
+              <PropertyRef Name="MASIZE" />
+            </Principal>
+            <Dependent Role="CHI_TIET_SP">
+              <PropertyRef Name="MASIZE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CHI_TIET_S__MASP__71D1E811">
+          <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
+          <End Role="CHI_TIET_SP" Type="Self.CHI_TIET_SP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAN_PHAM">
+              <PropertyRef Name="MASP" />
+            </Principal>
+            <Dependent Role="CHI_TIET_SP">
+              <PropertyRef Name="MASP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DANH_MUC__MANHOM__59063A47">
           <End Role="NHOM_DANH_MUC" Type="Self.NHOM_DANH_MUC" Multiplicity="1" />
           <End Role="DANH_MUC" Type="Self.DANH_MUC" Multiplicity="*" />
           <ReferentialConstraint>
@@ -283,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DON_HANG__MAKH__6FE99F9F">
+        <Association Name="FK__DON_HANG__MAKH__17036CC0">
           <End Role="KHACH_HANG" Type="Self.KHACH_HANG" Multiplicity="1" />
           <End Role="DON_HANG" Type="Self.DON_HANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -295,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HINH_ANH_S__MASP__5165187F">
+        <Association Name="FK__HINH_ANH_S__MASP__787EE5A0">
           <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="1" />
           <End Role="HINH_ANH_SP" Type="Self.HINH_ANH_SP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -307,7 +310,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__KHACH_HAN__USERN__276EDEB3">
+        <Association Name="FK__KHACH_HAN__USERN__4E88ABD4">
           <End Role="TAI_KHOAN" Type="Self.TAI_KHOAN" Multiplicity="1" />
           <End Role="KHACH_HANG" Type="Self.KHACH_HANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -319,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEU_NHA__MANCC__5CD6CB2B">
+        <Association Name="FK__PHIEU_NHA__MANCC__03F0984C">
           <End Role="NHA_CUNG_CAP" Type="Self.NHA_CUNG_CAP" Multiplicity="1" />
           <End Role="PHIEU_NHAP" Type="Self.PHIEU_NHAP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -331,7 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SAN_PHAM__MADM__38996AB5">
+        <Association Name="FK__SAN_PHAM__MADM__5FB337D6">
           <End Role="DANH_MUC" Type="Self.DANH_MUC" Multiplicity="1" />
           <End Role="SAN_PHAM" Type="Self.SAN_PHAM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -343,7 +346,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TAI_KHOAN__MAVT__1FCDBCEB">
+        <Association Name="FK__TAI_KHOAN__MAVT__46E78A0C">
           <End Role="VAI_TRO" Type="Self.VAI_TRO" Multiplicity="1" />
           <End Role="TAI_KHOAN" Type="Self.TAI_KHOAN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -460,14 +463,14 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QL_ShopQuanAoNuModelStoreContainer">
-          <EntitySet Name="CHI_TIET_SP" EntityType="Self.CHI_TIET_SP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_DON_HANG" EntityType="Self.CT_DON_HANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_PHIEU_NHAP" EntityType="Self.CT_PHIEU_NHAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHI_TIET_SP" EntityType="Self.CHI_TIET_SP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DANH_MUC" EntityType="Self.DANH_MUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DON_HANG" EntityType="Self.DON_HANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HINH_ANH_SP" EntityType="Self.HINH_ANH_SP" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KICH_THUOC" EntityType="Self.KICH_THUOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACH_HANG" EntityType="Self.KHACH_HANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MAU_SAC" EntityType="Self.MAU_SAC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHA_CUNG_CAP" EntityType="Self.NHA_CUNG_CAP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHOM_DANH_MUC" EntityType="Self.NHOM_DANH_MUC" Schema="dbo" store:Type="Tables" />
@@ -476,59 +479,59 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAI_KHOAN" EntityType="Self.TAI_KHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VAI_TRO" EntityType="Self.VAI_TRO" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CHI_TIET___MAMAU__4BAC3F29" Association="Self.FK__CHI_TIET___MAMAU__4BAC3F29">
+          <AssociationSet Name="FK__CT_DON_HAN__MADH__1CBC4616" Association="Self.FK__CT_DON_HAN__MADH__1CBC4616">
+            <End Role="DON_HANG" EntitySet="DON_HANG" />
+            <End Role="CT_DON_HANG" EntitySet="CT_DON_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_DON_HANG__1DB06A4F" Association="Self.FK__CT_DON_HANG__1DB06A4F">
+            <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
+            <End Role="CT_DON_HANG" EntitySet="CT_DON_HANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_PHIEU_N__MAPN__09A971A2" Association="Self.FK__CT_PHIEU_N__MAPN__09A971A2">
+            <End Role="PHIEU_NHAP" EntitySet="PHIEU_NHAP" />
+            <End Role="CT_PHIEU_NHAP" EntitySet="CT_PHIEU_NHAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CT_PHIEU_NHAP__0A9D95DB" Association="Self.FK__CT_PHIEU_NHAP__0A9D95DB">
+            <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
+            <End Role="CT_PHIEU_NHAP" EntitySet="CT_PHIEU_NHAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CHI_TIET___MAMAU__72C60C4A" Association="Self.FK__CHI_TIET___MAMAU__72C60C4A">
             <End Role="MAU_SAC" EntitySet="MAU_SAC" />
             <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHI_TIET___MASIZ__4CA06362" Association="Self.FK__CHI_TIET___MASIZ__4CA06362">
+          <AssociationSet Name="FK__CHI_TIET___MASIZ__73BA3083" Association="Self.FK__CHI_TIET___MASIZ__73BA3083">
             <End Role="KICH_THUOC" EntitySet="KICH_THUOC" />
             <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
           </AssociationSet>
-          <AssociationSet Name="FK__CHI_TIET_S__MASP__4AB81AF0" Association="Self.FK__CHI_TIET_S__MASP__4AB81AF0">
+          <AssociationSet Name="FK__CHI_TIET_S__MASP__71D1E811" Association="Self.FK__CHI_TIET_S__MASP__71D1E811">
             <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
             <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
           </AssociationSet>
-          <AssociationSet Name="FK__CT_DON_HAN__MADH__75A278F5" Association="Self.FK__CT_DON_HAN__MADH__75A278F5">
-            <End Role="DON_HANG" EntitySet="DON_HANG" />
-            <End Role="CT_DON_HANG" EntitySet="CT_DON_HANG" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CT_DON_HANG__76969D2E" Association="Self.FK__CT_DON_HANG__76969D2E">
-            <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
-            <End Role="CT_DON_HANG" EntitySet="CT_DON_HANG" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEU_N__MAPN__628FA481" Association="Self.FK__CT_PHIEU_N__MAPN__628FA481">
-            <End Role="PHIEU_NHAP" EntitySet="PHIEU_NHAP" />
-            <End Role="CT_PHIEU_NHAP" EntitySet="CT_PHIEU_NHAP" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CT_PHIEU_NHAP__6383C8BA" Association="Self.FK__CT_PHIEU_NHAP__6383C8BA">
-            <End Role="CHI_TIET_SP" EntitySet="CHI_TIET_SP" />
-            <End Role="CT_PHIEU_NHAP" EntitySet="CT_PHIEU_NHAP" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DANH_MUC__MANHOM__31EC6D26" Association="Self.FK__DANH_MUC__MANHOM__31EC6D26">
+          <AssociationSet Name="FK__DANH_MUC__MANHOM__59063A47" Association="Self.FK__DANH_MUC__MANHOM__59063A47">
             <End Role="NHOM_DANH_MUC" EntitySet="NHOM_DANH_MUC" />
             <End Role="DANH_MUC" EntitySet="DANH_MUC" />
           </AssociationSet>
-          <AssociationSet Name="FK__DON_HANG__MAKH__6FE99F9F" Association="Self.FK__DON_HANG__MAKH__6FE99F9F">
+          <AssociationSet Name="FK__DON_HANG__MAKH__17036CC0" Association="Self.FK__DON_HANG__MAKH__17036CC0">
             <End Role="KHACH_HANG" EntitySet="KHACH_HANG" />
             <End Role="DON_HANG" EntitySet="DON_HANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__HINH_ANH_S__MASP__5165187F" Association="Self.FK__HINH_ANH_S__MASP__5165187F">
+          <AssociationSet Name="FK__HINH_ANH_S__MASP__787EE5A0" Association="Self.FK__HINH_ANH_S__MASP__787EE5A0">
             <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
             <End Role="HINH_ANH_SP" EntitySet="HINH_ANH_SP" />
           </AssociationSet>
-          <AssociationSet Name="FK__KHACH_HAN__USERN__276EDEB3" Association="Self.FK__KHACH_HAN__USERN__276EDEB3">
+          <AssociationSet Name="FK__KHACH_HAN__USERN__4E88ABD4" Association="Self.FK__KHACH_HAN__USERN__4E88ABD4">
             <End Role="TAI_KHOAN" EntitySet="TAI_KHOAN" />
             <End Role="KHACH_HANG" EntitySet="KHACH_HANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEU_NHA__MANCC__5CD6CB2B" Association="Self.FK__PHIEU_NHA__MANCC__5CD6CB2B">
+          <AssociationSet Name="FK__PHIEU_NHA__MANCC__03F0984C" Association="Self.FK__PHIEU_NHA__MANCC__03F0984C">
             <End Role="NHA_CUNG_CAP" EntitySet="NHA_CUNG_CAP" />
             <End Role="PHIEU_NHAP" EntitySet="PHIEU_NHAP" />
           </AssociationSet>
-          <AssociationSet Name="FK__SAN_PHAM__MADM__38996AB5" Association="Self.FK__SAN_PHAM__MADM__38996AB5">
+          <AssociationSet Name="FK__SAN_PHAM__MADM__5FB337D6" Association="Self.FK__SAN_PHAM__MADM__5FB337D6">
             <End Role="DANH_MUC" EntitySet="DANH_MUC" />
             <End Role="SAN_PHAM" EntitySet="SAN_PHAM" />
           </AssociationSet>
-          <AssociationSet Name="FK__TAI_KHOAN__MAVT__1FCDBCEB" Association="Self.FK__TAI_KHOAN__MAVT__1FCDBCEB">
+          <AssociationSet Name="FK__TAI_KHOAN__MAVT__46E78A0C" Association="Self.FK__TAI_KHOAN__MAVT__46E78A0C">
             <End Role="VAI_TRO" EntitySet="VAI_TRO" />
             <End Role="TAI_KHOAN" EntitySet="TAI_KHOAN" />
           </AssociationSet>
