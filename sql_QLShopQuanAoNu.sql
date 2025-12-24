@@ -525,8 +525,7 @@ INSERT INTO HINH_ANH_SP(MAHINH, MASP, TENHINHANH) VALUES
 ('H002','SP001',N'sp001_2.jpg'),
 ('H003','SP002',N'sp002_1.jpg'),
 ('H004','SP003',N'sp003_1.jpg'),
-('H005','SP004',N'sp004_1.jpg');
-
+('H005','SP004',N'sp004_1.jpg'),
 -- 9) Tạo biến thể CTSP (10 sp x 3 màu x 3 size = 90 dòng)
 ;WITH P AS (
     SELECT MASP FROM SAN_PHAM

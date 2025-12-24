@@ -63,7 +63,10 @@ namespace WebsiteShopQuanAo.Controllers
                     .Where(h => h.TRANGTHAI == true && !string.IsNullOrEmpty(h.TENHINHANH))
                     .Select(h => Url.Content("~/UI_User/assets/img/product/small-product/" + h.TENHINHANH.Trim()))
                     .ToList();
-
+                if (!hinhanh.Any())
+                {
+                    hinhanh.Add(Url.Content("~/UI_User/assets/img/product/small-product/product1.jpg"));
+                }
 
 
                 products.Add(new ProductItemVM

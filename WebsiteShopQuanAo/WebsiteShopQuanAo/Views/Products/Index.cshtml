@@ -85,11 +85,9 @@
     $(function () {
         if (!$.ui || !$.ui.slider) return;
 
-        // DEFAULT RANGE (bạn đổi theo DB thực tế)
         var minDefault = 0;
         var maxDefault = 2000000;
 
-        // Lấy min/max hiện tại trên URL để giữ trạng thái
         var url = new URL(window.location.href);
         var minQ = parseInt(url.searchParams.get("min")) || minDefault;
         var maxQ = parseInt(url.searchParams.get("max")) || maxDefault;
@@ -107,7 +105,6 @@
             }
         });
 
-        // set giá trị lúc load trang
         var initValues = $("#slider-range").slider("values");
         $("#amount").val(initValues[0].toLocaleString("vi-VN") + " ₫ - " + initValues[1].toLocaleString("vi-VN") + " ₫");
         $("#minPrice").val(initValues[0]);
