@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="QL_ShopQuanAoNuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-<<<<<<< Updated upstream
+
         <EntityType Name="CHI_TIET_SP">
           <Key>
             <PropertyRef Name="MASP" />
@@ -21,8 +21,7 @@
           <Property Name="GIABAN" Type="decimal" Precision="18" Scale="3" />
           <Property Name="TRANGTHAI" Type="bit" />
         </EntityType>
-=======
->>>>>>> Stashed changes
+
         <EntityType Name="CT_DON_HANG">
           <Key>
             <PropertyRef Name="MADH" />
@@ -55,21 +54,7 @@
           <Property Name="DONGIANHAP" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="THANHTIEN" Type="decimal" Precision="18" Scale="3" />
         </EntityType>
-        <EntityType Name="CHI_TIET_SP">
-          <Key>
-            <PropertyRef Name="MASP" />
-            <PropertyRef Name="MAMAU" />
-            <PropertyRef Name="MASIZE" />
-          </Key>
-          <Property Name="MASP" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="MAMAU" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="MASIZE" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="MACTSP" Type="varchar" MaxLength="30" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="SOLUONGTON" Type="int" />
-          <Property Name="GIANHAP" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="GIABAN" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="TRANGTHAI" Type="bit" />
-        </EntityType>
+
         <EntityType Name="DANH_MUC">
           <Key>
             <PropertyRef Name="MADM" />
