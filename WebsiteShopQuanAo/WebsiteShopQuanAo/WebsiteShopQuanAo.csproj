@@ -109,6 +109,7 @@
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Areas\Admin\Boot\js\datatables-simple-demo.js" />
     <Content Include="Areas\Admin\Boot\js\scripts.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\QL_ShopQuanAoNu.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -232,6 +233,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +242,7 @@
     <Compile Include="Models\CHI_TIET_SP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTGioHang.cs" />
     <Compile Include="Models\CT_DON_HANG.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
@@ -273,6 +276,8 @@
     <Compile Include="Models\PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductDetailVM.cs" />
+    <Compile Include="Models\ProductItemVM.cs" />
     <Compile Include="Models\QL_ShopQuanAoNu.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -297,7 +302,16 @@
     <Compile Include="Models\SP_DM_LIST_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_SP_TIMKIEM_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAI_KHOAN.cs">
@@ -374,6 +388,14 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Products\_Related.cshtml" />
+    <Content Include="Views\Cart\Create.cshtml" />
+    <Content Include="Views\Cart\Delete.cshtml" />
+    <Content Include="Views\Cart\Details.cshtml" />
+    <Content Include="Views\Cart\Edit.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

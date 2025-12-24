@@ -1,0 +1,225 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.CHI_TIET_SP>
+
+@{
+    ViewBag.Title = "Index";
+
+    Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang> gioHang = new Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>();
+    if (Session["Cart"] != null)
+    {
+        gioHang = (Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>)Session["Cart"];
+    }
+
+    decimal tongTien= 0;
+}
+
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area breadcrumbs_other">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content text-center">
+                    <h3>Shopping Cart</h3>
+                </div>
+            </div
+        </div>
+    </div>
+</div>
+
+<!--breadcrumbs area end-->
+<!--shopping cart area start -->
+<div class="shopping_cart_area">
+    <div class="container">
+        <form action="#">
+            <div class="cart_page_inner mb-60">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cart_page_tabel">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>product </th>
+                                        <th>information</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5">
+                                            @if (gioHang == null || gioHang.Count == 0)
+                                            {
+                                                <div class="alert alert-warning text-center">
+                                                    Empty Cart
+                                                </div>
+                                            }
+                                        </td>
+                                    </tr>
+                                    @if (Model != null && gioHang != null)
+                                    {
+
+                                        foreach (var ctsp in Model)
+                                        {
+                                          
+                                            var item = gioHang[ctsp.MACTSP];
+
+                                            decimal thanhTien = item.Gia * item.SoLuong;
+                                            tongTien += thanhTien;
+
+                                            <tr class="border-top">
+                                                <td>
+                                                    <div class="cart_product_thumb">
+                                                        <img src="/assets/img/product/@ctsp.SAN_PHAM.HINH_ANH_SP.FirstOrDefault().TENHINHANH" alt="">
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="cart_product_text">
+                                                        <h4>@ctsp.SAN_PHAM.TENSP</h4>
+                                                        <ul>
+                                                            <li>
+                                                                <i class="ion-ios-arrow-right"></i>
+                                                                Color : <span>@ctsp.MAU_SAC.TENMAU</span>
+                                                            </li>
+                                                            <li>
+                                                                <i class="ion-ios-arrow-right"></i>
+                                                                Size : <span>@ctsp.KICH_THUOC.TENSIZE</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="cart_product_price">
+                                                        <span>@item.Gia.ToString("N0") ₫</span>
+                                                    </div>
+                                                </td>
+
+                                                <td class="product_quantity">
+                                                    <div class="cart_product_quantity">
+                                                        <input type="number"
+                                                               min="1"
+                                                               value="@item.SoLuong"
+                                                               readonly>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="cart_product_price">
+                                                        <span>@thanhTien.ToString("N0") ₫</span>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="cart_product_remove text-right">
+                                                        <a href="@Url.Action("RemoveFromCart", "Cart", new { MaCTSP = ctsp.MACTSP})">
+                                                            <i class="ion-android-close"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div class="cart_page_button border-top d-flex justify-content-between">
+                            <div class="shopping_cart_btn">
+                                <a href="@Url.Action("ClearCart", "Cart")" class="btn btn-primary border">CLEAR SHOPPING CART</a>
+                            </div>
+                            <div class="shopping_continue_btn">
+                                <a href="@Url.Action("Index", "Products")" class="btn btn-primary">CONTINUE SHOPPING</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area start-->
+            <div class="cart_page_bottom">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="grand_totall_area">
+                            <div class="grand_totall_inner border-bottom">
+                                <div class="cart_subtotal d-flex justify-content-between">
+                                    <p>sub total </p>
+                                    <span>@tongTien.ToString("N0") ₫</span>
+                                </div>
+                                <div class="cart_grandtotal d-flex justify-content-between">
+                                    <p>grand total</p>
+                                    <span>@tongTien.ToString("N0") ₫</span>
+                                </div>
+                            </div>
+                            @if (Session["User"] != null)
+                            {
+                                <div class="proceed_checkout_btn">
+                                    <a class="btn btn-primary" href="@Url.Action("Checkout", "Cart")">Proceed to Checkout</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="proceed_checkout_btn">
+                                    <a class="btn btn-primary" href="@Url.Action("Login", "User")">Login to Order</a>
+                                </div>
+                            }
+                            <a href="#">Checkout with Mutilple Adresses</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area end-->
+        </form>
+    </div>
+</div>
+<!--shopping cart area end -->
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TENSP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOTA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SOLUONGTON)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TRANGTHAI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TENSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOTA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SOLUONGTON)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRANGTHAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DANH_MUC.TENDM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MASP }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MASP }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MASP })
+            </td>
+        </tr>
+    }
+
+    </table>*@
