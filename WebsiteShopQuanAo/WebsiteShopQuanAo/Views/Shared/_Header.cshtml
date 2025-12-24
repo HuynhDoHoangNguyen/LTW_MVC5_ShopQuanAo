@@ -175,7 +175,7 @@
                                     <li> <a href="@Url.Action("Index","Home")">Trang chủ</a> </li>
                                     <li><a href="@Url.Action("Index","Products")">Sản phẩm</a></li>
                                     <li><a href="@Url.Action("Index","Cart")">Giỏ hàng</a></li>
-                                    <li><a href="@Url.Action("Index","Account")">Tài khoản</a></li>
+                                    <li><a href="@Url.Action("Login","User")">Tài khoản</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -185,9 +185,15 @@
                                 <li class="account_link">
                                     <a href="#"><i class="icon-user icons"></i></a>
                                     <ul class="dropdown_account_link">
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        @if (Session["User"] != null)
+                                        {
+                                            <li><a href="">Xin chào @Session["Username"]</a></li>
+                                            <li><a href="@Url.Action("Logout","User")">Logout</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Login", "User")">Login</a></li>
+                                        }
                                     </ul>
                                 </li>
                                 <li>
