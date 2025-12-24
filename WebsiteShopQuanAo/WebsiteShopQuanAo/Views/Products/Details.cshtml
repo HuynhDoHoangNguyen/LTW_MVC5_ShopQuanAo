@@ -1,59 +1,312 @@
-﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
-
+﻿@model WebsiteShopQuanAo.Models.ProductDetailVM
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_MainUserLayout.cshtml";
 }
 
-<h2>Details</h2>
+<style>
+    .ctsp-item {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 2px solid #e0e0e0;
+        margin-bottom: 8px;
+        padding: 12px;
+        border-radius: 5px;
+    }
 
-<div>
-    <h4>SAN_PHAM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TENSP)
-        </dt>
+        .ctsp-item:hover {
+            background: #f8f9fa;
+            border-color: #b0b0b0;
+        }
 
-        <dd>
-            @Html.DisplayFor(model => model.TENSP)
-        </dd>
+        .ctsp-item.active {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            border-width: 2px;
+            color: black;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MOTA)
-        </dt>
+    .price_box .current_price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #e74c3c;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.MOTA)
-        </dd>
+    .price_box .original_price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 18px;
+        margin-right: 10px;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SOLUONGTON)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SOLUONGTON)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TRANGTHAI)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TRANGTHAI)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DANH_MUC.TENDM)
-        </dd>
-
-    </dl>
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area breadcrumbs_product">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">home</a></li>
+                        <li><a href="@Url.Action("Index", "Product")">shop</a></li>
+                        <li>@Model.SanPham.TENSP</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MASP }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!--breadcrumbs area end-->
+<!--product details start-->
+<section class="product_details mb-135">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6">
+                <div class="product_zoom_gallery">
+                    <div class="zoom_gallery_inner d-flex gap-3">
+
+                        <!-- THUMBNAIL -->
+                        <div class="zoom_tab_img d-flex flex-column gap-2">
+                            @foreach (var img in Model.SanPham.HINH_ANH_SP)
+                            {
+                                <a class="zoom_tabimg_list" href="javascript:void(0)">
+                                    <img class="thumb-img"
+                                         src="/assets/img/product/small-product/@img.TENHINHANH"
+                                         alt="">
+                                </a>
+                            }
+                        </div>
+
+                        <!-- MAIN IMAGE -->
+                        <div class="product_zoom_main_img flex-grow-1">
+                            @foreach (var img in Model.SanPham.HINH_ANH_SP)
+                            {
+                                <div class="product_zoom_thumb">
+                                    <img class="main-img"
+                                         src="/assets/img/product/small-product/@img.TENHINHANH"
+                                         alt="">
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="product_d_right">
+                    <form method="post" action="@Url.Action("AddToCart","Cart")">
+                        <h1>@Model.SanPham.TENSP</h1>
+
+                        <div class="price_box">
+                            <span class="current_price" id="giaHienThi">Please select a version</span>
+                        </div>
+
+                        <input type="hidden" name="MaCTSP" id="MaCTSP" value="" />
+                        <input type="hidden" name="Gia" id="Gia" value="" />
+
+                        <div class="product_desc">
+                            <p class="">@Model.SanPham.MOTA </p>
+                        </div>
+
+                        <div class="product_variant">
+                            <h1>Select Options</h1>
+
+                            <ul class="list-group" id="ctspList">
+                                @foreach (var ct in Model.SanPham.CHI_TIET_SP.Where(x => x.TRANGTHAI == true))
+                                {
+                                    <li class="list-group-item ctsp-item"
+                                        data-id="@ct.MACTSP"
+                                        data-gia="@ct.GIABAN"
+                                        data-ton="@ct.SOLUONGTON">
+
+                                        <label class="d-flex align-items-center w-100 mb-0">
+                                            <input type="radio"
+                                                   class="ctsp-radio"
+                                                   name="ctspOption" />
+
+                                            <span>
+                                                Màu:
+                                                <b>@ct.MAU_SAC.TENMAU</b> |
+                                                Size:
+                                                <b>@ct.KICH_THUOC.TENSIZE</b> |
+                                                Tồn:
+                                                <b>@ct.SOLUONGTON</b>
+                                            </span>
+                                        </label>
+                                    </li>
+                                }
+                            </ul>
+
+                            <div class="variant_quantity_btn d-flex mt-3">
+                                <div class="pro-qty border">
+                                    <input min="1" max="999" type="number" name="SoLuong" value="1" id="soLuong">
+                                </div>
+                                <button class="button btn btn-secondary ml-2"
+                                        type="submit"
+                                        id="btnAddToCart"
+                                        disabled>
+                                    <i class="ion-android-add"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--product details end-->
+<!--product area start-->
+<section class="product_area related_products mb-118">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section_title mb-50">
+                    <h2>Related Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="product_container row">
+            <div class="product_slick slick_slider_activation" data-slick='{
+                  "slidesToShow": 4,
+                  "slidesToScroll": 1,
+                  "arrows": true,
+                  "dots": false,
+                  "autoplay": false,
+                  "speed": 300,
+                  "infinite": true,
+                  "responsive":[
+                    {"breakpoint":992, "settings": { "slidesToShow": 3 } },
+                    {"breakpoint":768, "settings": { "slidesToShow": 2 } },
+                    {"breakpoint":300, "settings": { "slidesToShow": 1 } }
+                   ]
+              }'>
+
+                @if (Model.RelatedProducts != null && Model.RelatedProducts.Any())
+                {
+                    @Html.Partial("_Related", Model.RelatedProducts)
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="alert alert-info text-center mt-4">
+                            <i class="ion-information-circled"></i>
+                            Hiện tại chưa có sản phẩm liên quan.
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--product area end-->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            function selectCTSP($item) {
+
+                $('.ctsp-item').removeClass('active');
+                $('.ctsp-radio').prop('checked', false);
+
+                $item.addClass('active');
+                $item.find('.ctsp-radio').prop('checked', true);
+
+                var maCTSP = $item.data('id');
+                var gia = parseFloat($item.data('gia')) || 0;
+                var ton = parseInt($item.data('ton')) || 0;
+
+                $('#MaCTSP').val(maCTSP);
+                $('#Gia').val(gia);
+
+                $('#giaHienThi').html(
+                    gia.toLocaleString('vi-VN') + ' ₫'
+                );
+
+                if (ton > 0) {
+                    $('#btnAddToCart')
+                        .prop('disabled', false)
+                        .removeClass('btn-secondary')
+                        .addClass('btn-primary');
+
+                    $('#soLuong').attr('max', ton).val(1);
+                } else {
+                    $('#btnAddToCart')
+                        .prop('disabled', true)
+                        .removeClass('btn-primary')
+                        .addClass('btn-secondary');
+
+                    $('#soLuong').attr('max', 0).val(0);
+                }
+            }
+
+            $('.ctsp-item').on('click', function () {
+                selectCTSP($(this));
+            });
+
+            if ($('.ctsp-item').length > 0) {
+                selectCTSP($('.ctsp-item').first());
+            }
+        });
+    </script>
+}
+
+
+
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>SAN_PHAM</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TENSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TENSP)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MOTA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MOTA)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SOLUONGTON)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SOLUONGTON)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TRANGTHAI)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TRANGTHAI)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DANH_MUC.TENDM)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MASP }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
