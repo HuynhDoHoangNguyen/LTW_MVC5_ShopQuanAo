@@ -1,29 +1,33 @@
 ﻿@model IEnumerable<WebsiteShopQuanAo.Models.ProductItemVM>
+
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainUserLayout.cshtml";
 }
 
-<!--shop  area start-->
 <div class="shop_section shop_reverse">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-3 col-md-12">
+
                 @Html.Action("Sidebar", "Products")
             </div>
+
             <div class="col-lg-9 col-md-12">
-                <!--shop wrapper start-->
-                <!--breadcrumbs area start-->
+
                 <div class="breadcrumb_content">
                     <ul>
                         <li><a href="@Url.Action("Index","Home")">home</a></li>
                         <li>shop</li>
                     </ul>
                 </div>
-                <!--breadcrumbs area end-->
-                <div class="shop_banner d-flex align-items-center" data-bgimg="assets/img/bg/shop_bg.jpg">
+
+                <div class="shop_banner d-flex align-items-center"
+                     data-bgimg="@Url.Content("~/UI_User/assets/img/bg/shop_bg.jpg")">
                     <div class="shop_banner_text">
-                        <h2>essential <br> wears</h2>
-                        <p>The collections basic items <br> essential for all girls</p>
+                        <h2>essential <br /> wears</h2>
+                        <p>The collections basic items <br /> essential for all girls</p>
                     </div>
                 </div>
 
@@ -35,63 +39,83 @@
                                 <h2>No products found</h2>
                             </div>
                         </div>
-
-
                     }
                     else
                     {
-                        foreach (var item in Model)
+                        foreach (var sp in Model)
                         {
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="single_product">
                                     <div class="product_thumb">
-                                        <a href="@Url.Action("Details", "Products", new { id = item.MaSanPham })">
-                                            <img src="@Url.Content((item.Images != null && item.Images.Any() && !string.IsNullOrEmpty(item.Images.First()))
-                                                ? item.Images.First()
-                                                : "~/Content/assets/img/no-image.png")"
-                                                 alt="@item.TenSanPham" />
+                                        <a href="@Url.Action("Details", "Products", new { id = sp.MaSanPham })">
+                                            @{
+                                                var img = (sp.HinhAnh != null && sp.HinhAnh.Any())
+                                                    ? sp.HinhAnh.First()
+                                                    : Url.Content("~/UI_User/assets/img/no-image.png");
+                                            }
+
+                                            <img src="@img" alt="@sp.TenSanPham" />
                                         </a>
                                     </div>
 
                                     <div class="product_content">
                                         <h3>
-                                            <a href="@Url.Action("Details", "Products", new { id = item.MaSanPham })">
-                                                @item.TenSanPham
+                                            <a href="@Url.Action("Details", "Products", new { id = sp.MaSanPham })">
+                                                @sp.TenSanPham
                                             </a>
                                         </h3>
 
                                         <div class="price_box">
-                                            <span class="current_price">@String.Format("{0:N0} ₫", item.GiaBan)</span>
+                                            <span class="current_price">@String.Format("{0:N0} ₫", sp.GiaBan)</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         }
                     }
-
-                </div>
-                <div class="pagination_style pagination justify-content-center">
-                    <ul class="d-flex">
-                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                        {
-                            <li>
-                                <a class="@(i == ViewBag.CurrentPage ? "current" : "")"
-                                   href="@Url.Action("Index", new { page = i,kw = ViewBag.Keyword, khoanggia = ViewBag.KhoangGia , maDanhMuc = ViewBag.MaDanhMuc})">
-                                    @i
-                                </a>
-                            </li>
-                        }
-                    </ul>
                 </div>
 
-
-                <!--shop toolbar end-->
-                <!--shop wrapper end-->
             </div>
         </div>
     </div>
 </div>
-<!--shop  area end-->
+
+@section scripts{
+    <script>
+    $(function () {
+        if (!$.ui || !$.ui.slider) return;
+
+        // DEFAULT RANGE (bạn đổi theo DB thực tế)
+        var minDefault = 0;
+        var maxDefault = 2000000;
+
+        // Lấy min/max hiện tại trên URL để giữ trạng thái
+        var url = new URL(window.location.href);
+        var minQ = parseInt(url.searchParams.get("min")) || minDefault;
+        var maxQ = parseInt(url.searchParams.get("max")) || maxDefault;
+
+        $("#slider-range").slider({
+            range: true,
+            min: minDefault,
+            max: maxDefault,
+            step: 50000,
+            values: [minQ, maxQ],
+            slide: function (event, ui) {
+                $("#amount").val(ui.values[0].toLocaleString("vi-VN") + " ₫ - " + ui.values[1].toLocaleString("vi-VN") + " ₫");
+                $("#minPrice").val(ui.values[0]);
+                $("#maxPrice").val(ui.values[1]);
+            }
+        });
+
+        // set giá trị lúc load trang
+        var initValues = $("#slider-range").slider("values");
+        $("#amount").val(initValues[0].toLocaleString("vi-VN") + " ₫ - " + initValues[1].toLocaleString("vi-VN") + " ₫");
+        $("#minPrice").val(initValues[0]);
+        $("#maxPrice").val(initValues[1]);
+    });
+    </script>
+}
+
 @*<h2>Index</h2>
 
     <p>

@@ -209,8 +209,8 @@
         <div class="search_close">
             <i class="ion-close-round"></i>
         </div>
-        <form class="border-bottom" action="#">
-            <input class="border-0" placeholder="Search products..." type="text">
+        <form class="border-bottom" action="@Url.Action("Index","Products")" method="get">
+            <input class="border-0" placeholder="Search products..." type="text" name="kw">
             <button type="submit"><span class="icon-magnifier icons"></span></button>
         </form>
     </div>

@@ -17,7 +17,7 @@ namespace WebsiteShopQuanAo.Models
 
         
 
-        public List<string> Images { get; set; }
+        public List<string> HinhAnh { get; set; }
 
     }
 
