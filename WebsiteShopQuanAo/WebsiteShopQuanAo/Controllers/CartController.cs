@@ -10,67 +10,83 @@ using WebsiteShopQuanAo.Models;
 
 namespace WebsiteShopQuanAo.Controllers
 {
-    public class ProductsController : Controller
+    public class CartController : Controller
     {
         private QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
 
-        // GET: Products
+        // GET: Cart
         public ActionResult Index()
         {
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            return View(sAN_PHAM.ToList());
+            
+            if (Session["Cart"] == null)
+            {
+                return View(new List<CHI_TIET_SP>());
+            }
+            Dictionary<string, CTGioHang> gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            var lstCTSP = db.CHI_TIET_SP.Where(ct => gioHang.Keys.Contains(ct.MACTSP));
+
+            return View(lstCTSP.ToList());
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(string id)
+        [HttpPost]
+        public ActionResult AddToCart(CTGioHang model)
         {
-            // lấy sản phẩm
-            var sp = db.SAN_PHAM.Where(x => x.TRANGTHAI == true && x.MASP == id).FirstOrDefault();
 
-            // lấy sản phẩm liên quan
-            var related = db.SAN_PHAM.Include(x => x.CHI_TIET_SP).Include(x => x.HINH_ANH_SP).Include(x => x.DANH_MUC).Where(x => x.MADM == sp.MADM&& x.TRANGTHAI == true && x.MASP != sp.MASP).ToList();
+            // tạo giỏ hàng để lưu tạm
+            Dictionary<string, CTGioHang> gioHang = new Dictionary<string, CTGioHang>();
 
-            var relatedProducts = new List<ProductItemVM>();
-
-            foreach (var item in related)
+            var ctsp = db.CHI_TIET_SP.FirstOrDefault(x => x.MACTSP == model.MaCTSP && x.TRANGTHAI == true);
+            //Kiểm tra session
+            if (Session["Cart"] != null)
             {
-                var ctspCoGia = item.CHI_TIET_SP.Where(x => x.GIABAN.HasValue).ToList();
-
-                decimal giaMin = ctspCoGia.Any() ? ctspCoGia.Min(x => x.GIABAN.Value) : 0;
-
-                relatedProducts.Add(new ProductItemVM
-                {
-                    MaSanPham = item.MASP,
-                    TenSanPham = item.TENSP,
-                    TenDanhMuc = item.DANH_MUC.TENDM,
-                    GiaBan = giaMin,
-                    HinhAnh = item.HINH_ANH_SP.OrderBy(h => h.TENHINHANH).Select(h => h.TENHINHANH).FirstOrDefault(),
-                    SoLuongTon = item.SOLUONGTON,
-                    MoTa = item.MOTA
-                });
-
+                gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
             }
 
-
-            var model = new ProductDetailVM
+            if (gioHang.ContainsKey(model.MaCTSP))
             {
-                SanPham = sp,
-                RelatedProducts = relatedProducts
-            };
+                int tongSoLuong = gioHang[model.MaCTSP].SoLuong + model.SoLuong;
 
+                // Không cho vượt tồn
+                if (tongSoLuong > ctsp.SOLUONGTON)
+                    gioHang[model.MaCTSP].SoLuong = ctsp.SOLUONGTON.Value;
+                else
+                    gioHang[model.MaCTSP].SoLuong = tongSoLuong;
+            }
+            else
+            {
+                gioHang.Add(model.MaCTSP, model);
+            }
 
+            Session["Cart"] = gioHang;
 
-            return View(model);
+            return RedirectToAction("Index", "Cart");
         }
 
-        // GET: Products/Create
+
+        // GET: Cart/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
+            if (sAN_PHAM == null)
+            {
+                return HttpNotFound();
+            }
+            return View(sAN_PHAM);
+        }
+
+        // GET: Cart/Create
         public ActionResult Create()
         {
             ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Cart/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -88,7 +104,7 @@ namespace WebsiteShopQuanAo.Controllers
             return View(sAN_PHAM);
         }
 
-        // GET: Products/Edit/5
+        // GET: Cart/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -104,7 +120,7 @@ namespace WebsiteShopQuanAo.Controllers
             return View(sAN_PHAM);
         }
 
-        // POST: Products/Edit/5
+        // POST: Cart/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -121,7 +137,7 @@ namespace WebsiteShopQuanAo.Controllers
             return View(sAN_PHAM);
         }
 
-        // GET: Products/Delete/5
+        // GET: Cart/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -136,7 +152,7 @@ namespace WebsiteShopQuanAo.Controllers
             return View(sAN_PHAM);
         }
 
-        // POST: Products/Delete/5
+        // POST: Cart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
