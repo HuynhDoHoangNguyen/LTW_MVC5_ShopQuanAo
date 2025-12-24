@@ -94,16 +94,43 @@ namespace WebsiteShopQuanAo.Controllers
         // GET: Products/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            // lấy sản phẩm
+            var sp = db.SAN_PHAM.Where(x => x.TRANGTHAI == true && x.MASP == id).FirstOrDefault();
+
+            // lấy sản phẩm liên quan
+            var related = db.SAN_PHAM.Include(x => x.CHI_TIET_SP).Include(x => x.HINH_ANH_SP).Include(x => x.DANH_MUC).Where(x => x.MADM == sp.MADM&& x.TRANGTHAI == true && x.MASP != sp.MASP).ToList();
+
+            var relatedProducts = new List<ProductItemVM>();
+
+            foreach (var item in related)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var ctspCoGia = item.CHI_TIET_SP.Where(x => x.GIABAN.HasValue).ToList();
+
+                decimal giaMin = ctspCoGia.Any() ? ctspCoGia.Min(x => x.GIABAN.Value) : 0;
+
+                relatedProducts.Add(new ProductItemVM
+                {
+                    MaSanPham = item.MASP,
+                    TenSanPham = item.TENSP,
+                    TenDanhMuc = item.DANH_MUC.TENDM,
+                    GiaBan = giaMin,
+                    HinhAnh = item.HINH_ANH_SP.OrderBy(h => h.TENHINHANH).Select(h => h.TENHINHANH).FirstOrDefault(),
+                    SoLuongTon = item.SOLUONGTON,
+                    MoTa = item.MOTA
+                });
+
             }
-            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
-            if (sAN_PHAM == null)
+
+
+            var model = new ProductDetailVM
             {
-                return HttpNotFound();
-            }
-            return View(sAN_PHAM);
+                SanPham = sp,
+                RelatedProducts = relatedProducts
+            };
+
+
+
+            return View(model);
         }
 
         // GET: Products/Create

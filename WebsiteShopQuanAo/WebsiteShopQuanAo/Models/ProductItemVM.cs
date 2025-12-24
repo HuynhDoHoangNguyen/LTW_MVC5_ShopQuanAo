@@ -14,11 +14,9 @@ namespace WebsiteShopQuanAo.Models
 
         public decimal GiaGoc { get; set; }
         public decimal GiaBan { get; set; }
-
-        
-
-        public List<string> HinhAnh { get; set; }
-
+        public string HinhAnh { get; set; }
+        public string  MoTa { get; set; }
+        public int? SoLuongTon { get; set; }
     }
 
 }

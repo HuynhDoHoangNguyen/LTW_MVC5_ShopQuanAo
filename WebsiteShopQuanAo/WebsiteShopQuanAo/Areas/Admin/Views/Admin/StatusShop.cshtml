@@ -4,20 +4,22 @@
     ViewBag.Title = "StatusShop";
 }
 
-
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/ShopStatus.css")" rel="stylesheet" />
+}
 <main>
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mt-4 fw-light">PRODUCT <span class="fw-bold">INVENTORY</span></h2>
             <div class="mt-4">
-              
-                    <!-- Nếu bạn muốn điều hướng đến trang Create thay vì modal -->
-                    @Html.ActionLink("THÊM SẢN PHẨM MỚI", "Create", "Admin", null, new
-                    {
-                        @class = "btn btn-dark-admin shadow-sm",
-                        @style = "text-decoration: none; color: white;"
-                    })
-          
+
+
+                @Html.ActionLink("THÊM SẢN PHẨM MỚI", "Create", "Admin", null, new
+                {
+                    @class = "btn btn-dark-admin shadow-sm",
+                    @style = "text-decoration: none; color: white;"
+                })
+
             </div>
         </div>
 
@@ -30,7 +32,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="text-muted small">Tất cả sản phẩm</div>
-                                <div class="h3 fw-bold mb-0">482</div>
+                                <div class="h3 fw-bold mb-0">@Model.Count()</div>
                             </div>
                             <div class="stat-icon"><i class="fas fa-boxes fa-2x"></i></div>
                         </div>
@@ -42,8 +44,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <div class="text-muted small">Sắp hết hàng (< 10)</div>
-                                <div class="h3 fw-bold mb-0 text-danger">12</div>
+                                <div class="text-muted small">Số lượng sản phẩm sắp hết hàng </div>
+                                <div class="h3 fw-bold mb-0 text-danger">@Model.Count(t => t.SOLUONGTON < 10)</div>
                             </div>
                             <div class="stat-icon"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
                         </div>
@@ -56,7 +58,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="text-muted small">Danh mục sản phẩm</div>
-                                <div class="h3 fw-bold mb-0">10</div>
+                                <div class="h3 fw-bold mb-0">@Model.Count(t => t.DANH_MUC.MADM != null && t.DANH_MUC != null)</div>
                             </div>
                             <div class="stat-icon"><i class="fas fa-tags fa-2x"></i></div>
                         </div>
@@ -69,7 +71,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <div class="text-muted small">Giá trị kho hàng</div>
-                                <div class="h3 fw-bold mb-0">2.4B</div>
+                                <div class="h3 fw-bold mb-0">@ViewBag.TongKho tr VND </div>
                             </div>
                             <div class="stat-icon"><i class="fas fa-warehouse fa-2x"></i></div>
                         </div>
@@ -79,13 +81,7 @@
         </div>
 
         <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center py-3">
-                <span class="small">PRODUCT LISTING</span>
-                <div class="d-flex gap-2">
-                    <input type="text" class="form-control form-control-sm" placeholder="Tìm kiếm mã hoặc tên...">
-                    <button class="btn btn-outline-admin btn-sm"><i class="fas fa-filter"></i></button>
-                </div>
-            </div>
+           
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table mb-0">
@@ -125,7 +121,7 @@
                                            class="btn btn-sm btn-outline-info me-1">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                   
+
                                         <!-- XÓA (POST + CONFIRM) -->
                                         <a href="@Url.Action("Delete", "Admin", new { id = item.MASP })"
                                            class="btn btn-sm btn-outline-info me-1">
@@ -135,8 +131,8 @@
 
                                 </tr>
                             }
-                               
-                            </tbody>
+
+                        </tbody>
                     </table>
                 </div>
             </div>

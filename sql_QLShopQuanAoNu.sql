@@ -1,4 +1,5 @@
-﻿/* ===========================================================
+﻿
+/* ===========================================================
 =========================================================== */
 SET NOCOUNT ON;
 SET DATEFORMAT DMY;
@@ -10,7 +11,7 @@ GO
 IF DB_ID('QL_ShopQuanAoNu') IS NOT NULL
     DROP DATABASE QL_ShopQuanAoNu;
 GO
-
+a
 CREATE DATABASE QL_ShopQuanAoNu;
 GO
 USE QL_ShopQuanAoNu;
@@ -829,6 +830,3 @@ BEGIN
         (@MADH, @MASP, @MAMAU, @MASIZE, @SOLUONG);
 END
 GO
-
-
-
