@@ -1,0 +1,304 @@
+﻿/* =================================================
+   CSS ĐƠN GIẢN CHO TRANG THỐNG KÊ DOANH THU
+   Dễ hiểu, dễ học, dễ giải thích
+   ================================================= */
+
+/* === 1. CÁC BIẾN MÀU CƠ BẢN === */
+:root {
+    --mau-xanh-dam: #212529;
+    --mau-xanh-la: #28a745;
+    --mau-do: #dc3545;
+    --mau-xanh-duong: #007bff;
+    --mau-xanh-nhat: #17a2b8;
+    --mau-nen: #f8f9fa;
+}
+
+/* === 2. THIẾT LẬP CƠ BẢN === */
+body {
+    background-color: var(--mau-nen);
+    font-family: Arial, sans-serif;
+}
+
+/* === 3. HEADER (Phần đầu trang) === */
+.page-header {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+    padding: 30px 0;
+    margin-bottom: 30px;
+    border-radius: 0 0 15px 15px;
+}
+
+/* === 4. THẺ THỐNG KÊ (4 ô vuông màu) === */
+.stat-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+/* Hiệu ứng khi rê chuột */
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Nội dung bên trong thẻ */
+.stat-card .card-body {
+    padding: 25px;
+    text-align: center;
+}
+
+/* Icon */
+.stat-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+/* Số liệu */
+.stat-card h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Nhãn */
+.stat-card p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Màu cho từng loại thẻ */
+.bg-success {
+    background-color: var(--mau-xanh-la) !important;
+}
+
+.bg-danger {
+    background-color: var(--mau-do) !important;
+}
+
+.bg-primary {
+    background-color: var(--mau-xanh-duong) !important;
+}
+
+.bg-info {
+    background-color: var(--mau-xanh-nhat) !important;
+}
+
+/* === 5. BỘ LỌC === */
+.filter-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.filter-card .card-header {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.filter-card .card-body {
+    padding: 20px;
+}
+
+/* === 6. NÚT BẤM === */
+.btn-dark-admin {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.btn-dark-admin:hover {
+    background-color: #343a40;
+}
+
+.btn-outline-admin {
+    background-color: white;
+    color: var(--mau-xanh-dam);
+    border: 2px solid var(--mau-xanh-dam);
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.btn-outline-admin:hover {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+}
+
+/* === 7. BẢNG DỮ LIỆU === */
+.data-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.data-table .card-header {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tiêu đề bảng */
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+/* Dòng dữ liệu */
+.table tbody td {
+    padding: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Hiệu ứng khi rê chuột lên dòng */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Dòng tổng cộng */
+.table tfoot {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+/* === 8. BADGE (Nhãn màu) === */
+.badge {
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* Badge xếp hạng */
+.badge-rank-1 {
+    background-color: #ffc107;
+    color: black;
+}
+
+.badge-rank-2 {
+    background-color: #c0c0c0;
+    color: white;
+}
+
+.badge-rank-3 {
+    background-color: #cd7f32;
+    color: white;
+}
+
+.badge-rank-other {
+    background-color: var(--mau-xanh-dam);
+    color: white;
+}
+
+/* === 9. BIỂU ĐỒ === */
+.chart-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+    .chart-card .card-header {
+        padding: 15px 20px;
+        border-bottom: 2px solid #dee2e6;
+        background-color: #2c3e50;
+        color: white;
+    }
+
+    .chart-card .card-body {
+        padding: 20px;
+        background-color: white;
+        /* XÓA min-height */
+    }
+
+.chart-container {
+    position: relative;
+    height: 400px; /* GIỮ NGUYÊN */
+    width: 100%;
+    padding: 0; /* ĐỔI từ 10px → 0 */
+    background-color: white;
+}
+
+canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* === 10. FOOTER === */
+.page-footer {
+    margin-top: 50px;
+    padding: 30px 0;
+    background-color: var(--mau-xanh-dam);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+/* === 11. RESPONSIVE (Hiển thị trên điện thoại) === */
+@media (max-width: 768px) {
+    .stat-card h3 {
+        font-size: 24px;
+    }
+
+    .stat-icon {
+        font-size: 30px;
+    }
+
+    .table {
+        font-size: 13px;
+    }
+
+    .chart-container {
+        height: 300px; /* Giảm chiều cao trên mobile */
+    }
+
+    .chart-card .card-body {
+        min-height: 350px;
+        padding: 15px;
+    }
+}
+
+/* === 12. HIỆU ỨNG === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease;
+}
+
+/* === 13. TIỆN ÍCH === */
+.font-monospace {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}

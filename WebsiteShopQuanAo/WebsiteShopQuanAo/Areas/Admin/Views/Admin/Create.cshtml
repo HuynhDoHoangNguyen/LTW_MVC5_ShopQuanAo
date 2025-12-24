@@ -183,15 +183,15 @@
                             @Html.LabelFor(model => model.SOLUONGTON, htmlAttributes: new { @class = "control-label-create required" })
                             <div class="form-input-create">
                                 @Html.EditorFor(model => model.SOLUONGTON, new
-                           {
-                               htmlAttributes = new
-                               {
-                                   @class = "form-control-create",
-                                   placeholder = "0",
-                                   type = "number",
-                                   min = "0"
-                               }
-                           })
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control-create",
+                                           placeholder = "0",
+                                           type = "number",
+                                           min = "0"
+                                       }
+                                   })
                                 @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger-create" })
                             </div>
                         </div>

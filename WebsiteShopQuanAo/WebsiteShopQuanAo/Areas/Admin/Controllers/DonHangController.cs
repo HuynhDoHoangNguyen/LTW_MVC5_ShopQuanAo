@@ -10,121 +10,112 @@ using WebsiteShopQuanAo.Models;
 
 namespace WebsiteShopQuanAo.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class DonHangController : Controller
     {
         private QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
 
-        // GET: Admin/Admin
+        // GET: Admin/DonHang
         public ActionResult Index()
         {
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            return View(sAN_PHAM.ToList());
+            var dON_HANG = db.DON_HANG.Include(d => d.KHACH_HANG);
+            return View(dON_HANG.ToList());
         }
-        public ActionResult StatusShop()
-        {
-            var tongKho= db.CHI_TIET_SP.Where(t => t.MASP != null && t.GIABAN != null).GroupBy(t => t.MASP).Select(k => new { MASP=k.Key,GiaTriKho = k.Sum(t=>t.GIABAN*t.SOLUONGTON)});
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            decimal? tongGiaTriKho = tongKho.Sum(t => t.GiaTriKho);
-            ViewBag.TongKho = tongGiaTriKho / 1000000;
-            return View(sAN_PHAM.ToList());
 
-        }
-      
-        // GET: Admin/Admin/Details/5
+        // GET: Admin/DonHang/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
-            if (sAN_PHAM == null)
+            DON_HANG dON_HANG = db.DON_HANG.Find(id);
+            if (dON_HANG == null)
             {
                 return HttpNotFound();
             }
-            return View(sAN_PHAM);
+            return View(dON_HANG);
         }
 
-        // GET: Admin/Admin/Create
+        // GET: Admin/DonHang/Create
         public ActionResult Create()
         {
-            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM");
+            ViewBag.MAKH = new SelectList(db.KHACH_HANG, "MAKH", "HOTEN");
             return View();
         }
 
-        // POST: Admin/Admin/Create
+        // POST: Admin/DonHang/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MASP,TENSP,MADM,MOTA,SOLUONGTON,TRANGTHAI")] SAN_PHAM sAN_PHAM)
+        public ActionResult Create([Bind(Include = "MADH,MAKH,NGAYDAT,HINHTHUCTHANHTOAN,DIACHIGIAO,GIAMGIA,TONGSOLUONG,TONGTHANHTIEN,TRANGTHAI")] DON_HANG dON_HANG)
         {
             if (ModelState.IsValid)
             {
-                db.SAN_PHAM.Add(sAN_PHAM);
+                db.DON_HANG.Add(dON_HANG);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
-            return View(sAN_PHAM);
+            ViewBag.MAKH = new SelectList(db.KHACH_HANG, "MAKH", "HOTEN", dON_HANG.MAKH);
+            return View(dON_HANG);
         }
 
-        // GET: Admin/Admin/Edit/5
+        // GET: Admin/DonHang/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
-            if (sAN_PHAM == null)
+            DON_HANG dON_HANG = db.DON_HANG.Find(id);
+            if (dON_HANG == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
-            return View(sAN_PHAM);
+            ViewBag.MAKH = new SelectList(db.KHACH_HANG, "MAKH", "HOTEN", dON_HANG.MAKH);
+            return View(dON_HANG);
         }
 
-        // POST: Admin/Admin/Edit/5
+        // POST: Admin/DonHang/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MASP,TENSP,MADM,MOTA,SOLUONGTON,TRANGTHAI")] SAN_PHAM sAN_PHAM)
+        public ActionResult Edit([Bind(Include = "MADH,MAKH,NGAYDAT,HINHTHUCTHANHTOAN,DIACHIGIAO,GIAMGIA,TONGSOLUONG,TONGTHANHTIEN,TRANGTHAI")] DON_HANG dON_HANG)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sAN_PHAM).State = EntityState.Modified;
+                db.Entry(dON_HANG).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
-            return View(sAN_PHAM);
+            ViewBag.MAKH = new SelectList(db.KHACH_HANG, "MAKH", "HOTEN", dON_HANG.MAKH);
+            return View(dON_HANG);
         }
 
-        // GET: Admin/Admin/Delete/5
+        // GET: Admin/DonHang/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
-            if (sAN_PHAM == null)
+            DON_HANG dON_HANG = db.DON_HANG.Find(id);
+            if (dON_HANG == null)
             {
                 return HttpNotFound();
             }
-            return View(sAN_PHAM);
+            return View(dON_HANG);
         }
 
-        // POST: Admin/Admin/Delete/5
+        // POST: Admin/DonHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
-            db.SAN_PHAM.Remove(sAN_PHAM);
+            DON_HANG dON_HANG = db.DON_HANG.Find(id);
+            db.DON_HANG.Remove(dON_HANG);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
