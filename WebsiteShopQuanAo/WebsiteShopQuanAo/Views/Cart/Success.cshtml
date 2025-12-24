@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Order Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area breadcrumbs_other">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content text-center">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">home</a></li>
+                        <li>order success</li>
+                    </ul>
+                    <h3>Order Success</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--Order success section-->
+<div class="checkout_section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="checkout_info text-center">
+
+                    <h2 class="text-success mb-20">
+                         ĐẶT HÀNG THÀNH CÔNG!
+                    </h2>
+
+                    <p class="mb-20">
+                        Cảm ơn bạn đã mua sắm tại shop.<br />
+                        Đơn hàng của bạn đã được ghi nhận và đang được xử lý.
+                    </p>
+
+                    <div class="mt-30">
+                        <a href="@Url.Action("Index","Home")"
+                           class="btn btn-primary mr-10">
+                            Tiếp tục mua sắm
+                        </a>
+
+                        <a href="@Url.Action("MyOrders","User")"
+                           class="btn btn-outline-primary">
+                            Xem đơn hàng của tôi
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Order success section end-->

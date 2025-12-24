@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+<div class="checkout_section mt-60">
+    <div class="container" style="margin-top:100px">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2">
+                <div class="checkout_info">
+                    <h3 class="text-center mb-30">Account Register</h3>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger text-center mb-30">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form_group">
+                            <label>Tên đăng nhập <span>*</span></label>
+                            <input name="username" class="form-control" required />
+                        </div>
+
+                        <div class="form_group">
+                            <label>Mật khẩu <span>*</span></label>
+                            <input name="matkhau" type="password" class="form-control" required />
+                        </div>
+
+                        <div class="form_group">
+                            <label>Họ tên <span>*</span></label>
+                            <input name="hoten" class="form-control" required />
+                        </div>
+
+                        <div class="form_group">
+                            <label>Email <span>*</span></label>
+                            <input name="email" type="email" class="form-control" required />
+                        </div>
+
+                        <div class="form_group">
+                            <label>SĐT <span>*</span></label>
+                            <input name="sdt" class="form-control" required />
+                        </div>
+
+                        <div class="form_group">
+                            <label>Địa chỉ</label>
+                            <input name="diachi" class="form-control" />
+                        </div>
+
+                        <div class="form_group text-center mt-30">
+                            <button type="submit" class="btn btn-primary">
+                                Register
+                            </button>
+                        </div>
+                    }
+
+                    <p class="text-center mt-20">
+                        Already have an account?
+                        <a href="@Url.Action("Login", "User")">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
