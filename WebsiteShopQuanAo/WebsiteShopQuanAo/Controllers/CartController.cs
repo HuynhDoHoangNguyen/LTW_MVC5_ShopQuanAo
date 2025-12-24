@@ -193,11 +193,6 @@ namespace WebsiteShopQuanAo.Controllers
             return View();
         }
 
-
-
-
-
-
         // GET: Cart/Create
         public ActionResult Create()
         {
