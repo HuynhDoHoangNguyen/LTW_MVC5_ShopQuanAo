@@ -22,19 +22,14 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
         }
         public ActionResult StatusShop()
         {
+            var tongKho= db.CHI_TIET_SP.Where(t => t.MASP != null && t.GIABAN != null).GroupBy(t => t.MASP).Select(k => new { MASP=k.Key,GiaTriKho = k.Sum(t=>t.GIABAN*t.SOLUONGTON)});
             var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
+            decimal? tongGiaTriKho = tongKho.Sum(t => t.GiaTriKho);
+            ViewBag.TongKho = tongGiaTriKho / 1000000;
             return View(sAN_PHAM.ToList());
 
         }
-        public ActionResult GetProductPage(int page)
-        {
-            var products = db.SAN_PHAM.OrderBy(p => p.MASP)
-                             .Skip((page - 1) * 10)
-                             .Take(10).ToList();
-
-            // Trả về một file .cshtml chỉ có đoạn lặp <tr>...</tr>
-            return PartialView("_ProductTablePartial", products);
-        }
+      
         // GET: Admin/Admin/Details/5
         public ActionResult Details(string id)
         {

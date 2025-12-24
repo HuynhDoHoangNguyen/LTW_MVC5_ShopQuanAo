@@ -625,3 +625,159 @@ hr {
         transform: rotate(360deg);
     }
 }
+
+/* ===================================
+   DETAILS DISPLAY (dl-horizontal)
+   =================================== */
+.dl-horizontal {
+    margin-bottom: 0;
+}
+
+    .dl-horizontal dt {
+        float: left;
+        width: 200px;
+        clear: left;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 700;
+        color: var(--primary-black);
+        padding: 12px 20px 12px 0;
+        margin-bottom: 0;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 220px;
+        padding: 12px 0;
+        color: var(--text-dark);
+        font-size: 1rem;
+        font-weight: 500;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+        .dl-horizontal dd:last-child {
+            border-bottom: none;
+        }
+
+/* ===================================
+   BUTTONS SPACING
+   =================================== */
+.btn + .btn {
+    margin-left: 10px;
+}
+
+/* ===================================
+   RESPONSIVE FOR DETAILS
+   =================================== */
+@media (max-width: 768px) {
+    .dl-horizontal dt {
+        float: none;
+        width: 100%;
+        text-align: left;
+        padding: 8px 0 4px 0;
+        border-top: 2px solid var(--border-color);
+        margin-top: 8px;
+    }
+
+        .dl-horizontal dt:first-child {
+            border-top: none;
+            margin-top: 0;
+        }
+
+    .dl-horizontal dd {
+        margin-left: 0;
+        padding: 4px 0 8px 0;
+        border-bottom: none;
+    }
+}
+
+/* ===================================
+   FORM GROUP SPACING (Create/Edit Forms)
+   =================================== */
+.form-horizontal .form-group {
+    margin-bottom: 25px;
+    clear: both;
+}
+
+    .form-horizontal .form-group:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+.form-horizontal .control-label {
+    padding-top: 12px;
+    font-weight: 600;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.form-horizontal h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+}
+
+.form-horizontal hr {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.form-horizontal .checkbox {
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Text Danger Spacing */
+.text-danger {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.875rem;
+}
+
+/* Button Group in Forms */
+.form-horizontal .form-group:last-child {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+/* ===================================
+   DETAILS PAGE IMPROVEMENTS
+   =================================== */
+.dl-horizontal {
+    margin-top: 25px;
+}
+
+.card-body h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+}
+
+.card-body hr {
+    margin: 20px 0 25px 0;
+    border-color: var(--gold);
+    opacity: 0.5;
+}
+
+/* Delete Page Warning */
+.card-body h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Form Actions Spacing */
+.form-actions {
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+}
