@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.DON_HANG>
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+}
+
+<!--breadcrumbs-->
+<div class="breadcrumbs_area breadcrumbs_other" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content text-center">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">home</a></li>
+                        <li>my orders</li>
+                    </ul>
+                    <h3>Đơn hàng của tôi</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shopping_cart_area mt-60">
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Ngày đặt</th>
+                    <th>SL</th>
+                    <th>Tổng tiền</th>
+                    <th>Thanh toán</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MADH</td>
+                        <td>@(item.NGAYDAT?.ToString("dd/MM/yyyy"))</td>
+                        <td>@item.TONGSOLUONG</td>
+                        <td>@((item.TONGTHANHTIEN ?? 0).ToString("N0")) ₫</td>
+                        <td>@item.HINHTHUCTHANHTOAN</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                               href="@Url.Action("OrderDetails","Cart", new { id = item.MADH })">
+                                Chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            Bạn chưa có đơn hàng nào
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -60,62 +60,7 @@
 </div>
 <!--offcanvas menu area end-->
 <!--mini cart-->
-<div class="mini_cart">
-    <div class="cart_gallery">
-        <div class="cart_close">
-            <div class="cart_text">
-                <h3>cart</h3>
-            </div>
-            <div class="mini_cart_close">
-                <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="assets/img/product/product1.jpg" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">Primis In Faucibus</a>
-                <p>1 x <span> $65.00 </span></p>
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="assets/img/product/product2.jpg" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">Letraset Sheets</a>
-                <p>1 x <span> $60.00 </span></p>
-            </div>
-            <div class="cart_remove">
-                <a href="#"><i class="icon-close icons"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="mini_cart_table">
-        <div class="cart_table_border">
-            <div class="cart_total">
-                <span>Sub total:</span>
-                <span class="price">$125.00</span>
-            </div>
-            <div class="cart_total mt-10">
-                <span>total:</span>
-                <span class="price">$125.00</span>
-            </div>
-        </div>
-    </div>
-    <div class="mini_cart_footer">
-        <div class="cart_button">
-            <a href="cart.html"><i class="fa fa-shopping-cart"></i> View cart</a>
-        </div>
-        <div class="cart_button">
-            <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
-        </div>
-    </div>
-</div>
+@Html.Action("MiniCart", "Cart")
 <!--mini cart end-->
 <!--header area start-->
 <header class="header_section header_transparent">
@@ -130,7 +75,7 @@
                                     <i class="icons icon-phone"></i> <a href="tel:+05483716566">+054 8371 65 66</a>
                                 </li>
                                 <li class="text-white">
-                                    <i class="icon-envelope-letter icons"></i> <a href="#">uthrstore@domain.com</a>
+                                    <i class="icon-envelope-letter icons"></i> <a href="#">HUITstore@domain.com</a>
                                 </li>
                             </ul>
                         </div>
@@ -175,7 +120,8 @@
                                     <li> <a href="@Url.Action("Index","Home")">Trang chủ</a> </li>
                                     <li><a href="@Url.Action("Index","Products")">Sản phẩm</a></li>
                                     <li><a href="@Url.Action("Index","Cart")">Giỏ hàng</a></li>
-                                    <li><a href="@Url.Action("Index","Account")">Tài khoản</a></li>
+                                    <li><a href="@Url.Action("Login","User")">Tài khoản</a></li>
+                                    <li><a href="@Url.Action("MyOrders","Cart")">Đơn hàng</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -185,9 +131,21 @@
                                 <li class="account_link">
                                     <a href="#"><i class="icon-user icons"></i></a>
                                     <ul class="dropdown_account_link">
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        @if (Session["User"] != null)
+                                        {
+                                            <li><a href="">Xin chào @Session["Username"]</a></li>
+                                            <li><a href="@Url.Action("Logout","User")">Logout</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Login", "User")">Login</a></li>
+                                            <li>
+                                                <a href="@Url.Action("Login", "Admin", new { area = "Admin" })">
+                                                    Login Management
+                                                </a>
+                                            </li>
+
+                                        }
                                     </ul>
                                 </li>
                                 <li>
@@ -195,7 +153,7 @@
                                 </li>
                                 <li class="shopping_cart">
                                     <a href="#"><i class="icon-basket-loaded icons"></i></a>
-                                    <span class="item_count">2</span>
+                                    <span class="item_count">@Html.Action("CartItemCount", "Cart")</span>
                                 </li>
                             </ul>
                         </div>
@@ -209,8 +167,8 @@
         <div class="search_close">
             <i class="ion-close-round"></i>
         </div>
-        <form class="border-bottom" action="#">
-            <input class="border-0" placeholder="Search products..." type="text">
+        <form class="border-bottom" action="@Url.Action("Index","Products")" method="get">
+            <input class="border-0" placeholder="Search products..." type="text" name="kw">
             <button type="submit"><span class="icon-magnifier icons"></span></button>
         </form>
     </div>

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.SAN_PHAM>
+
+@{
+    ViewBag.Title = "Index";
+}
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/ShopStatus.css")" rel="stylesheet" />
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Trang Chủ</h1>
+        @if (Session["AdminName"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                <i class="fas fa-user-shield me-2"></i>
+                Xin chào, <strong>@Session["AdminName"]</strong>
+                <span class="badge bg-light text-dark ms-2">@Session["AdminEmail"]</span>
+                <hr />
+                <p class="mb-0 small">Hệ thống ghi nhận bạn đã đăng nhập thành công vào trang quản trị.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Trang Quản Lý</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        Area Chart
+                    </div>
+                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-1"></i>
+                        Bar Chart
+                    </div>
+                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ProductName</th>
+                            <th>Description</th>
+                            <th>StockQuantity</th>
+                            <th>Status</th>
+                            <th>CategoryName</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ProductName</th>
+                            <th>Description</th>
+                            <th>StockQuantity</th>
+                            <th>Status</th>
+                            <th>CategoryName</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TENSP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MOTA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SOLUONGTON)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TRANGTHAI)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DANH_MUC.TENDM)
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/Areas/Admin/Boot/assets/demo/chart-area-demo.js")"></script>
+    <script src="@Url.Content("~/Areas/Admin/Boot/assets/demo/chart-bar-demo.js")"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/Areas/Admin/Boot/js/datatables-simple-demo.js")"></script>
+}

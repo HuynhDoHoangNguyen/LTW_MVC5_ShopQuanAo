@@ -17,8 +17,83 @@ namespace WebsiteShopQuanAo.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            var gIO_HANG = db.GIO_HANG.Include(g => g.TAI_KHOAN);
-            return View(gIO_HANG.ToList());
+            
+            if (Session["Cart"] == null)
+            {
+
+                return View(new List<CHI_TIET_SP>());
+            }
+            Dictionary<string, CTGioHang> gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            var lstCTSP = db.CHI_TIET_SP.Where(ct => gioHang.Keys.Contains(ct.MACTSP));
+
+            return View(lstCTSP.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(CTGioHang model)
+        {
+
+            // tạo giỏ hàng để lưu tạm
+            Dictionary<string, CTGioHang> gioHang = new Dictionary<string, CTGioHang>();
+
+            var ctsp = db.CHI_TIET_SP.FirstOrDefault(x => x.MACTSP == model.MaCTSP && x.TRANGTHAI == true);
+            //Kiểm tra session
+            if (Session["Cart"] != null)
+            {
+                gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+            }
+
+            if (gioHang.ContainsKey(model.MaCTSP))
+            {
+                int tongSoLuong = gioHang[model.MaCTSP].SoLuong + model.SoLuong;
+
+                // Không cho vượt tồn
+                if (tongSoLuong > ctsp.SOLUONGTON)
+                    gioHang[model.MaCTSP].SoLuong = ctsp.SOLUONGTON.Value;
+                else
+                    gioHang[model.MaCTSP].SoLuong = tongSoLuong;
+            }
+            else
+            {
+                gioHang.Add(model.MaCTSP, model);
+            }
+
+            Session["Cart"] = gioHang;
+
+            return RedirectToAction("Index", "Cart");
+        }
+
+        public ActionResult RemoveFromCart(string MaCTSP)
+        {
+            Dictionary<string, CTGioHang> gioHang = new Dictionary<string, CTGioHang>();
+
+            var ctsp = db.CHI_TIET_SP.FirstOrDefault(x => x.MACTSP == MaCTSP && x.TRANGTHAI == true);
+            //Kiểm tra session
+            if (Session["Cart"] != null)
+            {
+                gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+            }
+
+            if (gioHang.ContainsKey(MaCTSP))
+            {
+                gioHang.Remove(MaCTSP);
+            }
+           
+
+            Session["Cart"] = gioHang;
+
+            return RedirectToAction("Index", "Cart");
+        }
+
+
+        public ActionResult ClearCart()
+        {
+            Dictionary<string, CTGioHang> gioHang = new Dictionary<string, CTGioHang>();
+
+            Session["Cart"] = gioHang;
+
+            return RedirectToAction("Index", "Cart");
         }
 
         // GET: Cart/Details/5
@@ -28,18 +103,160 @@ namespace WebsiteShopQuanAo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GIO_HANG gIO_HANG = db.GIO_HANG.Find(id);
-            if (gIO_HANG == null)
+            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
+            if (sAN_PHAM == null)
             {
                 return HttpNotFound();
             }
-            return View(gIO_HANG);
+            return View(sAN_PHAM);
         }
+
+        public ActionResult Checkout()
+        {
+            if (Session["User"] == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var cart = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            var ctspKeys = cart.Keys.ToList();
+
+            var ctspList = db.CHI_TIET_SP.Where(x => ctspKeys.Contains(x.MACTSP)).ToList();
+
+            var vm = new CheckoutVM
+            {
+                CTSPs = ctspList,
+                TongSoLuong = cart.Sum(x => x.Value.SoLuong),
+                TongTien = cart.Sum(x => x.Value.SoLuong * x.Value.Gia),
+                HinhThucThanhToan = "COD"
+            };
+
+            return View(vm);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlaceOrder(CheckoutVM model)
+        {
+            if (Session["Cart"] == null || Session["MAKH"] == null)
+                return RedirectToAction("Index", "Cart");
+
+            var cart = (Dictionary<string, CTGioHang>)Session["Cart"];
+            string makh = Session["MAKH"].ToString();
+
+            using (var tran = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // tạo đơn hàng
+                    db.SP_DONHANG_CREATE(makh,model.DiaChiGiao,model.HinhThucThanhToan);
+
+                    // lấy MADH mới nhất
+                    string madh = db.DON_HANG.Where(x => x.MAKH == makh).OrderByDescending(x => x.NGAYDAT).Select(x => x.MADH).First();
+
+                    // thêm chi tiết đơn hàng
+                    foreach (var item in cart)
+                    {
+                        var ctsp = db.CHI_TIET_SP.First(x => x.MACTSP == item.Key);
+
+                        db.SP_CTDH_ADD(
+                            madh,
+                            ctsp.MASP,
+                            ctsp.MAMAU,
+                            ctsp.MASIZE,
+                            item.Value.SoLuong
+                        );
+                    }
+
+                    tran.Commit();
+                    Session["Cart"] = null;
+
+                    return RedirectToAction("Success");
+                }
+                catch
+                {
+                    tran.Rollback();
+                    ViewBag.Error = "Không đủ tồn kho hoặc lỗi hệ thống";
+                    return View("Checkout", model);
+                }
+            }
+        }
+
+        public ActionResult Success()
+        {
+            if (Session["MAKH"] == null)
+                return RedirectToAction("Index", "Home");
+
+            return View();
+        }
+
+        public ActionResult MiniCart()
+        {
+            if (Session["Cart"] == null)
+            {
+                return PartialView("_MiniCart", new List<CHI_TIET_SP>());
+            }
+            Dictionary<string, CTGioHang> gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            var lstCTSP = db.CHI_TIET_SP.Where(ct => gioHang.Keys.Contains(ct.MACTSP));
+
+            return PartialView("_MiniCart", lstCTSP);
+        }
+
+        public ActionResult CartItemCount()
+        {
+            var cart = Session["GioHang"] as Dictionary<string, CTGioHang>;
+
+            int count = 0;
+            if (cart != null)
+            {
+                count = cart.Count();
+            }
+
+            return PartialView("_CartItemCount", count);
+        }
+
+
+        public ActionResult MyOrders()
+        {
+            if (Session["MAKH"] == null)
+                return RedirectToAction("Login", "User");
+
+            string makh = Session["MAKH"].ToString();
+
+            var orders = db.DON_HANG.Where(x => x.MAKH == makh).OrderByDescending(x => x.NGAYDAT).ToList();
+
+            return View(orders);
+        }
+
+
+        public ActionResult OrderDetails(string id)
+        {
+            if (Session["MAKH"] == null)
+                return RedirectToAction("Login", "User");
+
+            if (id == null)
+                return HttpNotFound();
+
+            string makh = Session["MAKH"].ToString();
+
+            var order = db.DON_HANG.FirstOrDefault(x => x.MADH == id && x.MAKH == makh);
+
+            if (order == null)
+                return HttpNotFound();
+
+            return View(order);
+        }
+
+
 
         // GET: Cart/Create
         public ActionResult Create()
         {
-            ViewBag.USERNAME = new SelectList(db.TAI_KHOAN, "USERNAME", "MATKHAU");
+            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM");
             return View();
         }
 
@@ -48,17 +265,17 @@ namespace WebsiteShopQuanAo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MAGH,USERNAME,NGAYTAO,TRANGTHAI")] GIO_HANG gIO_HANG)
+        public ActionResult Create([Bind(Include = "MASP,TENSP,MADM,MOTA,SOLUONGTON,TRANGTHAI")] SAN_PHAM sAN_PHAM)
         {
             if (ModelState.IsValid)
             {
-                db.GIO_HANG.Add(gIO_HANG);
+                db.SAN_PHAM.Add(sAN_PHAM);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.USERNAME = new SelectList(db.TAI_KHOAN, "USERNAME", "MATKHAU", gIO_HANG.USERNAME);
-            return View(gIO_HANG);
+            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
+            return View(sAN_PHAM);
         }
 
         // GET: Cart/Edit/5
@@ -68,13 +285,13 @@ namespace WebsiteShopQuanAo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GIO_HANG gIO_HANG = db.GIO_HANG.Find(id);
-            if (gIO_HANG == null)
+            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
+            if (sAN_PHAM == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.USERNAME = new SelectList(db.TAI_KHOAN, "USERNAME", "MATKHAU", gIO_HANG.USERNAME);
-            return View(gIO_HANG);
+            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
+            return View(sAN_PHAM);
         }
 
         // POST: Cart/Edit/5
@@ -82,16 +299,16 @@ namespace WebsiteShopQuanAo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MAGH,USERNAME,NGAYTAO,TRANGTHAI")] GIO_HANG gIO_HANG)
+        public ActionResult Edit([Bind(Include = "MASP,TENSP,MADM,MOTA,SOLUONGTON,TRANGTHAI")] SAN_PHAM sAN_PHAM)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(gIO_HANG).State = EntityState.Modified;
+                db.Entry(sAN_PHAM).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.USERNAME = new SelectList(db.TAI_KHOAN, "USERNAME", "MATKHAU", gIO_HANG.USERNAME);
-            return View(gIO_HANG);
+            ViewBag.MADM = new SelectList(db.DANH_MUC, "MADM", "TENDM", sAN_PHAM.MADM);
+            return View(sAN_PHAM);
         }
 
         // GET: Cart/Delete/5
@@ -101,12 +318,12 @@ namespace WebsiteShopQuanAo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GIO_HANG gIO_HANG = db.GIO_HANG.Find(id);
-            if (gIO_HANG == null)
+            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
+            if (sAN_PHAM == null)
             {
                 return HttpNotFound();
             }
-            return View(gIO_HANG);
+            return View(sAN_PHAM);
         }
 
         // POST: Cart/Delete/5
@@ -114,8 +331,8 @@ namespace WebsiteShopQuanAo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            GIO_HANG gIO_HANG = db.GIO_HANG.Find(id);
-            db.GIO_HANG.Remove(gIO_HANG);
+            SAN_PHAM sAN_PHAM = db.SAN_PHAM.Find(id);
+            db.SAN_PHAM.Remove(sAN_PHAM);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

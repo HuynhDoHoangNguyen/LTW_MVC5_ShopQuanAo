@@ -1,0 +1,96 @@
+﻿@model WebsiteShopQuanAo.Models.DON_HANG
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/Order.css")" rel="stylesheet" />
+
+<div class="container" style="max-width: 900px; margin: 40px auto;">
+    <div class="card">
+        <div class="card-header">
+            <h2 style="margin: 0; color: var(--white); font-size: 1.5rem;">Details</h2>
+        </div>
+
+        <div class="card-body">
+            <div>
+                <h4 style="color: var(--primary-black); margin-bottom: 20px;">DON_HANG</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NGAYDAT)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NGAYDAT)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HINHTHUCTHANHTOAN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HINHTHUCTHANHTOAN)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DIACHIGIAO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DIACHIGIAO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GIAMGIA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.GIAMGIA)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TONGSOLUONG)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TONGSOLUONG)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TONGTHANHTIEN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TONGTHANHTIEN)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TRANGTHAI)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TRANGTHAI)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.KHACH_HANG.HOTEN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.KHACH_HANG.HOTEN)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <p style="margin: 0;">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.MADH }, new { @class = "btn btn-outline-warning" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-admin" })
+            </p>
+        </div>
+    </div>
+</div>

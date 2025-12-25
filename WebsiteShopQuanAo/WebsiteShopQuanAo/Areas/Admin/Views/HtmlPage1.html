@@ -1,0 +1,774 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống Kê Doanh Thu</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* =================================================
+           REVENUE STATISTICS PAGE STYLES
+           ================================================= */
+
+        :root {
+            --primary-dark: #212529;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --primary-color: #007bff;
+            --info-color: #17a2b8;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #343a40 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            .stat-card .card-body {
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+        }
+
+        /* Filter Card */
+        .filter-card .card-header {
+            background-color: var(--primary-dark);
+            color: white;
+            border-bottom: none;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-radius: 10px 10px 0 0 !important;
+        }
+
+        .filter-card .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Form Controls */
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.25);
+        }
+
+        /* Buttons */
+        .btn-dark-admin {
+            background-color: var(--primary-dark);
+            color: white;
+            border: 2px solid var(--primary-dark);
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+            .btn-dark-admin:hover {
+                background-color: white;
+                color: var(--primary-dark);
+                border-color: var(--primary-dark);
+            }
+
+        .btn-outline-admin {
+            background-color: white;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary-dark);
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+            .btn-outline-admin:hover {
+                background-color: var(--primary-dark);
+                color: white;
+            }
+
+        /* Table Styles */
+        .data-table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+            .data-table .card-header {
+                background-color: var(--primary-dark);
+                color: white;
+                border-bottom: none;
+                padding: 1rem 1.5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+            .table thead {
+                background-color: #f8f9fa;
+                color: var(--primary-dark);
+            }
+
+                .table thead th {
+                    border-bottom: 2px solid #dee2e6;
+                    padding: 1rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 0.85rem;
+                    letter-spacing: 0.5px;
+                    vertical-align: middle;
+                }
+
+            .table tbody td {
+                padding: 1rem;
+                vertical-align: middle;
+                border-top: 1px solid #e9ecef;
+            }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(33, 37, 41, 0.05);
+        }
+
+        .table tfoot {
+            font-weight: 600;
+            background-color: #f8f9fa;
+        }
+
+        /* Badge Styles */
+        .badge {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .chart-card .card-header {
+            background-color: white;
+            color: var(--primary-dark);
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem 1.5rem;
+        }
+
+        /* Responsive Design */
+        @@media (max-width: 768px) {
+            .stat-card .card-body {
+                padding: 1.25rem;
+            }
+
+            .stat-icon {
+                font-size: 2rem !important;
+            }
+
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .table {
+                font-size: 0.85rem;
+            }
+
+            .btn-group .btn {
+                padding: 0.25rem 0.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animation */
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.5s ease;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Font Monospace for Numbers */
+        .font-monospace {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+        }
+
+        /* Custom Scrollbar for Table */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #adb5bd;
+            border-radius: 10px;
+        }
+
+            .table-responsive::-webkit-scrollbar-thumb:hover {
+                background: #6c757d;
+            }
+
+        /* Rank badges */
+        .badge-rank-1 {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .badge-rank-2 {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .badge-rank-3 {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .badge-rank-other {
+            background-color: #212529;
+            color: white;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            background-color: var(--primary-dark);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="page-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold mb-2">
+                        <i class="fas fa-chart-line me-2"></i>THỐNG KÊ DOANH THU
+                    </h1>
+                    <p class="lead mb-0">Phân tích và theo dõi hiệu suất bán hàng theo thời gian thực</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="d-inline-block p-3 bg-white rounded-3 shadow-sm">
+                        <div class="small text-muted">Ngày cập nhật</div>
+                        <div class="fw-bold" id="currentDate">--/--/----</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4">
+        <!-- Filter Section -->
+        <div class="card filter-card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-filter me-2"></i> BỘ LỌC THỐNG KÊ</h5>
+            </div>
+            <div class="card-body">
+                <form id="filterForm" method="get">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold">Loại Thống Kê</label>
+                            <select class="form-control" id="filterType" name="filterType">
+                                <option value="day">Theo Ngày</option>
+                                <option value="week">Theo Tuần</option>
+                                <option value="month" selected>Theo Tháng</option>
+                                <option value="year">Theo Năm</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3" id="dayFilter">
+                            <label class="form-label fw-semibold">Chọn Ngày</label>
+                            <input type="date" class="form-control" name="selectedDate" value="2023-10-15">
+                        </div>
+                        <div class="col-md-3" id="monthFilter">
+                            <label class="form-label fw-semibold">Chọn Tháng</label>
+                            <input type="month" class="form-control" name="selectedMonth" value="2023-10">
+                        </div>
+                        <div class="col-md-3" id="yearFilter" style="display: none;">
+                            <label class="form-label fw-semibold">Chọn Năm</label>
+                            <select class="form-control" name="selectedYear">
+                                <option value="2023" selected>2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-dark-admin w-100 py-2">
+                                <i class="fas fa-search me-2"></i> XEM THỐNG KÊ
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="stat-card card bg-success text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-check-circle fa-3x mb-3 stat-icon"></i>
+                        <p class="mb-1">ĐƠN HÀNG THÀNH CÔNG</p>
+                        <h3 class="h3 mb-0" id="totalSuccessOrders">128</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card bg-danger text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-times-circle fa-3x mb-3 stat-icon"></i>
+                        <p class="mb-1">ĐƠN HÀNG ĐÃ HỦY</p>
+                        <h3 class="h3 mb-0" id="totalCancelledOrders">12</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-dollar-sign fa-3x mb-3 stat-icon"></i>
+                        <p class="mb-1">TỔNG DOANH THU</p>
+                        <h3 class="h3 mb-0" id="totalRevenue">45,820,000 đ</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card bg-info text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3 stat-icon"></i>
+                        <p class="mb-1">DOANH THU TRUNG BÌNH</p>
+                        <h3 class="h3 mb-0" id="averageOrderValue">358,000 đ</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-8">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i> BIỂU ĐỒ DOANH THU</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i> TỶ LỆ TRẠNG THÁI</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="card data-table mb-4">
+            <div class="card-header">
+                <span><i class="fas fa-table me-2"></i> CHI TIẾT DOANH THU</span>
+                <div>
+                    <button class="btn btn-outline-admin me-2" onclick="printTable()">
+                        <i class="fas fa-print"></i> In
+                    </button>
+                    <button class="btn btn-outline-admin" onclick="exportToExcel()">
+                        <i class="fas fa-file-excel"></i> Xuất Excel
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" id="revenueTable">
+                        <thead>
+                            <tr>
+                                <th>THỜI GIAN</th>
+                                <th>TỔNG ĐƠN HÀNG</th>
+                                <th>ĐƠN THÀNH CÔNG</th>
+                                <th>ĐƠN BỊ HỦY</th>
+                                <th>DOANH THU</th>
+                                <th>DOANH THU TRUNG BÌNH</th>
+                            </tr>
+                        </thead>
+                        <tbody id="revenueTableBody">
+                            <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-active">
+                                <td class="fw-bold">TỔNG CỘNG</td>
+                                <td class="fw-bold" id="totalOrdersSum">140</td>
+                                <td class="fw-bold" id="successOrdersSum">128</td>
+                                <td class="fw-bold" id="cancelledOrdersSum">12</td>
+                                <td class="fw-bold font-monospace" id="totalRevenueSum">45,820,000 đ</td>
+                                <td class="fw-bold font-monospace" id="avgRevenueSum">358,000 đ</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Products Section -->
+        <div class="card data-table">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-trophy me-2"></i> SẢN PHẨM BÁN CHẠY NHẤT</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>XẾP HẠNG</th>
+                                <th>TÊN SẢN PHẨM</th>
+                                <th>SỐ LƯỢNG ĐÃ BÁN</th>
+                                <th>DOANH THU</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topProductsBody">
+                            <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-store fa-2x me-3"></i>
+                        <div>
+                            <h5 class="mb-1">HỆ THỐNG QUẢN LÝ SHOP QUẦN ÁO</h5>
+                            <p class="mb-0 small">Phiên bản 2.0 - Phát triển bởi đội ngũ Admin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="small">© 2023 Bản quyền thuộc về Shop Quần Áo</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Dữ liệu mẫu - Thay thế bằng dữ liệu thực từ Model
+        const revenueData = [
+            { period: "01/10", totalOrders: 15, successOrders: 14, cancelledOrders: 1, revenue: 5250000, avgRevenue: 375000 },
+            { period: "02/10", totalOrders: 18, successOrders: 17, cancelledOrders: 1, revenue: 6420000, avgRevenue: 377647 },
+            { period: "03/10", totalOrders: 12, successOrders: 11, cancelledOrders: 1, revenue: 3980000, avgRevenue: 361818 },
+            { period: "04/10", totalOrders: 20, successOrders: 18, cancelledOrders: 2, revenue: 7150000, avgRevenue: 397222 },
+            { period: "05/10", totalOrders: 16, successOrders: 15, cancelledOrders: 1, revenue: 5800000, avgRevenue: 386667 },
+            { period: "06/10", totalOrders: 22, successOrders: 20, cancelledOrders: 2, revenue: 8250000, avgRevenue: 412500 },
+            { period: "07/10", totalOrders: 19, successOrders: 17, cancelledOrders: 2, revenue: 6980000, avgRevenue: 410588 },
+            { period: "08/10", totalOrders: 14, successOrders: 13, cancelledOrders: 1, revenue: 5010000, avgRevenue: 385385 }
+        ];
+
+        const topProductsData = [
+            { rank: 1, productName: "Áo thun nam cổ tròn", quantitySold: 45, revenue: 6750000 },
+            { rank: 2, productName: "Quần jean nữ rách gối", quantitySold: 32, revenue: 6400000 },
+            { rank: 3, productName: "Áo khoác bomber nam", quantitySold: 28, revenue: 8400000 },
+            { rank: 4, productName: "Váy liền thân công sở", quantitySold: 25, revenue: 6250000 },
+            { rank: 5, productName: "Áo sơ mi nam dài tay", quantitySold: 22, revenue: 4400000 }
+        ];
+
+        // Khởi tạo ngày hiện tại
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('vi-VN');
+
+        // Filter Type Toggle
+        document.getElementById('filterType').addEventListener('change', function() {
+            const type = this.value;
+            document.getElementById('dayFilter').style.display = type === 'day' ? 'block' : 'none';
+            document.getElementById('monthFilter').style.display = type === 'month' ? 'block' : 'none';
+            document.getElementById('yearFilter').style.display = type === 'year' ? 'block' : 'none';
+
+            // Ẩn các filter không cần thiết
+            if (type !== 'day') document.getElementById('dayFilter').style.display = 'none';
+            if (type !== 'month') document.getElementById('monthFilter').style.display = 'none';
+            if (type !== 'year') document.getElementById('yearFilter').style.display = 'none';
+        });
+
+        // Populate Revenue Table
+        function populateRevenueTable() {
+            const tableBody = document.getElementById('revenueTableBody');
+            tableBody.innerHTML = '';
+
+            let totalOrders = 0;
+            let totalSuccessOrders = 0;
+            let totalCancelledOrders = 0;
+            let totalRevenue = 0;
+
+            revenueData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="fw-bold">${item.period}</td>
+                    <td>${item.totalOrders}</td>
+                    <td><span class="badge bg-success">${item.successOrders}</span></td>
+                    <td><span class="badge bg-danger">${item.cancelledOrders}</span></td>
+                    <td class="font-monospace fw-bold">${item.revenue.toLocaleString('vi-VN')} đ</td>
+                    <td class="font-monospace">${item.avgRevenue.toLocaleString('vi-VN')} đ</td>
+                `;
+                tableBody.appendChild(row);
+
+                totalOrders += item.totalOrders;
+                totalSuccessOrders += item.successOrders;
+                totalCancelledOrders += item.cancelledOrders;
+                totalRevenue += item.revenue;
+            });
+
+            // Cập nhật tổng số
+            document.getElementById('totalOrdersSum').textContent = totalOrders;
+            document.getElementById('successOrdersSum').textContent = totalSuccessOrders;
+            document.getElementById('cancelledOrdersSum').textContent = totalCancelledOrders;
+            document.getElementById('totalRevenueSum').textContent = totalRevenue.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('avgRevenueSum').textContent = (totalSuccessOrders > 0 ? Math.round(totalRevenue / totalSuccessOrders) : 0).toLocaleString('vi-VN') + ' đ';
+
+            // Cập nhật thẻ thống kê
+            document.getElementById('totalSuccessOrders').textContent = totalSuccessOrders;
+            document.getElementById('totalCancelledOrders').textContent = totalCancelledOrders;
+            document.getElementById('totalRevenue').textContent = totalRevenue.toLocaleString('vi-VN') + ' đ';
+            document.getElementById('averageOrderValue').textContent = (totalSuccessOrders > 0 ? Math.round(totalRevenue / totalSuccessOrders) : 0).toLocaleString('vi-VN') + ' đ';
+        }
+
+        // Populate Top Products Table
+        function populateTopProductsTable() {
+            const tableBody = document.getElementById('topProductsBody');
+            tableBody.innerHTML = '';
+
+            topProductsData.forEach(product => {
+                const row = document.createElement('tr');
+
+                let rankBadge;
+                if (product.rank === 1) {
+                    rankBadge = '<span class="badge badge-rank-1"><i class="fas fa-crown me-1"></i> #1</span>';
+                } else if (product.rank === 2) {
+                    rankBadge = '<span class="badge badge-rank-2"><i class="fas fa-medal me-1"></i> #2</span>';
+                } else if (product.rank === 3) {
+                    rankBadge = '<span class="badge badge-rank-3"><i class="fas fa-medal me-1"></i> #3</span>';
+                } else {
+                    rankBadge = `<span class="badge badge-rank-other">#${product.rank}</span>`;
+                }
+
+                row.innerHTML = `
+                    <td>${rankBadge}</td>
+                    <td class="fw-bold">${product.productName}</td>
+                    <td>${product.quantitySold}</td>
+                    <td class="font-monospace">${product.revenue.toLocaleString('vi-VN')} đ</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initialize Charts
+        function initializeCharts() {
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: revenueData.map(x => x.period),
+                    datasets: [{
+                        label: 'Doanh Thu (đ)',
+                        data: revenueData.map(x => x.revenue),
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        borderRadius: 5,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Doanh thu: ' + context.parsed.y.toLocaleString('vi-VN') + ' đ';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString('vi-VN') + ' đ';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Status Chart
+            const totalSuccess = revenueData.reduce((sum, item) => sum + item.successOrders, 0);
+            const totalCancelled = revenueData.reduce((sum, item) => sum + item.cancelledOrders, 0);
+
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            const statusChart = new Chart(statusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Thành Công', 'Đã Hủy'],
+                    datasets: [{
+                        data: [totalSuccess, totalCancelled],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(255, 99, 132, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = totalSuccess + totalCancelled;
+                                    const percentage = total > 0 ? ((context.parsed / total) * 100).toFixed(1) : 0;
+                                    return context.label + ': ' + context.parsed + ' (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        }
+
+        // Export to Excel
+        function exportToExcel() {
+            const table = document.getElementById('revenueTable');
+            let html = table.outerHTML;
+            const url = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+            const downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+            downloadLink.href = url;
+            downloadLink.download = 'ThongKeDoanhThu_' + new Date().toISOString().slice(0, 10) + '.xls';
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            // Hiển thị thông báo
+            alert('Đã xuất file Excel thành công!');
+        }
+
+        // Print Table
+        function printTable() {
+            window.print();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateRevenueTable();
+            populateTopProductsTable();
+            initializeCharts();
+        });
+    </script>
+</body>
+</html>

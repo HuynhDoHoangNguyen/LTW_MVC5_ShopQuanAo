@@ -109,24 +109,152 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Static Navigation</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="mt-4 fw-light">PRODUCT <span class="fw-bold">INVENTORY</span></h2>
+                            <div class="mt-4">
+                                <button class="btn btn-dark-admin shadow-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                    <i class="fas fa-plus me-2"></i> NEW PRODUCT
+                                </button>
                             </div>
                         </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
+
+                        <hr class="mb-4 opacity-10">
+
+                        <div class="row mb-4">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card stat-card mb-4">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="text-muted small">Tất cả sản phẩm</div>
+                                                <div class="h3 fw-bold mb-0">482</div>
+                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-boxes fa-2x"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card stat-card mb-4" style="border-left-color: #d1d1d1;">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="text-muted small">Sắp hết hàng (< 10)</div>
+                                                <div class="h3 fw-bold mb-0 text-danger">12</div>
+                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card stat-card mb-4">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="text-muted small">Danh mục sản phẩm</div>
+                                                <div class="h3 fw-bold mb-0">10</div>
+                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-tags fa-2x"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card stat-card mb-4">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="text-muted small">Giá trị kho hàng</div>
+                                                <div class="h3 fw-bold mb-0">2.4B</div>
+                                            </div>
+                                            <div class="stat-icon"><i class="fas fa-warehouse fa-2x"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center py-3">
+                                <span class="small">PRODUCT LISTING</span>
+                                <div class="d-flex gap-2">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Tìm kiếm mã hoặc tên...">
+                                    <button class="btn btn-outline-admin btn-sm"><i class="fas fa-filter"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>CODE</th>
+                                                <th>PRODUCT NAME</th>
+                                                <th>CATEGORY</th>
+                                                <th class="text-center">STOCK</th>
+                                                <th>STATUS</th>
+                                                <th class="text-end">ACTIONS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">#SP001</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-2 bg-light me-3" style="width: 40px; height: 40px; border: 1px solid #eee;"></div>
+                                                        <span>Áo sơ mi lụa cao cấp</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-muted small">Sơ mi</span></td>
+                                                <td class="text-center font-monospace">124</td>
+                                                <td><span class="badge-status bg-active text-uppercase" style="font-size: 0.65rem;">Available</span></td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-outline-admin me-1"><i class="fas fa-pencil-alt"></i></button>
+                                                    <button class="btn btn-sm btn-outline-admin text-danger"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">#SP002</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="rounded-2 bg-light me-3" style="width: 40px; height: 40px; border: 1px solid #eee;"></div>
+                                                        <span>Chân váy chữ A đen</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-muted small">Chân váy</span></td>
+                                                <td class="text-center font-monospace text-danger fw-bold">05</td>
+                                                <td><span class="badge-status bg-light text-muted text-uppercase" style="font-size: 0.65rem;">Low Stock</span></td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-outline-admin me-1"><i class="fas fa-pencil-alt"></i></button>
+                                                    <button class="btn btn-sm btn-outline-admin text-danger"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-white py-3 border-top-0">
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span>Hiển thị 1 đến 10 của 482 sản phẩm</span>
+                                    <nav aria-label="Product Page Navigation">
+                                        <ul class="pagination pagination-sm mb-0">
+                                            <li class="page-item">
+                                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="0">Trước đó</a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link border-0 bg-dark text-white shadow-sm btn-pagination" href="#" data-page="1">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">2</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">Kế tiếp</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

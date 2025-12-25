@@ -17,7 +17,7 @@ namespace WebsiteShopQuanAo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TAI_KHOAN()
         {
-            this.GIO_HANG = new HashSet<GIO_HANG>();
+            this.KHACH_HANG = new HashSet<KHACH_HANG>();
         }
     
         public string USERNAME { get; set; }
@@ -26,7 +26,7 @@ namespace WebsiteShopQuanAo.Models
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GIO_HANG> GIO_HANG { get; set; }
+        public virtual ICollection<KHACH_HANG> KHACH_HANG { get; set; }
         public virtual VAI_TRO VAI_TRO { get; set; }
     }
 }

@@ -21,14 +21,15 @@ namespace WebsiteShopQuanAo.Models
         }
     
         public string MAKH { get; set; }
+        public string USERNAME { get; set; }
         public string HOTEN { get; set; }
         public string SDT { get; set; }
         public string EMAIL { get; set; }
         public string DIACHI { get; set; }
-        public string USERNAME { get; set; }
         public Nullable<bool> TRANGTHAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DON_HANG> DON_HANG { get; set; }
+        public virtual TAI_KHOAN TAI_KHOAN { get; set; }
     }
 }

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.CHI_TIET_SP>
+
+@{
+    Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang> gioHang =
+        Session["Cart"] as Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>
+        ?? new Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>();
+
+    decimal tongTien = 0;
+}
+
+<!--mini cart-->
+<div class="mini_cart">
+    <div class="cart_gallery">
+        <div class="cart_close">
+            <div class="cart_text">
+                <h3>cart</h3>
+            </div>
+            <div class="mini_cart_close">
+                <a href="javascript:void(0)"><i class="icon-close icons"></i></a>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="cart_item text-center">
+                <p>Empty Cart</p>
+            </div>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                var ct = gioHang[item.MACTSP];
+                var thanhTien = ct.SoLuong * ct.Gia;
+                tongTien += thanhTien;
+
+                <div class="cart_item">
+                    <div class="cart_img">
+                        <a href="#">
+                            <img src="~/UI_User/assets/img/product/small-product/@item.SAN_PHAM.HINH_ANH_SP.OrderBy(x=> x.TENHINHANH).Select(h => h.TENHINHANH).FirstOrDefault()" alt="">
+                        </a>
+                    </div>
+
+                    <div class="cart_info">
+                        <a href="#">@item.SAN_PHAM.TENSP</a>
+                        <a href="#">@item.KICH_THUOC.TENSIZE</a>
+                        <a href="#">@item.MAU_SAC.TENMAU</a>
+                        <p>
+                            @ct.SoLuong x
+                            <span>@ct.Gia.ToString("N0") ₫</span>
+                        </p>
+                    </div>
+
+                    <div class="cart_remove">
+                        <a href="@Url.Action("RemoveFromCart", "Cart",
+                            new { MaCTSP = item.MACTSP })">
+                            <i class="icon-close icons"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="mini_cart_table">
+        <div class="cart_table_border">
+            <div class="cart_total">
+                <span>Sub total:</span>
+                <span class="price">@tongTien.ToString("N0") ₫</span>
+            </div>
+            <div class="cart_total mt-10">
+                <span>total:</span>
+                <span class="price">@tongTien.ToString("N0") ₫</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mini_cart_footer">
+        <div class="cart_button">
+            <a href="@Url.Action("Index", "Cart")">
+                <i class="fa fa-shopping-cart"></i> View cart
+            </a>
+        </div>
+        <div class="cart_button">
+            <a href="@Url.Action("Checkout", "Cart")">
+                <i class="fa fa-sign-in"></i> Checkout
+            </a>
+        </div>
+    </div>
+</div>
+<!--mini cart end-->

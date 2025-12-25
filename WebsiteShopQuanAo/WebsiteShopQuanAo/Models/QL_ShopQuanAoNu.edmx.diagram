@@ -4,38 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a1a0aa0321714c9a826fb223d5ca4d7d" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CHI_TIET_SP" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_DON_HANG" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_GIO_HANG" Width="1.5" PointX="10.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_PHIEU_NHAP" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DANH_MUC" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DON_HANG" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.GIO_HANG" Width="1.5" PointX="8.25" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.HINH_ANH_SP" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KHACH_HANG" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KICH_THUOC" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.MAU_SAC" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHA_CUNG_CAP" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.PHIEU_NHAP" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.SAN_PHAM" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.TAI_KHOAN" Width="1.5" PointX="6" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.VAI_TRO" Width="1.5" PointX="3.75" PointY="21.375" IsExpanded="true" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MAMAU__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MASIZ__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET_S__MASP__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HANG__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HANG__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_NHAP__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HAN__MADH__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_GIO_HAN__MAGH__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_N__MAPN__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__SAN_PHAM__MADM__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__DON_HANG__MAKH__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__GIO_HANG__USERNA__6D0D32F4" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__HINH_ANH_S__MASP__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__656C112C" ManuallyRouted="false" />
+      <Diagram DiagramId="4d7d2654fc1c4613be0f3e1d50201f1b" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CHI_TIET_SP" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_DON_HANG" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_PHIEU_NHAP" Width="1.5" PointX="12.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DANH_MUC" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DON_HANG" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.HINH_ANH_SP" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KHACH_HANG" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KICH_THUOC" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.MAU_SAC" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHA_CUNG_CAP" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHOM_DANH_MUC" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.PHIEU_NHAP" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.SAN_PHAM" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.TAI_KHOAN" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.VAI_TRO" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MAMAU__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MASIZ__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET_S__MASP__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HANG__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_NHAP__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_DON_HAN__MADH__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CT_PHIEU_N__MAPN__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__DANH_MUC__MANHOM__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__SAN_PHAM__MADM__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__DON_HANG__MAKH__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__HINH_ANH_S__MASP__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__KHACH_HAN__USERN__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__1FCDBCEB" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

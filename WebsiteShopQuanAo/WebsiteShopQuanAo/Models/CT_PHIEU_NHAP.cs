@@ -19,8 +19,8 @@ namespace WebsiteShopQuanAo.Models
         public string MAMAU { get; set; }
         public string MASIZE { get; set; }
         public string MACTPN { get; set; }
-        public Nullable<int> SOLUONG { get; set; }
-        public Nullable<decimal> DONGIANHAP { get; set; }
+        public int SOLUONG { get; set; }
+        public decimal DONGIANHAP { get; set; }
         public Nullable<decimal> THANHTIEN { get; set; }
     
         public virtual CHI_TIET_SP CHI_TIET_SP { get; set; }

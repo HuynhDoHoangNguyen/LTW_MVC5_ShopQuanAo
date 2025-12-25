@@ -1,0 +1,178 @@
+﻿@model IEnumerable<WebsiteShopQuanAo.Models.SAN_PHAM>
+
+@{
+    ViewBag.Title = "StatusShop";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/ShopStatus.css")" rel="stylesheet" />
+}
+<main>
+    <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mt-4 fw-light">PRODUCT <span class="fw-bold">INVENTORY</span></h2>
+            <div class="mt-4">
+
+
+                @Html.ActionLink("THÊM SẢN PHẨM MỚI", "Create", "Admin", null, new
+                {
+                    @class = "btn btn-dark-admin shadow-sm",
+                    @style = "text-decoration: none; color: white;"
+                })
+
+            </div>
+        </div>
+
+        <hr class="mb-4 opacity-10">
+
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Tất cả sản phẩm</div>
+                                <div class="h3 fw-bold mb-0">@Model.Count()</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-boxes fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4" style="border-left-color: #d1d1d1;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Số lượng sản phẩm sắp hết hàng </div>
+                                <div class="h3 fw-bold mb-0 text-danger">@Model.Count(t => t.SOLUONGTON < 10)</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-exclamation-triangle fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Danh mục sản phẩm</div>
+                                <div class="h3 fw-bold mb-0">@Model.Count(t => t.DANH_MUC.MADM != null && t.DANH_MUC != null)</div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-tags fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stat-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-muted small">Giá trị kho hàng</div>
+                                <div class="h3 fw-bold mb-0">@ViewBag.TongKho tr VND </div>
+                            </div>
+                            <div class="stat-icon"><i class="fas fa-warehouse fa-2x"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+           
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>CODE</th>
+                                <th>ProductName</th>
+                                <th>CategoryName</th>
+                                <th class="text-center">StockQuantity</th>
+                                <th>Status</th>
+                                <th class="text-end">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="fw-bold">@item.MASP</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="rounded-2 me-3 d-flex align-items-center justify-content-center"
+                                                 style="width: 45px; height: 45px; border: 1px solid #eee; overflow: hidden; background-color: #f8f9fa;">
+
+                                                @if (item.HINH_ANH_SP != null && item.HINH_ANH_SP.Any())
+                                                {
+                                                    var hinh = item.HINH_ANH_SP.FirstOrDefault();
+                                                    <img src="@Url.Content("~/Areas/Admin/Boot/Img/"+@hinh.TENHINHANH)"
+                                                         alt="@item.TENSP"
+                                                         style="width: 100%; height: 100%; object-fit: cover;" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Url.Content("~/Areas/Admin/Boot/Img/Error.jpg")"
+                                                         alt="No Image"
+                                                         style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;" />
+                                                }
+                                            </div>
+                                            <span class="fw-bold">@item.TENSP</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="text-muted small">@item.DANH_MUC.TENDM</span></td>
+                                    <td class="text-center font-monospace">@item.SOLUONGTON</td>
+                                    <td><span class="badge-status bg-active text-uppercase" style="font-size: 0.65rem;">@item.TRANGTHAI</span></td>
+                                    <td class="text-end">
+                                        <!-- SỬA -->
+                                        <a href="@Url.Action("Edit", "Admin", new { id = item.MASP })"
+                                           class="btn btn-sm btn-outline-admin me-1">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+
+                                        <!-- XEM CHI TIẾT -->
+                                        <a href="@Url.Action("Details", "Admin", new { id = item.MASP })"
+                                           class="btn btn-sm btn-outline-info me-1">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <!-- XÓA (POST + CONFIRM) -->
+                                        <a href="@Url.Action("Delete", "Admin", new { id = item.MASP })"
+                                           class="btn btn-sm btn-outline-info me-1">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white py-3 border-top-0">
+                <div class="d-flex justify-content-between align-items-center small text-muted">
+                    <span>Hiển thị 1 đến 10 của 482 sản phẩm</span>
+                    <nav aria-label="Product Page Navigation">
+                        <ul class="pagination pagination-sm mb-0">
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="0">Trước đó</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link border-0 bg-dark text-white shadow-sm btn-pagination" href="#" data-page="1">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link border-0 text-dark btn-pagination" href="#" data-page="2">Kế tiếp</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,22 +1,37 @@
-﻿@model WebsiteShopQuanAo.Models.GIO_HANG
+﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_MainUserLayout.cshtml";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>GIO_HANG</h4>
+    <h4>SAN_PHAM</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NGAYTAO)
+            @Html.DisplayNameFor(model => model.TENSP)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NGAYTAO)
+            @Html.DisplayFor(model => model.TENSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOTA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SOLUONGTON)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SOLUONGTON)
         </dd>
 
         <dt>
@@ -28,16 +43,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TAI_KHOAN.MATKHAU)
+            @Html.DisplayNameFor(model => model.DANH_MUC.TENDM)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TAI_KHOAN.MATKHAU)
+            @Html.DisplayFor(model => model.DANH_MUC.TENDM)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MAGH }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MASP }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -18,7 +18,6 @@ namespace WebsiteShopQuanAo.Models
         public CHI_TIET_SP()
         {
             this.CT_DON_HANG = new HashSet<CT_DON_HANG>();
-            this.CT_GIO_HANG = new HashSet<CT_GIO_HANG>();
             this.CT_PHIEU_NHAP = new HashSet<CT_PHIEU_NHAP>();
         }
     
@@ -36,8 +35,6 @@ namespace WebsiteShopQuanAo.Models
         public virtual SAN_PHAM SAN_PHAM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_DON_HANG> CT_DON_HANG { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_GIO_HANG> CT_GIO_HANG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEU_NHAP> CT_PHIEU_NHAP { get; set; }
     }

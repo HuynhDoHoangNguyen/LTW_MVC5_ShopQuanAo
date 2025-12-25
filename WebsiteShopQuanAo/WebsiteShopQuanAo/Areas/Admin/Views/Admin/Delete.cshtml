@@ -1,0 +1,257 @@
+﻿﻿@model WebsiteShopQuanAo.Models.SAN_PHAM
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+}
+
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/admin-forms-complete.css")" rel="stylesheet" />
+}
+
+<div class="create-page-body">
+    <div class="create-container">
+        <div class="create-header">
+            <div class="create-title-section">
+                <h1 class="create-main-title">
+                    <i class="fas fa-trash-alt"></i>
+                    Xóa sản phẩm
+                </h1>
+                <p class="create-subtitle">Xác nhận xóa sản phẩm khỏi hệ thống</p>
+                <a href="@Url.Action("StatusShop")" class="back-to-list-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Quay lại danh sách
+                </a>
+            </div>
+        </div>
+
+        <div class="form-card-create">
+            <div class="card-header-create" style="background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);">
+                <h4><i class="fas fa-exclamation-triangle"></i> Cảnh báo xóa</h4>
+            </div>
+            <div class="card-body-create">
+                <div class="warning-message">
+                    <div class="warning-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>Bạn có chắc chắn muốn xóa sản phẩm này?</h3>
+                    <p>Hành động này không thể hoàn tác. File hình ảnh và các thông tin liên quan sẽ bị xóa vĩnh viễn.</p>
+                </div>
+
+                <div class="product-info-delete">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="control-label-create mb-2"><i class="fas fa-image"></i> Hình ảnh hiện tại</div>
+                            @if (Model.HINH_ANH_SP != null && Model.HINH_ANH_SP.Any())
+                            {
+                                var hinh = Model.HINH_ANH_SP.FirstOrDefault();
+                                <img src="@Url.Content("~/Areas/Admin/Boot/Img/"+@hinh.TENHINHANH)" class="img-thumbnail" style="max-height: 250px; border-radius: 10px;" />
+                            }
+                            else
+                            {
+                                <div class="detail-value justify-content-center" style="height: 200px; background: #eee;">Không có ảnh</div>
+                            }
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group-create">
+                                <div class="control-label-create"><i class="fas fa-barcode"></i> Mã sản phẩm</div>
+                                <div class="form-input-create">
+                                    <div class="detail-value">@Model.MASP</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-create">
+                                <div class="control-label-create"><i class="fas fa-tag"></i> Tên sản phẩm</div>
+                                <div class="form-input-create">
+                                    <div class="detail-value">@Model.TENSP</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group-create">
+                                        <div class="control-label-create"><i class="fas fa-list"></i> Danh mục</div>
+                                        <div class="form-input-create">
+                                            <div class="detail-value">@(Model.DANH_MUC != null ? Model.DANH_MUC.TENDM : "N/A")</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group-create">
+                                        <div class="control-label-create"><i class="fas fa-boxes"></i> Số lượng tồn</div>
+                                        <div class="form-input-create">
+                                            <div class="detail-value">@Model.SOLUONGTON</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group-create">
+                                <div class="control-label-create"><i class="fas fa-toggle-on"></i> Trạng thái</div>
+                                <div class="form-input-create">
+                                    @if (Model.TRANGTHAI == true)
+                                    {
+                                        <span class="status-badge active"><i class="fas fa-check-circle"></i> Đang hoạt động</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-badge inactive"><i class="fas fa-times-circle"></i> Ngừng hoạt động</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("Delete", "Admin", new { id = Model.MASP }, FormMethod.Post, new { id = "deleteForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="confirmation-wrapper mb-4">
+                        <div class="confirm-checkbox-card">
+                            <input type="checkbox" id="confirmDelete" class="confirm-input">
+                            <label for="confirmDelete" class="confirm-label">
+                                Tôi hiểu rằng hành động này sẽ xóa vĩnh viễn sản phẩm <strong>@Model.TENSP</strong> và không thể khôi phục lại.
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-create">
+                        <a href="@Url.Action("StatusShop")" class="btn-create btn-create-secondary">
+                            <i class="fas fa-times"></i> Hủy bỏ
+                        </a>
+                    
+                        <button type="submit" id="btnSubmitDelete" class="btn-create btn-delete opacity-50" disabled title="Vui lòng tích xác nhận trước khi xóa">
+                            <i class="fas fa-trash-alt"></i> Xác nhận xóa
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="create-footer">
+            <div class="footer-logo-create">
+                <i class="fas fa-tshirt"></i>
+                <span>ShopQuanAo Admin</span>
+            </div>
+            <p class="footer-text-create">Hành động xóa sẽ được ghi lại vào nhật ký hệ thống</p>
+        </div>
+    </div>
+</div>
+<style>
+    .warning-message {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: var(--border-radius-lg);
+        margin-bottom: 30px;
+    }
+
+    .warning-icon {
+        font-size: 60px;
+        color: var(--error);
+        margin-bottom: 20px;
+    }
+
+    .warning-message h3 {
+        color: var(--error);
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .warning-message p {
+        color: var(--text-secondary);
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .product-info-delete {
+        background: var(--bg-tertiary);
+        border-radius: var(--border-radius-lg);
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+    .detail-value {
+        padding: 14px 16px;
+        background: var(--bg-secondary);
+        border: 2px solid transparent;
+        border-radius: var(--border-radius);
+        font-size: 15px;
+        color: var(--text-primary);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+        .status-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-badge.inactive {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .status-badge i {
+            font-size: 16px;
+        }
+
+    .btn-delete {
+        background: linear-gradient(135deg, var(--error) 0%, #c53030 100%);
+        color: white;
+        box-shadow: var(--shadow-md);
+    }
+
+        .btn-delete:hover {
+            background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const $checkbox = $('#confirmDelete');
+            const $btnDelete = $('#btnSubmitDelete');
+            const $form = $('#deleteForm');
+            $checkbox.on('change', function () {
+                if ($(this).is(':checked')) {
+                    $btnDelete.prop('disabled', false).removeClass('opacity-50');
+                } else {
+                    $btnDelete.prop('disabled', true).addClass('opacity-50');
+                }
+            });
+            $form.on('submit', function (e) {
+                if (!$checkbox.is(':checked')) {
+                    alert('Vui lòng tích vào ô xác nhận trước khi thực hiện xóa!');
+                    e.preventDefault();
+                    return false;
+                }
+                var originalText = $btnDelete.html();
+                $btnDelete.html('<i class="fas fa-spinner fa-spin"></i> Đang xóa...');
+                $btnDelete.prop('disabled', true);
+
+                return true;
+            });
+        });
+    </script>
+}
