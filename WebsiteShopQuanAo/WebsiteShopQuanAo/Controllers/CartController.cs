@@ -193,6 +193,66 @@ namespace WebsiteShopQuanAo.Controllers
             return View();
         }
 
+        public ActionResult MiniCart()
+        {
+            if (Session["Cart"] == null)
+            {
+                return PartialView("_MiniCart", new List<CHI_TIET_SP>());
+            }
+            Dictionary<string, CTGioHang> gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            var lstCTSP = db.CHI_TIET_SP.Where(ct => gioHang.Keys.Contains(ct.MACTSP));
+
+            return PartialView("_MiniCart", lstCTSP);
+        }
+
+        public ActionResult CartItemCount()
+        {
+            var cart = Session["GioHang"] as Dictionary<string, CTGioHang>;
+
+            int count = 0;
+            if (cart != null)
+            {
+                count = cart.Count();
+            }
+
+            return PartialView("_CartItemCount", count);
+        }
+
+
+        public ActionResult MyOrders()
+        {
+            if (Session["MAKH"] == null)
+                return RedirectToAction("Login", "User");
+
+            string makh = Session["MAKH"].ToString();
+
+            var orders = db.DON_HANG.Where(x => x.MAKH == makh).OrderByDescending(x => x.NGAYDAT).ToList();
+
+            return View(orders);
+        }
+
+
+        public ActionResult OrderDetails(string id)
+        {
+            if (Session["MAKH"] == null)
+                return RedirectToAction("Login", "User");
+
+            if (id == null)
+                return HttpNotFound();
+
+            string makh = Session["MAKH"].ToString();
+
+            var order = db.DON_HANG.FirstOrDefault(x => x.MADH == id && x.MAKH == makh);
+
+            if (order == null)
+                return HttpNotFound();
+
+            return View(order);
+        }
+
+
+
         // GET: Cart/Create
         public ActionResult Create()
         {

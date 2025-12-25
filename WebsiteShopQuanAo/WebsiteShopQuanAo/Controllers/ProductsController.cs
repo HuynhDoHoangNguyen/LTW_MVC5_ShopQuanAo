@@ -73,7 +73,7 @@ namespace WebsiteShopQuanAo.Controllers
                     TenDanhMuc = sp.DANH_MUC?.TENDM,
                   
                     GiaBan = giaGoc,
-                    HinhAnh = sp.HINH_ANH_SP.Select(it => it.TENHINHANH).FirstOrDefault(),
+                    HinhAnh = sp.HINH_ANH_SP.OrderBy(h => h.TENHINHANH).Select(h => h.TENHINHANH).FirstOrDefault(),
                 });
             }
 

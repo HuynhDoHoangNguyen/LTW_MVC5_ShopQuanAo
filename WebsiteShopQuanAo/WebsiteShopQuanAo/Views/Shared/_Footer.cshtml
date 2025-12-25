@@ -52,46 +52,13 @@
             <div class="col-lg-7 col-md-7 col-sm-7">
                 <div class="footer_widget_list text-right">
                     <div class="footer_menu">
+
                         <ul class="d-flex justify-content-end">
-                            <li><a href="index.html">home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="product-details.html">Product</a></li>
-                            <li><a href="#">pages</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer_social">
-                        <ul class="d-flex justify-content-end">
-                            <li>
-                                <a href="https://twitter.com" data-tippy="Twitter" data-tippy-inertia="true"
-                                   data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">
-                                    <i class="ion-social-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com" data-tippy="Facebook" data-tippy-inertia="true"
-                                   data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">
-                                    <i class="ion-social-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com" data-tippy="googleplus" data-tippy-inertia="true"
-                                   data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">
-                                    <i class="ion-social-googleplus-outline"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com" data-tippy="Instagram" data-tippy-inertia="true"
-                                   data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">
-                                    <i class="ion-social-instagram-outline"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com" data-tippy="Youtube" data-tippy-inertia="true"
-                                   data-tippy-delay="50" data-tippy-arrow="true" data-tippy-placement="top">
-                                    <i class="ion-social-youtube"></i>
-                                </a>
-                            </li>
+                            <li> <a href="@Url.Action("Index","Home")">Trang chủ</a> </li>
+                            <li><a href="@Url.Action("Index","Products")">Sản phẩm</a></li>
+                            <li><a href="@Url.Action("Index","Cart")">Giỏ hàng</a></li>
+                            <li><a href="@Url.Action("Login","User")">Tài khoản</a></li>
+                            <li><a href="@Url.Action("MyOrders","Cart")">Đơn hàng của tôi</a></li>
                         </ul>
                     </div>
                     <div class="copyright_right">
