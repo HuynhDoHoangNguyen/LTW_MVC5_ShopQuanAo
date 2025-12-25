@@ -1,4 +1,5 @@
 ﻿
+
 /* ===========================================================
 =========================================================== */
 SET NOCOUNT ON;
@@ -440,10 +441,6 @@ BEGIN
 END
 GO
 
-/* ===========================================================
-    DATA MẪU (FULL như hồi nãy nhưng đã sửa theo DB mới)
-=========================================================== */
-
 -- 1) Vai trò
 INSERT INTO VAI_TRO(MAVT, TENVAI) VALUES
 ('VT01', N'admin'),
@@ -451,7 +448,9 @@ INSERT INTO VAI_TRO(MAVT, TENVAI) VALUES
 
 -- 2) Tài khoản
 INSERT INTO TAI_KHOAN(USERNAME, MATKHAU, MAVT, TRANGTHAI) VALUES
-('admin', '123456', 'VT01', 1),
+('admin','123456','VT01',1),
+('Nguyen1235','12345678','VT02',1),
+('PhatHuy','12345678','VT02',1),
 ('user01','123456','VT02',1),
 ('user02','123456','VT02',1),
 ('user03','123456','VT02',1),
@@ -462,19 +461,24 @@ INSERT INTO TAI_KHOAN(USERNAME, MATKHAU, MAVT, TRANGTHAI) VALUES
 ('user08','123456','VT02',1),
 ('user09','123456','VT02',1),
 ('user10','123456','VT02',1);
+GO
+
 
 -- 3) Khách hàng (link USERNAME -> TAI_KHOAN)
-INSERT INTO KHACH_HANG(MAKH, USERNAME, HOTEN, SDT, EMAIL, DIACHI) VALUES
-('KH0001','user01',N'Lê Minh Thảo', '0903111222', 'thaole@gmail.com', N'Q1, HCM'),
-('KH0002','user02',N'Nguyễn Thái Hòa', '0912333444', 'hoa.nt@gmail.com', N'Q3, HCM'),
-('KH0003','user03',N'Trần Thị Mai', '0933444555', 'maitran@gmail.com', N'Tân Bình, HCM'),
-('KH0004','user04',N'Phạm Nhật Tân', '0988777666', 'tanpnhat@gmail.com', N'Bình Thạnh, HCM'),
-('KH0005','user05',N'Võ Anh Quân', '0902555666', 'quan.vo@gmail.com', N'Thủ Đức, HCM'),
-('KH0006','user06',N'Đỗ Hoàng Vy', '0966778899', 'vy.do@gmail.com', N'Hà Nội'),
-('KH0007','user07',N'Nguyễn Ngọc Hà', '0911888999', 'hanguyen@gmail.com', N'Hà Nội'),
-('KH0008','user08',N'Phan Thùy Trang', '0937788996', 'trangpth@gmail.com', N'Đà Nẵng'),
-('KH0009','user09',N'Vũ Minh Khoa', '0988555444', 'khoa.vu@gmail.com', N'Hải Phòng'),
-('KH0010','user10',N'Huỳnh Gia Hân', '0909777333', 'hanh.huynh@gmail.com', N'Cần Thơ');
+INSERT INTO KHACH_HANG(MAKH,USERNAME,HOTEN,SDT,EMAIL,DIACHI,TRANGTHAI) VALUES
+('KH0001','user01',N'Lê Minh Thảo','0903111222','thaole@gmail.com',N'Q1, HCM',1),
+('KH0002','user02',N'Nguyễn Thái Hòa','0912333444','hoa.nt@gmail.com',N'Q3, HCM',1),
+('KH0003','user03',N'Trần Thị Mai','0933444555','maitran@gmail.com',N'Tân Bình, HCM',1),
+('KH0004','user04',N'Phạm Nhật Tân','0988777666','tanpnhat@gmail.com',N'Bình Thạnh, HCM',1),
+('KH0005','user05',N'Võ Anh Quân','0902555666','quan.vo@gmail.com',N'Thủ Đức, HCM',1),
+('KH0006','user06',N'Đỗ Hoàng Vy','0966778899','vy.do@gmail.com',N'Hà Nội',1),
+('KH0007','user07',N'Nguyễn Ngọc Hà','0911888999','hanguyen@gmail.com',N'Hà Nội',1),
+('KH0008','user08',N'Phan Thùy Trang','0937788996','trangpth@gmail.com',N'Đà Nẵng',1),
+('KH0009','user09',N'Vũ Minh Khoa','0988555444','khoa.vu@gmail.com',N'Hải Phòng',1),
+('KH0010','user10',N'Huỳnh Gia Hân','0909777333','hanh.huynh@gmail.com',N'Cần Thơ',1),
+('KH0011','Nguyen1235',N'Huỳnh Nguyên','0907766198','nguyenhuynh120305@gmail.com',N'HCM',1),
+('KH0012','PhatHuy',N'Phát Huy','0912345678','huy@gmail.com',N'HCM',1);
+GO
 
 -- 4) Nhóm danh mục
 INSERT INTO NHOM_DANH_MUC(MANHOM, TENNHOM) VALUES
@@ -508,25 +512,50 @@ INSERT INTO KICH_THUOC(MASIZE, TENSIZE) VALUES
 ('SZ03', N'L');
 
 -- 7) Sản phẩm
-INSERT INTO SAN_PHAM(MASP, TENSP, MADM, MOTA) VALUES
-('SP001', N'Áo thun basic cotton', 'DM01', N'Cotton form rộng'),
-('SP002', N'Áo sơ mi tay dài nữ', 'DM02', N'Sơ mi công sở'),
-('SP003', N'Hoodie oversize nữ', 'DM03', N'Nỉ bông'),
-('SP004', N'Áo khoác bomber nữ', 'DM04', N'Kaki mềm'),
-('SP005', N'Quần jean skinny nữ', 'DM05', N'Co giãn 4 chiều'),
-('SP006', N'Quần short kaki nữ', 'DM06', N'Kaki co giãn'),
-('SP007', N'Chân váy chữ A', 'DM07', N'Dáng A, tuyết mưa'),
-('SP008', N'Đầm công sở body', 'DM08', N'Body sang trọng'),
-('SP009', N'Đồ ngủ pijama nữ', 'DM09', N'Cotton mềm'),
-('SP010', N'Yếm váy denim nữ', 'DM10', N'Denim cá tính');
+INSERT INTO SAN_PHAM VALUES
+('SP001',N'Áo thun basic cotton','DM01',N'Cotton form rộng',1260,1),
+('SP002',N'Áo sơ mi tay dài nữ','DM02',N'Áo thun mát lạnh',1134,1),
+('SP003',N'Hoodie oversize nữ','DM03',N'Nỉ bông',972,1),
+('SP004',N'Áo khoác bomber nữ','DM04',N'Kaki mềm',1013,1),
+('SP005',N'Quần jean skinny nữ','DM05',N'Co giãn 4 chiều',981,1),
+('SP006',N'Quần short kaki nữ','DM06',N'Kaki co giãn',1166,1),
+('SP007',N'Chân váy chữ A','DM07',N'Dáng A, tuyết mưa',1002,1),
+('SP008',N'Đầm công sở body','DM08',N'Body sang trọng',1078,1),
+('SP009',N'Đồ ngủ pijama nữ','DM09',N'Cotton mềm',1014,1),
+('SP010',N'Yếm váy denim nữ','DM10',N'Denim cá tính',970,1),
+('SP011',N'Áo thun nữ basic form rộng','DM01',N'Cotton 100%',150,1),
+('SP012',N'Áo thun nữ cổ tròn','DM01',N'Mềm, thoáng mát',120,1),
+('SP013',N'Áo thun nữ in chữ','DM01',N'Phong cách trẻ trung',90,1),
+('SP014',N'Sơ mi nữ tay dài công sở','DM02',N'Lụa mềm',75,1),
+('SP015',N'Sơ mi nữ form rộng','DM02',N'Phong cách Hàn',60,1),
+('SP016',N'Sơ mi nữ cổ bèo','DM02',N'Nữ tính',90,1),
+('SP017',N'Hoodie nữ oversize','DM03',N'Nỉ bông',105,1),
+('SP018',N'Hoodie nữ trơn','DM03',N'Hoddie giữ ấm đêm đông',90,1),
+('SP019',N'Hoodie nữ có mũ','DM03',N'Phong cách street',60,0);
+GO
+
 select * from HINH_ANH_SP
 -- 8) Hình ảnh (demo)
-INSERT INTO HINH_ANH_SP(MAHINH, MASP, TENHINHANH) VALUES
-('H001','SP001',N'sp001_1.jpg'),
-('H002','SP001',N'sp001_2.jpg'),
-('H003','SP002',N'sp002_1.jpg'),
-('H004','SP003',N'sp003_1.jpg'),
-('H005','SP004',N'sp004_1.jpg');
+DECLARE @MASP VARCHAR(10), @i INT;
+DECLARE cur CURSOR FOR SELECT MASP FROM SAN_PHAM;
+OPEN cur;
+FETCH NEXT FROM cur INTO @MASP;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    SET @i = 1;
+    WHILE @i <= 3
+    BEGIN
+        INSERT INTO HINH_ANH_SP(MASP, TENHINHANH, TRANGTHAI)
+        VALUES (@MASP, LOWER(@MASP)+'_'+CAST(@i AS VARCHAR)+'.jpg',1);
+        SET @i += 1;
+    END
+    FETCH NEXT FROM cur INTO @MASP;
+END
+CLOSE cur;
+DEALLOCATE cur;
+GO
+
 
 -- 9) Tạo biến thể CTSP (10 sp x 3 màu x 3 size = 90 dòng)
 ;WITH P AS (
@@ -553,11 +582,14 @@ INSERT INTO NHA_CUNG_CAP(MANCC, TENNCC, SDT, DIACHI) VALUES
 ('NCC01', N'Fashion Supplier', '0988001122', N'Hà Nội'),
 ('NCC02', N'Saigon Clothes Co', '0909123456', N'HCM');
 
-INSERT INTO PHIEU_NHAP(MAPN, MANCC, GHICHU) VALUES
-('PN0001','NCC01',N'Nhập đầu kho'),
-('PN0002','NCC01',N'Nhập bổ sung'),
-('PN0003','NCC02',N'Nhập hàng đợt 3'),
-('PN0004','NCC02',N'Nhập hàng Tết');
+INSERT INTO PHIEU_NHAP(MAPN, MANCC, NGAYLAP, TONGSOLUONG, TONGTHANHTIEN, GHICHU, TRANGTHAI) VALUES
+('PN0001','NCC01','2025-12-21',721,255565000,N'Nhập đầu kho',1),
+('PN0002','NCC01','2025-12-21',378,163020000,N'Nhập bổ sung',1),
+('PN0003','NCC02','2025-12-21',344,170150000,N'Nhập hàng đợt 3',1),
+('PN0004','NCC02','2025-12-21',194,88350000,N'Nhập hàng Tết',1),
+('PN0005','NCC01','2025-12-24',840,347650000,N'Nhập hàng cho SP011–SP019',1);
+GO
+
 
 -- 11) Chi tiết phiếu nhập (trigger TG_CTPN sẽ tự cộng tồn & set giá)
 INSERT INTO CT_PHIEU_NHAP(MAPN, MASP, MAMAU, MASIZE, SOLUONG, DONGIANHAP, THANHTIEN) VALUES
@@ -643,9 +675,8 @@ INSERT INTO DON_HANG(MADH, MAKH, DIACHIGIAO, HINHTHUCTHANHTOAN) VALUES
 ('DH0015','KH0006', N'Thủ Đức, HCM', N'COD'),
 ('DH0016','KH0007', N'Hà Nội', N'BANK'),
 ('DH0017','KH0008', N'Hà Nội', N'CASH'),
-('DH0018','KH0009', N'Đà Nẵng', N'COD'),
-('DH0019','KH0010', N'Hải Phòng', N'COD'),
-('DH0020','KH0001', N'Cần Thơ', N'CASH');
+('DH0018','KH0009', N'Đà Nẵng', N'COD')
+
 
 -- 13) CT đơn hàng (trigger TG_CTDH tự set giá, tính tiền, trừ kho, cập nhật tổng)
 INSERT INTO CT_DON_HANG(MADH, MASP, MAMAU, MASIZE, SOLUONG) VALUES
@@ -680,12 +711,12 @@ ALTER SEQUENCE SEQ_NDM  RESTART WITH 5;
 ALTER SEQUENCE SEQ_DM   RESTART WITH 11;
 ALTER SEQUENCE SEQ_MAU  RESTART WITH 4;
 ALTER SEQUENCE SEQ_SIZE RESTART WITH 4;
-ALTER SEQUENCE SEQ_SP   RESTART WITH 11;
-ALTER SEQUENCE SEQ_HINH RESTART WITH 6;
+ALTER SEQUENCE SEQ_SP   RESTART WITH 20;
+ALTER SEQUENCE SEQ_HINH RESTART WITH 58;
 ALTER SEQUENCE SEQ_NCC  RESTART WITH 3;
 ALTER SEQUENCE SEQ_PN   RESTART WITH 5;
-ALTER SEQUENCE SEQ_KH   RESTART WITH 11;
-ALTER SEQUENCE SEQ_DH   RESTART WITH 21;
+ALTER SEQUENCE SEQ_KH   RESTART WITH 13;
+ALTER SEQUENCE SEQ_DH   RESTART WITH 19;
 GO
 
 /* ===========================================================
@@ -803,14 +834,31 @@ GO
 
 CREATE PROCEDURE SP_DONHANG_CREATE
     @MAKH VARCHAR(10),
-    @DIACHIGIAO NVARCHAR(200),
-    @HTTT NVARCHAR(50)
+    @DIACHIGIAO NVARCHAR(255),
+    @HINHTHUCTT VARCHAR(10),
+    @MADH VARCHAR(10) OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO DON_HANG(MAKH, DIACHIGIAO, HINHTHUCTHANHTOAN)
-    VALUES (@MAKH, @DIACHIGIAO, @HTTT);
+    DECLARE @So INT = NEXT VALUE FOR SEQ_DH;
+
+    SET @MADH = 'DH' + RIGHT('0000' + CAST(@So AS VARCHAR), 4);
+
+    INSERT INTO DON_HANG (
+        MADH,
+        MAKH,
+        NGAYDAT,
+        DIACHIGIAO,
+        HINHTHUCTHANHTOAN
+    )
+    VALUES (
+        @MADH,
+        @MAKH,
+        GETDATE(),
+        @DIACHIGIAO,
+        @HINHTHUCTT
+    );
 END
 GO
 
