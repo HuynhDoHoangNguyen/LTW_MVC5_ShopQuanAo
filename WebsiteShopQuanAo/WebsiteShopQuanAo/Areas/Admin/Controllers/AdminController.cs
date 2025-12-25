@@ -39,20 +39,43 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
             return View();
         }
         // GET: Admin/Admin
-       
+        public ActionResult LogOut()
+        {
+            Session.Remove("AdminName");
+            Session.Remove("AdminEmail");
+
+            Session.Clear(); 
+            Session.Abandon();
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
         public ActionResult Index()
         {
             var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC).Include(s => s.HINH_ANH_SP);
             return View(sAN_PHAM.ToList());
         }
-        public ActionResult StatusShop()
+        public ActionResult StatusShop(string searchString, string idDanhMuc)
         {
-            var tongKho = db.CHI_TIET_SP.Where(t => t.MASP != null && t.GIABAN != null).GroupBy(t => t.MASP).Select(k => new { MASP = k.Key, GiaTriKho = k.Sum(t => t.GIABAN * t.SOLUONGTON) });
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            decimal? tongGiaTriKho = tongKho.Sum(t => t.GiaTriKho);
-            ViewBag.TongKho = tongGiaTriKho / 1000000;
-            return View(sAN_PHAM.ToList());
+            var tongKho = db.CHI_TIET_SP
+                            .Where(t => t.MASP != null && t.GIABAN != null)
+                            .GroupBy(t => t.MASP)
+                            .Select(k => new { MASP = k.Key, GiaTriKho = k.Sum(t => (decimal?)t.GIABAN * t.SOLUONGTON) });
 
+            decimal? tongGiaTriKho = tongKho.Sum(t => t.GiaTriKho);
+            ViewBag.TongKho = (tongGiaTriKho ?? 0) / 1000000;
+            ViewBag.idDanhMuc = new SelectList(db.DANH_MUC, "MADM", "TENDM");
+
+            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC).Include(s => s.HINH_ANH_SP).AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                sAN_PHAM = sAN_PHAM.Where(s => s.TENSP.Contains(searchString) || s.MASP.Contains(searchString));
+            }
+            if (!string.IsNullOrEmpty(idDanhMuc))
+            {
+                sAN_PHAM = sAN_PHAM.Where(s => s.MADM == idDanhMuc);
+            }
+
+            return View(sAN_PHAM.ToList());
         }
 
         // GET: Admin/Admin/Details/5
@@ -119,7 +142,7 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
                     }
                     string maHinhAnhMoi = "HA" + nextHANumber.ToString("000");
 
-                    string uploadPath = Server.MapPath("~/Areas/Admin/Boot/Img/");
+                    string uploadPath = Server.MapPath("~/UI_User/assets/img/product/small-product/");
                     if (!Directory.Exists(uploadPath))
                     {
                         Directory.CreateDirectory(uploadPath);
@@ -193,7 +216,7 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
 
                 if (imageFile != null && imageFile.ContentLength > 0)
                 {
-                    string uploadPath = Server.MapPath("~/Areas/Admin/Boot/Img/");
+                    string uploadPath = Server.MapPath("~/UI_User/assets/img/product/small-product/");
                     if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
 
                     var oldImage = db.HINH_ANH_SP.FirstOrDefault(h => h.MASP == sAN_PHAM.MASP);
@@ -280,7 +303,7 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
 
             if (sAN_PHAM != null)
             {
-                string uploadPath = Server.MapPath("~/Areas/Admin/Boot/Img/");
+                string uploadPath = Server.MapPath("~/UI_User/assets/img/product/small-product/");
                 var dsHinhAnh = sAN_PHAM.HINH_ANH_SP.ToList();
 
                 foreach (var hinh in dsHinhAnh)
