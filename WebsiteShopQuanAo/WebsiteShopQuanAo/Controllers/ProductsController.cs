@@ -59,10 +59,10 @@ namespace WebsiteShopQuanAo.Controllers
                 if (max.HasValue && giaGoc > max.Value) continue;
 
 
-                var hinhanh = sp.HINH_ANH_SP
-                    .Where(h => h.TRANGTHAI == true && !string.IsNullOrEmpty(h.TENHINHANH))
-                    .Select(h => Url.Content("~/UI_User/assets/img/product/small-product/" + h.TENHINHANH.Trim()))
-                    .ToList();
+                //var hinhanh = sp.HINH_ANH_SP
+                //    .Where(h => h.TRANGTHAI == true && !string.IsNullOrEmpty(h.TENHINHANH))
+                //    .Select(h => Url.Content("~/UI_User/assets/img/product/small-product/" + h.TENHINHANH.Trim()))
+                //    .ToList();
 
 
 
@@ -71,9 +71,9 @@ namespace WebsiteShopQuanAo.Controllers
                     MaSanPham = sp.MASP,
                     TenSanPham = sp.TENSP,
                     TenDanhMuc = sp.DANH_MUC?.TENDM,
-                    GiaGoc = giaGoc,
+                  
                     GiaBan = giaGoc,
-                    HinhAnh = hinhanh
+                    HinhAnh = sp.HINH_ANH_SP.Select(it => it.TENHINHANH).FirstOrDefault(),
                 });
             }
 

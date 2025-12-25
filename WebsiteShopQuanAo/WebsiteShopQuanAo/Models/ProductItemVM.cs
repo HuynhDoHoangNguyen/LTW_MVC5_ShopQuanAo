@@ -12,7 +12,7 @@ namespace WebsiteShopQuanAo.Models
         public string TenSanPham { get; set; }
         public string TenDanhMuc { get; set; }
 
-        public decimal GiaGoc { get; set; }
+       
         public decimal GiaBan { get; set; }
         public string HinhAnh { get; set; }
         public string  MoTa { get; set; }

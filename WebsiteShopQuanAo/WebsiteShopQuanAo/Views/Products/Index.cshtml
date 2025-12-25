@@ -42,19 +42,16 @@
                     }
                     else
                     {
-                        foreach (var sp in Model)
+                        foreach (var sp in Model.SanPham.HINH_ANH_SP)
                         {
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="single_product">
                                     <div class="product_thumb">
                                         <a href="@Url.Action("Details", "Products", new { id = sp.MaSanPham })">
-                                            @{
-                                                var img = (sp.HinhAnh != null && sp.HinhAnh.Any())
-                                                    ? sp.HinhAnh.First()
-                                                    : Url.Content("~/UI_User/assets/img/no-image.png");
-                                            }
 
-                                            <img src="@img" alt="@sp.TenSanPham" />
+                                            class="main-img"
+                                            src="/assets/img/product/small-product/@sp.TENHINHANH"
+                                            alt="">
                                         </a>
                                     </div>
 

@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="02b3e1b9f6c34b2a8d457319af94b03f" Name="Diagram1" ZoomLevel="65">
+      <Diagram DiagramId="4d7d2654fc1c4613be0f3e1d50201f1b" Name="Diagram1">
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CHI_TIET_SP" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_DON_HANG" Width="1.5" PointX="9.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.CT_PHIEU_NHAP" Width="1.5" PointX="12.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DANH_MUC" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DON_HANG" Width="1.5" PointX="18.125" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.HINH_ANH_SP" Width="1.5" PointX="7.625" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KHACH_HANG" Width="1.5" PointX="15.875" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.DON_HANG" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.HINH_ANH_SP" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KHACH_HANG" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.KICH_THUOC" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.MAU_SAC" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHA_CUNG_CAP" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.NHOM_DANH_MUC" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.PHIEU_NHAP" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.SAN_PHAM" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.TAI_KHOAN" Width="1.5" PointX="13.625" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.VAI_TRO" Width="1.5" PointX="11.375" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.TAI_KHOAN" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.VAI_TRO" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MAMAU__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET___MASIZ__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__CHI_TIET_S__MASP__4AB81AF0" ManuallyRouted="false" />
@@ -34,7 +34,6 @@
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__KHACH_HAN__USERN__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__1FCDBCEB" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
