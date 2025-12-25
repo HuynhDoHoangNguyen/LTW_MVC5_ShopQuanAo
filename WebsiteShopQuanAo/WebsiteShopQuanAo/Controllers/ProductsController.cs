@@ -2,25 +2,95 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebsiteShopQuanAo.Models;
 
 namespace WebsiteShopQuanAo.Controllers
 {
     public class ProductsController : Controller
     {
-        private QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
+        private readonly QL_ShopQuanAoNuEntities db = new QL_ShopQuanAoNuEntities();
+
 
         // GET: Products
-        public ActionResult Index()
+
+
+        public ActionResult Index(string kw, string maDanhMuc, decimal? min, decimal? max, int page = 1)
         {
-            var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC);
-            return View(sAN_PHAM.ToList());
+            int pageSize = 6;
+
+            // ViewBag để giữ filter khi click menu / phân trang
+            ViewBag.Keyword = kw;
+            ViewBag.MaDanhMuc = maDanhMuc;
+            ViewBag.Min = min;
+            ViewBag.Max = max;
+
+            var query = db.SAN_PHAM.Where(sp => sp.TRANGTHAI == true);
+
+            if (!string.IsNullOrWhiteSpace(kw))
+                query = query.Where(sp => sp.TENSP.Contains(kw));
+
+            if (!string.IsNullOrWhiteSpace(maDanhMuc))
+                query = query.Where(sp => sp.MADM == maDanhMuc);
+
+            var sanPhams = query.ToList();
+
+            var products = new List<ProductItemVM>();
+
+            foreach (var sp in sanPhams)
+            {
+                var ctsp = sp.CHI_TIET_SP
+                    .Where(ct => ct.TRANGTHAI == true && ct.GIABAN.HasValue)
+                    .ToList();
+
+                if (!ctsp.Any())
+                    continue;
+
+                decimal giaGoc = ctsp.Min(ct => ct.GIABAN.Value);
+
+                // lọc giá
+                if (min.HasValue && giaGoc < min.Value) continue;
+                if (max.HasValue && giaGoc > max.Value) continue;
+
+
+                //var hinhanh = sp.HINH_ANH_SP
+                //    .Where(h => h.TRANGTHAI == true && !string.IsNullOrEmpty(h.TENHINHANH))
+                //    .Select(h => Url.Content("~/UI_User/assets/img/product/small-product/" + h.TENHINHANH.Trim()))
+                //    .ToList();
+
+
+
+                products.Add(new ProductItemVM
+                {
+                    MaSanPham = sp.MASP,
+                    TenSanPham = sp.TENSP,
+                    TenDanhMuc = sp.DANH_MUC?.TENDM,
+                  
+                    GiaBan = giaGoc,
+                    HinhAnh = sp.HINH_ANH_SP.Select(it => it.TENHINHANH).FirstOrDefault(),
+                });
+            }
+
+            return View(products);
         }
 
+
+
+
+        public PartialViewResult Sidebar()
+        {
+            var data = db.NHOM_DANH_MUC
+                .Where(n => n.TRANGTHAI == true)
+                .ToList();
+
+            return PartialView("_Sidebar", data);
+        }
         // GET: Products/Details/5
         public ActionResult Details(string id)
         {

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'V:\MONHOC\LTW\DOAN\DoAn_Web\LTW_MVC5_ShopQuanAo\WebsiteShopQuanAo\WebsiteShopQuanAo\Models\QL_ShopQuanAoNu.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\University\HK1_2025_2026\LapTrinhWeb\Project\LTW_MVC5_ShopQuanAo\WebsiteShopQuanAo\WebsiteShopQuanAo\Models\QL_ShopQuanAoNu.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

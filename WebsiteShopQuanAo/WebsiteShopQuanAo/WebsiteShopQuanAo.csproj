@@ -201,10 +201,44 @@
     <Content Include="UI_User\assets\img\product\product6.jpg" />
     <Content Include="UI_User\assets\img\product\product7.jpg" />
     <Content Include="UI_User\assets\img\product\product8.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\product1.jpg" />
     <Content Include="UI_User\assets\img\product\small-product\product1.png" />
     <Content Include="UI_User\assets\img\product\small-product\product2.png" />
     <Content Include="UI_User\assets\img\product\small-product\product3.png" />
     <Content Include="UI_User\assets\img\product\small-product\product4.png" />
+    <Content Include="UI_User\assets\img\product\small-product\so008_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp008_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp008_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_3.jpg" />
     <Content Include="UI_User\assets\img\slider\slider1.jpg" />
     <Content Include="UI_User\assets\js\images-loaded.min.js" />
     <Content Include="UI_User\assets\js\isotope.pkgd.min.js" />
@@ -280,12 +314,9 @@
     <Compile Include="Models\NHOM_DANH_MUC.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ThongKeSP.cs" />
     <Compile Include="Models\PHIEU_NHAP.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductDetailVM.cs" />
-    <Compile Include="Models\ProductItemVM.cs" />
     <Compile Include="Models\QL_ShopQuanAoNu.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -310,21 +341,15 @@
     <Compile Include="Models\SP_DM_LIST_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SP_SP_TIMKIEM_Result.cs">
-      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAI_KHOAN.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThongKeSP.cs" />
+    <Compile Include="Models\ProductDetailVM.cs" />
+    <Compile Include="Models\ProductItemVM.cs" />
     <Compile Include="Models\VAI_TRO.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
@@ -420,6 +445,9 @@
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\LogIn.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Products\_Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
