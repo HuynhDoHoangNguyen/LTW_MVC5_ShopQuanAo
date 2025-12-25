@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<WebsiteShopQuanAo.Models.ProductItemVM>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_MainUserLayout.cshtml";
+
+    // base path ảnh nhỏ (bạn đổi nếu dự án để chỗ khác)
+    string imgBase = Url.Content("~/UI_User/assets/img/product/small-product/");
+    string noImg = Url.Content("~/Content/assets/img/no-image.png");
 }
 
 <div class="shop_section shop_reverse">
@@ -10,7 +14,6 @@
         <div class="row">
 
             <div class="col-lg-3 col-md-12">
-
                 @Html.Action("Sidebar", "Products")
             </div>
 
@@ -42,30 +45,45 @@
                     }
                     else
                     {
-                        foreach (var sp in Model.SanPham.HINH_ANH_SP)
+                        foreach (var sp in Model)
                         {
+                            // build url ảnh
+                            var imgUrl = string.IsNullOrWhiteSpace(sp.HinhAnh)
+                                ? noImg
+                                : (imgBase + sp.HinhAnh.Trim());
+
                             <div class="col-lg-4 col-md-4 col-sm-6">
                                 <div class="single_product">
                                     <div class="product_thumb">
                                         <a href="@Url.Action("Details", "Products", new { id = sp.MaSanPham })">
-
-                                            class="main-img"
-                                            src="/assets/img/product/small-product/@sp.TENHINHANH"
-                                            alt="">
+                                            <img class="main-img"
+                                                 src="@imgUrl"
+                                                 alt="@sp.TenSanPham" />
                                         </a>
                                     </div>
 
-                                    <div class="product_content">
-                                        <h3>
-                                            <a href="@Url.Action("Details", "Products", new { id = sp.MaSanPham })">
+                                    <figcaption class="product_content text-center">
+                                        <h4 class="product_name">
+                                            <a href="@Url.Action("Details","Products", new {id = sp.MaSanPham})">
                                                 @sp.TenSanPham
                                             </a>
-                                        </h3>
+                                        </h4>
 
                                         <div class="price_box">
-                                            <span class="current_price">@String.Format("{0:N0} ₫", sp.GiaBan)</span>
+                                            <span class="current_price">
+                                                @sp.GiaBan.ToString("N0") ₫
+                                            </span>
+
+                                           
                                         </div>
-                                    </div>
+
+                                        <div class="add_to_cart">
+                                            <a class="btn btn-primary"
+                                               href="@Url.Action("Details","Products", new {id = sp.MaSanPham})">
+                                                See more
+                                            </a>
+                                        </div>
+                                    </figcaption>
                                 </div>
                             </div>
                         }
@@ -79,39 +97,37 @@
 
 @section scripts{
     <script>
-    $(function () {
-        if (!$.ui || !$.ui.slider) return;
+        $(function () {
+            if (!$.ui || !$.ui.slider) return;
 
-        // DEFAULT RANGE (bạn đổi theo DB thực tế)
-        var minDefault = 0;
-        var maxDefault = 2000000;
+            var minDefault = 0;
+            var maxDefault = 2000000;
 
-        // Lấy min/max hiện tại trên URL để giữ trạng thái
-        var url = new URL(window.location.href);
-        var minQ = parseInt(url.searchParams.get("min")) || minDefault;
-        var maxQ = parseInt(url.searchParams.get("max")) || maxDefault;
+            var url = new URL(window.location.href);
+            var minQ = parseInt(url.searchParams.get("min")) || minDefault;
+            var maxQ = parseInt(url.searchParams.get("max")) || maxDefault;
 
-        $("#slider-range").slider({
-            range: true,
-            min: minDefault,
-            max: maxDefault,
-            step: 50000,
-            values: [minQ, maxQ],
-            slide: function (event, ui) {
-                $("#amount").val(ui.values[0].toLocaleString("vi-VN") + " ₫ - " + ui.values[1].toLocaleString("vi-VN") + " ₫");
-                $("#minPrice").val(ui.values[0]);
-                $("#maxPrice").val(ui.values[1]);
-            }
+            $("#slider-range").slider({
+                range: true,
+                min: minDefault,
+                max: maxDefault,
+                step: 50000,
+                values: [minQ, maxQ],
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0].toLocaleString("vi-VN") + " ₫ - " + ui.values[1].toLocaleString("vi-VN") + " ₫");
+                    $("#minPrice").val(ui.values[0]);
+                    $("#maxPrice").val(ui.values[1]);
+                }
+            });
+
+            var initValues = $("#slider-range").slider("values");
+            $("#amount").val(initValues[0].toLocaleString("vi-VN") + " ₫ - " + initValues[1].toLocaleString("vi-VN") + " ₫");
+            $("#minPrice").val(initValues[0]);
+            $("#maxPrice").val(initValues[1]);
         });
-
-        // set giá trị lúc load trang
-        var initValues = $("#slider-range").slider("values");
-        $("#amount").val(initValues[0].toLocaleString("vi-VN") + " ₫ - " + initValues[1].toLocaleString("vi-VN") + " ₫");
-        $("#minPrice").val(initValues[0]);
-        $("#maxPrice").val(initValues[1]);
-    });
     </script>
 }
+
 
 @*<h2>Index</h2>
 

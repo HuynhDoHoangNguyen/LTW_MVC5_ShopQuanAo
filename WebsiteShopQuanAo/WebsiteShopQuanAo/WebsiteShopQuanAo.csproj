@@ -201,10 +201,44 @@
     <Content Include="UI_User\assets\img\product\product6.jpg" />
     <Content Include="UI_User\assets\img\product\product7.jpg" />
     <Content Include="UI_User\assets\img\product\product8.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\product1.jpg" />
     <Content Include="UI_User\assets\img\product\small-product\product1.png" />
     <Content Include="UI_User\assets\img\product\small-product\product2.png" />
     <Content Include="UI_User\assets\img\product\small-product\product3.png" />
     <Content Include="UI_User\assets\img\product\small-product\product4.png" />
+    <Content Include="UI_User\assets\img\product\small-product\so008_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp001_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp002_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp003_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp004_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp005_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp006_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp007_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp008_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp008_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp010_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp011_3.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_1.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_2.jpg" />
+    <Content Include="UI_User\assets\img\product\small-product\sp012_3.jpg" />
     <Content Include="UI_User\assets\img\slider\slider1.jpg" />
     <Content Include="UI_User\assets\js\images-loaded.min.js" />
     <Content Include="UI_User\assets\js\isotope.pkgd.min.js" />
@@ -409,13 +443,6 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
-    <EntityDeploy Include="Models\QL_ShopQuanAoNu.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
-      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Admin\LogIn.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
