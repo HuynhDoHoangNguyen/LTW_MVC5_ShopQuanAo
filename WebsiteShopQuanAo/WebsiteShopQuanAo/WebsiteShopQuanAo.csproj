@@ -102,10 +102,12 @@
     <Content Include="Areas\Admin\Boot\assets\demo\datatables-demo.js" />
     <Content Include="Areas\Admin\Boot\assets\img\error-404-monochrome.svg" />
     <Content Include="Areas\Admin\Boot\css\admin-forms-complete.css" />
+    <Content Include="Areas\Admin\Boot\css\LogIn.css" />
     <Content Include="Areas\Admin\Boot\css\Order.css" />
     <Content Include="Areas\Admin\Boot\css\ShopStatus.css" />
     <Content Include="Areas\Admin\Boot\css\styles.css" />
     <Content Include="Areas\Admin\Boot\css\ThongKe.css" />
+    <Content Include="Areas\Admin\Boot\Img\401.html" />
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Areas\Admin\Boot\js\datatables-simple-demo.js" />
     <Content Include="Areas\Admin\Boot\js\scripts.js" />
@@ -236,7 +238,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\DonHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
-	<Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -416,6 +418,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\LogIn.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -426,7 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

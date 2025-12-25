@@ -519,7 +519,7 @@ INSERT INTO SAN_PHAM(MASP, TENSP, MADM, MOTA) VALUES
 ('SP008', N'Đầm công sở body', 'DM08', N'Body sang trọng'),
 ('SP009', N'Đồ ngủ pijama nữ', 'DM09', N'Cotton mềm'),
 ('SP010', N'Yếm váy denim nữ', 'DM10', N'Denim cá tính');
-
+select * from HINH_ANH_SP
 -- 8) Hình ảnh (demo)
 INSERT INTO HINH_ANH_SP(MAHINH, MASP, TENHINHANH) VALUES
 ('H001','SP001',N'sp001_1.jpg'),
