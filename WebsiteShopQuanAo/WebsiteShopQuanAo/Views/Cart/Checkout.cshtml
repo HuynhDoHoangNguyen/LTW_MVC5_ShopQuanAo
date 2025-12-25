@@ -1,10 +1,27 @@
 ﻿@model WebsiteShopQuanAo.Models.CheckoutVM
 @{
     ViewBag.Title = "Checkout";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
     var cart = (Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>)Session["Cart"];
 }
+
+.payment-method {
+    margin-top: 10px;
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-weight: normal;
+}
+
+.payment-radio {
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0;
+}
+
 
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area breadcrumbs_other">
@@ -46,18 +63,19 @@
                         </div>
 
                         <div class="checkout_form_input">
-                            <label>Hình thức thanh toán <span>*</span></label><br />
+                            <label>Hình thức thanh toán <span>*</span></label>
 
-                            <label>
-                                @Html.RadioButtonFor(x => x.HinhThucThanhToan, "BANK")
-                                Chuyển khoản ngân hàng
-                            </label>
-                            <br />
+                            <div class="payment-method">
+                                <label class="payment-item">
+                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "COD", new { @class = "payment-radio" })
+                                    <span>Thanh toán khi nhận hàng (COD)</span>
+                                </label>
 
-                            <label>
-                                @Html.RadioButtonFor(x => x.HinhThucThanhToan, "COD", true)
-                                Thanh toán khi nhận hàng (COD)
-                            </label>
+                                <label class="payment-item">
+                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "BANK", new { @class = "payment-radio" })
+                                    <span>Chuyển khoản ngân hàng</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -87,7 +105,7 @@
                                                     SL: @item.SoLuong
                                                 </td>
                                                 <td class="text-right">
-                                                    @(item.SoLuong * item.Gia).ToString("N0") ₫
+                                                    @((item.SoLuong * item.Gia).ToString("N0"))₫
                                                 </td>
                                             </tr>
                                         }

@@ -1,0 +1,55 @@
+﻿@model WebsiteShopQuanAo.Models.DON_HANG
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+  
+}
+
+<div class="breadcrumbs_area breadcrumbs_other" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>Chi tiết đơn hàng @Model.MADH</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shopping_cart_area mt-60">
+    <div class="container">
+
+        <p><b>Ngày đặt:</b> @(Model.NGAYDAT?.ToString("dd/MM/yyyy"))</p>
+        <p><b>Địa chỉ giao:</b> @Model.DIACHIGIAO</p>
+        <p><b>Thanh toán:</b> @Model.HINHTHUCTHANHTOAN</p>
+
+        <table class="table table-bordered mt-30">
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Màu</th>
+                    <th>Size</th>
+                    <th>SL</th>
+                    <th>Giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ct in Model.CT_DON_HANG)
+                {
+                    <tr>
+                        <td>@ct.CHI_TIET_SP.SAN_PHAM.TENSP</td>
+                        <td>@ct.CHI_TIET_SP.MAU_SAC.TENMAU</td>
+                        <td>@ct.CHI_TIET_SP.KICH_THUOC.TENSIZE</td>
+                        <td>@ct.SOLUONG</td>
+                        <td>@((ct.GIALUCBAN ?? 0).ToString("N0")) ₫</td>
+                        <td>@((ct.THANHTIEN ?? 0).ToString("N0")) ₫</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4 class="text-right">
+            Tổng tiền: @((Model.TONGTHANHTIEN ?? 0).ToString("N0")) ₫
+        </h4>
+
+    </div>
+</div>

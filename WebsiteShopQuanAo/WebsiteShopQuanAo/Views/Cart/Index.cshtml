@@ -9,7 +9,7 @@
         gioHang = (Dictionary<string, WebsiteShopQuanAo.Models.CTGioHang>)Session["Cart"];
     }
 
-    decimal tongTien= 0;
+    decimal tongTien = 0;
 }
 
 <!--breadcrumbs area start-->
@@ -20,7 +20,7 @@
                 <div class="breadcrumb_content text-center">
                     <h3>Shopping Cart</h3>
                 </div>
-            </div
+            </div>
         </div>
     </div>
 </div>
@@ -60,7 +60,7 @@
 
                                         foreach (var ctsp in Model)
                                         {
-                                          
+
                                             var item = gioHang[ctsp.MACTSP];
 
                                             decimal thanhTien = item.Gia * item.SoLuong;
@@ -69,7 +69,7 @@
                                             <tr class="border-top">
                                                 <td>
                                                     <div class="cart_product_thumb">
-                                                        <img src="/assets/img/product/@ctsp.SAN_PHAM.HINH_ANH_SP.FirstOrDefault().TENHINHANH" alt="">
+                                                        <img src="~/UI_User/assets/img/product/small-product/@ctsp.SAN_PHAM.HINH_ANH_SP.OrderBy(h => h.TENHINHANH).Select(h => h.TENHINHANH).FirstOrDefault()" alt="">
                                                     </div>
                                                 </td>
 
