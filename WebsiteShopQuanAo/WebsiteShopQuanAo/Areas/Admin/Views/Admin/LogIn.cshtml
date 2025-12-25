@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+}
+@section Styles {
+    <link href="@Url.Content("~/Areas/Admin/Boot/css/LogIn.css")" rel="stylesheet" />
+}
+
+<body>
+    <div class="login-container">
+        <div class="brand-logo">
+            <i class="fas fa-crown"></i>
+        </div>
+
+        <div class="login-card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i>Đăng Nhập Admin</h3>
+            </div>
+
+            <div class="card-body">
+                <form action="@Url.Action("LogIn","Admin")" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-floating mb-4">
+                        <input class="form-control" id="inputEmail" name="Email" type="text" placeholder="ten@vidu.com" required />
+                        <label for="inputEmail"><i class="fas fa-envelope me-2"></i>Tên tài khoản</label>
+                        <div class="invalid-feedback">Vui lòng nhập tên tài khoản hợp lệ.</div>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Mật khẩu" required />
+                        <label for="inputPassword"><i class="fas fa-lock me-2"></i>Mật khẩu</label>
+                        <div class="invalid-feedback">Vui lòng nhập mật khẩu của bạn.</div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                        <label class="form-check-label" for="inputRememberPassword">
+                            <i class="fas fa-check-circle me-2"></i>Ghi nhớ mật khẩu
+                        </label>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger border-0 shadow-sm mb-4" role="alert" style="font-size: 0.85rem;">
+                                <i class="fas fa-exclamation-triangle me-2"></i> @ViewBag.Error
+                            </div>
+                        }
+                        <button type="submit" class="login-btn">
+                            <i class="fas fa-sign-in-alt me-2"></i>Đăng Nhập
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <div class="footer-text">
+                
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-4 text-center">
+            <div class="text-muted small">
+                <div>Bản quyền &copy; Admin Pro 2023</div>
+                <div class="mt-2">
+                    <a href="#" class="text-muted me-3">Chính sách bảo mật</a>
+                    &middot;
+                    <a href="#" class="text-muted ms-3">Điều khoản & Điều kiện</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Xác thực Form
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('inputEmail');
+            const password = document.getElementById('inputPassword');
+            let isValid = true;
+            [email, password].forEach(input => {
+                input.classList.remove('is-invalid');
+            });
+            if (!email.value || !email.value.includes('@@')) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            }
+            if (!password.value || password.value.length < 6) {
+                password.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            if (isValid) {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang đăng nhập...';
+                submitBtn.disabled = true;
+                setTimeout(() => {
+                    alert('Đăng nhập thành công! Đang chuyển hướng đến bảng điều khiển...');
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        });
+
+        document.getElementById('inputRememberPassword').addEventListener('change', function () {
+            if (this.checked) {
+                localStorage.setItem('rememberMe', 'true');
+            } else {
+                localStorage.removeItem('rememberMe');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('rememberMe') === 'true') {
+                document.getElementById('inputRememberPassword').checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
