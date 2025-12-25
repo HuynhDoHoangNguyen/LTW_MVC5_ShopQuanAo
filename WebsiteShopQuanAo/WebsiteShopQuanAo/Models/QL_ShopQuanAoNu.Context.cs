@@ -209,7 +209,7 @@ namespace WebsiteShopQuanAo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DM_UPDATE", mADMParameter, tENParameter, mANHOMParameter, tTParameter);
         }
     
-        public virtual int SP_DONHANG_CREATE(string mAKH, string dIACHIGIAO, string hTTT)
+        public virtual int SP_DONHANG_CREATE(string mAKH, string dIACHIGIAO, string hINHTHUCTT, ObjectParameter mADH)
         {
             var mAKHParameter = mAKH != null ?
                 new ObjectParameter("MAKH", mAKH) :
@@ -219,11 +219,11 @@ namespace WebsiteShopQuanAo.Models
                 new ObjectParameter("DIACHIGIAO", dIACHIGIAO) :
                 new ObjectParameter("DIACHIGIAO", typeof(string));
     
-            var hTTTParameter = hTTT != null ?
-                new ObjectParameter("HTTT", hTTT) :
-                new ObjectParameter("HTTT", typeof(string));
+            var hINHTHUCTTParameter = hINHTHUCTT != null ?
+                new ObjectParameter("HINHTHUCTT", hINHTHUCTT) :
+                new ObjectParameter("HINHTHUCTT", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DONHANG_CREATE", mAKHParameter, dIACHIGIAOParameter, hTTTParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DONHANG_CREATE", mAKHParameter, dIACHIGIAOParameter, hINHTHUCTTParameter, mADH);
         }
     
         public virtual int SP_NCC_ADD(string tENNCC, string sDT, string dIACHI)

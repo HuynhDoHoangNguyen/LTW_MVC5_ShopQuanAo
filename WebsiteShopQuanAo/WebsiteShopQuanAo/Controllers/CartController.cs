@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -152,10 +153,17 @@ namespace WebsiteShopQuanAo.Controllers
                 try
                 {
                     // tạo đơn hàng
-                    db.SP_DONHANG_CREATE(makh,model.DiaChiGiao,model.HinhThucThanhToan);
+                    var madhParam = new ObjectParameter("MADH", typeof(string));
 
-                    // lấy MADH mới nhất
-                    string madh = db.DON_HANG.Where(x => x.MAKH == makh).OrderByDescending(x => x.NGAYDAT).Select(x => x.MADH).First();
+                    db.SP_DONHANG_CREATE(
+                        makh,
+                        model.DiaChiGiao,
+                        model.HinhThucThanhToan,
+                        madhParam
+                    );
+
+                    string madh = madhParam.Value.ToString();
+
 
                     // thêm chi tiết đơn hàng
                     foreach (var item in cart)
@@ -178,6 +186,15 @@ namespace WebsiteShopQuanAo.Controllers
                 }
                 catch
                 {
+                    var ctspKeys = cart.Keys.ToList();
+                    var ctspList = db.CHI_TIET_SP
+                                     .Where(x => ctspKeys.Contains(x.MACTSP))
+                                     .ToList();
+
+                    model.CTSPs = ctspList;
+                    model.TongSoLuong = cart.Sum(x => x.Value.SoLuong);
+                    model.TongTien = cart.Sum(x => x.Value.SoLuong * x.Value.Gia);
+
                     tran.Rollback();
                     ViewBag.Error = "Không đủ tồn kho hoặc lỗi hệ thống";
                     return View("Checkout", model);
