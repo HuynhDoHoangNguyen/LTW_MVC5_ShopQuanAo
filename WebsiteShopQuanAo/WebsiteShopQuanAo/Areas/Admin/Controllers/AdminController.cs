@@ -39,7 +39,15 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
             return View();
         }
         // GET: Admin/Admin
-       
+        public ActionResult LogOut()
+        {
+            Session.Remove("AdminName");
+            Session.Remove("AdminEmail");
+
+            Session.Clear(); 
+            Session.Abandon();
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
         public ActionResult Index()
         {
             var sAN_PHAM = db.SAN_PHAM.Include(s => s.DANH_MUC).Include(s => s.HINH_ANH_SP);
