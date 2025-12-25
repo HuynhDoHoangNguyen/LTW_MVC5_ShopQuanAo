@@ -102,10 +102,12 @@
     <Content Include="Areas\Admin\Boot\assets\demo\datatables-demo.js" />
     <Content Include="Areas\Admin\Boot\assets\img\error-404-monochrome.svg" />
     <Content Include="Areas\Admin\Boot\css\admin-forms-complete.css" />
+    <Content Include="Areas\Admin\Boot\css\LogIn.css" />
     <Content Include="Areas\Admin\Boot\css\Order.css" />
     <Content Include="Areas\Admin\Boot\css\ShopStatus.css" />
     <Content Include="Areas\Admin\Boot\css\styles.css" />
     <Content Include="Areas\Admin\Boot\css\ThongKe.css" />
+    <Content Include="Areas\Admin\Boot\Img\401.html" />
     <Content Include="Areas\Admin\Boot\js\Admin.js" />
     <Content Include="Areas\Admin\Boot\js\datatables-simple-demo.js" />
     <Content Include="Areas\Admin\Boot\js\scripts.js" />
@@ -335,6 +337,13 @@
     <Content Include="Areas\Admin\Views\DonHang\Details.cshtml" />
     <Content Include="Areas\Admin\Views\DonHang\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\DonHang\Index.cshtml" />
+    <EntityDeploy Include="Models\QL_ShopQuanAoNu.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QL_ShopQuanAoNu.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
+      <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
+    </Content>
     <Content Include="Views\Shared\_MainUserLayout.cshtml" />
     <Content Include="UI_User\assets\css\style" />
     <Content Include="UI_User\assets\css\style.css.map" />
@@ -407,6 +416,7 @@
     <Content Include="Models\QL_ShopQuanAoNu.edmx.diagram">
       <DependentUpon>QL_ShopQuanAoNu.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Admin\LogIn.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -420,7 +430,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -554,3 +554,46 @@ select.form-control-create {
     ::-webkit-scrollbar-thumb:hover {
         background: var(--accent-main);
     }
+.confirm-checkbox-card {
+    background: #fff5f5;
+    border: 1px dashed #feb2b2;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .confirm-checkbox-card:hover {
+        background: #fff;
+        border-color: #f56565;
+    }
+
+.confirm-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.confirm-label {
+    font-size: 14px;
+    color: #4a5568;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.5;
+}
+
+/* Hiệu ứng cho nút khi bị khóa */
+.btn-delete:disabled {
+    cursor: not-allowed;
+    filter: grayscale(1);
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
