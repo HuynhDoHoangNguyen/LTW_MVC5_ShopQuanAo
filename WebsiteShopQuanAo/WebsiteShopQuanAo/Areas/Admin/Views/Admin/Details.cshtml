@@ -39,7 +39,7 @@
                             @if (Model.HINH_ANH_SP != null && Model.HINH_ANH_SP.Any())
                             {
                                 var hinh = Model.HINH_ANH_SP.FirstOrDefault();
-                                <img src="@Url.Content("~/Areas/Admin/Boot/Img/"+@hinh.TENHINHANH)"
+                                <img src="@Url.Content("~/UI_User/assets/img/product/small-product/"+@hinh.TENHINHANH)"
                                      alt="@Model.TENSP"
                                      class="img-fluid rounded shadow-sm"
                                      style="max-height: 350px; border: 1px solid #ddd; padding: 5px;" />
