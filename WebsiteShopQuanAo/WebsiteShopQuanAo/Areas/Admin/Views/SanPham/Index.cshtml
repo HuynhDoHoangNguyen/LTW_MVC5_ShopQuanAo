@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý sản phẩm</h2>
+
+<button class="btn btn-success mb-2" onclick="openAdd()">Thêm</button>
+
+<table class="table table-bordered" id="tbl">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Danh mục</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- MODAL -->
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <input id="MaSP" hidden />
+            <input id="TenSP" class="form-control mb-2" placeholder="Tên SP" />
+            <input id="MaDM" class="form-control mb-2" placeholder="Mã DM" />
+            <input id="GiaBan" class="form-control mb-2" placeholder="Giá bán" />
+            <input id="SoLuong" class="form-control mb-2" placeholder="Số lượng" />
+            <textarea id="MoTa" class="form-control mb-2" placeholder="Mô tả"></textarea>
+            <button class="btn btn-primary" onclick="save()">Lưu</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    let isEdit = false;
+
+    $(load);
+
+    function load() {
+        $.get('/api/SanPham', data => {
+            let html = '';
+            data.forEach(sp => {
+                html += `
+            <tr>
+                <td>${sp.MaSanPham}</td>
+                <td>${sp.TenSanPham}</td>
+                <td>${sp.TenDanhMuc}</td>
+                <td>${sp.GiaBan}</td>
+                <td>${sp.SoLuongTon}</td>
+                <td>
+                    <button onclick="edit('${sp.MaSanPham}')">Sửa</button>
+                    <button onclick="del('${sp.MaSanPham}')">Xóa</button>
+                </td>
+            </tr>`;
+            });
+            $('#tbl tbody').html(html);
+        });
+    }
+
+    function openAdd() {
+        isEdit = false;
+        $('#modal input,textarea').val('');
+        $('#modal').modal('show');
+    }
+
+    function edit(id) {
+        isEdit = true;
+        $('#MaSP').val(id);
+        $('#modal').modal('show');
+    }
+
+    function save() {
+        let model = {
+            MaSanPham: $('#MaSP').val(),
+            TenSanPham: $('#TenSP').val(),
+            GiaBan: $('#GiaBan').val(),
+            SoLuongTon: $('#SoLuong').val(),
+            MoTa: $('#MoTa').val()
+        };
+        let maDM = $('#MaDM').val();
+
+        let ajax = {
+            url: '/api/SanPham' + (isEdit ? '/' + model.MaSanPham : '') + `?maDanhMuc=${maDM}`,
+            type: isEdit ? 'PUT' : 'POST',
+            data: JSON.stringify(model),
+            contentType: 'application/json',
+            success: () => { $('#modal').modal('hide'); load(); }
+        };
+        $.ajax(ajax);
+    }
+
+    function del(id) {
+        if (!confirm('Xóa?')) return;
+        $.ajax({
+            url: '/api/SanPham/' + id,
+            type: 'DELETE',
+            success: load
+        });
+    }
+</script>

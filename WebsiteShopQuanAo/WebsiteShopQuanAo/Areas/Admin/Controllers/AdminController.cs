@@ -27,12 +27,12 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
                 ViewBag.Error = "Vui lòng nhập đầy đủ Email và Mật khẩu!";
                 return View();
             }
-            var vaitro =db.TAI_KHOAN.FirstOrDefault(t => t.USERNAME == Email && t.MATKHAU == Password);
+            var admin =db.TAI_KHOAN.FirstOrDefault(t => t.USERNAME == Email && t.MATKHAU == Password && t.MAVT == "VT01");
          
-            if (vaitro.MAVT=="VT01")
+            if (admin != null)
             {
                 Session["AdminName"] = "Quản Trị Viên";
-                Session["AdminEmail"] = vaitro.USERNAME;
+                Session["AdminEmail"] = admin.USERNAME;
                 return RedirectToAction("Index", "Admin");
             }
             ViewBag.Error = "Email hoặc mật khẩu không chính xác!";
