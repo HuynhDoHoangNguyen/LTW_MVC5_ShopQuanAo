@@ -186,17 +186,11 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
             CalculateTotals(model);
         }
 
-        /// <summary>
-        /// Lấy TOP 5 sản phẩm bán chạy - CÁCH 1: JOIN THỦ CÔNG
-        /// </summary>
         private void LoadTopProducts(ThongKeSP model)
         {
-            // Lấy tất cả chi tiết đơn hàng đã hoàn thành
             List<CT_DON_HANG> allOrderDetails = db.CT_DON_HANG
                 .Where(od => od.DON_HANG.TRANGTHAI == true)
                 .ToList();
-
-            // Lấy danh sách tất cả sản phẩm
             List<SAN_PHAM> allProducts = db.SAN_PHAM.ToList();
 
             // Nhóm theo MASP
@@ -205,8 +199,6 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
             foreach (var detail in allOrderDetails)
             {
                 string masp = detail.MASP;
-
-                // Tìm tên sản phẩm từ danh sách SAN_PHAM
                 SAN_PHAM product = allProducts.FirstOrDefault(p => p.MASP == masp);
 
                 if (product != null)
@@ -227,8 +219,6 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
                     productGroups[productName].Revenue += detail.THANHTIEN ?? 0;
                 }
             }
-
-            // Sắp xếp và lấy top 5
             List<ProductTemp> sortedProducts = productGroups.Values
                 .OrderByDescending(p => p.QuantitySold)
                 .Take(5)
