@@ -324,6 +324,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIController\DanhMucController.cs" />
     <Compile Include="APIController\SanPhamController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -503,6 +504,7 @@
     <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\LogIn.cshtml" />
     <Content Include="Areas\Admin\Views\SanPham\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SanPham\DanhMuc.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Products\_Sidebar.cshtml" />
     <Content Include="Views\Cart\_MiniCart.cshtml" />

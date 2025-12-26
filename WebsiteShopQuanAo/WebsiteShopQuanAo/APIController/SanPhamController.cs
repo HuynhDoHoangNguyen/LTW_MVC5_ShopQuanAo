@@ -39,13 +39,13 @@ namespace WebsiteShopQuanAo.APIController
         // POST: api/SanPham?maDanhMuc=DM01
         [HttpPost]
         [Route("")]
-            public IHttpActionResult Post(ProductItemVM model, string maDanhMuc)
-            {
-                if (string.IsNullOrWhiteSpace(model.TenSanPham))
-                    return BadRequest("Tên sản phẩm không được rỗng");
-                db.SP_SANPHAM_ADD(model.TenSanPham, maDanhMuc, model.MoTa);
-                return Ok("Thêm sản phẩm thành công ");
-            }
+        public IHttpActionResult Post(ProductItemVM model, string maDanhMuc)
+        {
+            if (string.IsNullOrWhiteSpace(model.TenSanPham))
+                return BadRequest("Tên sản phẩm không được rỗng");
+            db.SP_SANPHAM_ADD(model.TenSanPham, maDanhMuc, model.MoTa);
+            return Ok("Thêm sản phẩm thành công ");
+        }
 
         // PUT: api/SanPham/SP01?maDanhMuc=DM01
         [HttpPut]
@@ -80,7 +80,7 @@ namespace WebsiteShopQuanAo.APIController
             var sp = db.SAN_PHAM.Find(id);
             if (sp == null) return NotFound();
 
-            sp.TRANGTHAI = false;
+            db.SAN_PHAM.Remove(sp);
             db.SaveChanges();
             return Ok("Đã xóa");
         }
