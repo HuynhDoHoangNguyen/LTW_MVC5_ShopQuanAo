@@ -13,5 +13,10 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult DanhMuc()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Quản lý danh mục";
+}
+
+<h2>Quản lý danh mục</h2>
+
+<button class="btn btn-success mb-2" onclick="openAdd()">Thêm danh mục</button>
+
+<table class="table table-bordered" id="tbl">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Nhóm</th>
+            <th>Trạng thái</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- MODAL -->
+<div class="modal fade" id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content p-3">
+            <input id="MaDM" hidden />
+            <input id="TenDM" class="form-control mb-2" placeholder="Tên danh mục" />
+            <input id="MaNhom" class="form-control mb-2" placeholder="Mã nhóm" />
+
+            <div class="form-check mb-2">
+                <input type="checkbox" id="TrangThai" class="form-check-input" checked />
+                <label class="form-check-label">Hoạt động</label>
+            </div>
+
+            <button class="btn btn-primary" onclick="save()">Lưu</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    let isEdit = false;
+
+    $(load);
+
+    function load() {
+        $.get('/api/DanhMuc', data => {
+            let html = '';
+            data.forEach(dm => {
+                html += `
+                <tr>
+                    <td>${dm.MADM}</td>
+                    <td>${dm.TENDM}</td>
+                    <td>${dm.MANHOM ?? ''}</td>
+                    <td>${dm.TRANGTHAI ? 'Hoạt động' : 'Ngưng'}</td>
+                    <td>
+                        <button onclick="edit('${dm.MADM}')">Sửa</button>
+                        <button onclick="del('${dm.MADM}')">Xóa</button>
+                    </td>
+                </tr>`;
+            });
+            $('#tbl tbody').html(html);
+        });
+    }
+
+    function openAdd() {
+        isEdit = false;
+        $('#modal input').val('');
+        $('#TrangThai').prop('checked', true);
+        $('#modal').modal('show');
+    }
+
+    function edit(id) {
+        isEdit = true;
+        $.get('/api/DanhMuc', data => {
+            let dm = data.find(x => x.MADM === id);
+            $('#MaDM').val(dm.MADM);
+            $('#TenDM').val(dm.TENDM);
+            $('#MaNhom').val(dm.MANHOM);
+            $('#TrangThai').prop('checked', dm.TRANGTHAI);
+            $('#modal').modal('show');
+        });
+    }
+
+    function save() {
+        let model = {
+            MADM: $('#MaDM').val(),
+            TENDM: $('#TenDM').val(),
+            MANHOM: $('#MaNhom').val(),
+            TRANGTHAI: $('#TrangThai').is(':checked')
+        };
+
+        $.ajax({
+            url: '/api/DanhMuc' + (isEdit ? '/' + model.MADM : ''),
+            type: isEdit ? 'PUT' : 'POST',
+            data: JSON.stringify(model),
+            contentType: 'application/json',
+            success: () => {
+                $('#modal').modal('hide');
+                load();
+            }
+        });
+    }
+
+    function del(id) {
+        if (!confirm('Ngừng hoạt động danh mục này?')) return;
+        $.ajax({
+            url: '/api/DanhMuc/' + id,
+            type: 'DELETE',
+            success: load
+        });
+    }
+</script>
