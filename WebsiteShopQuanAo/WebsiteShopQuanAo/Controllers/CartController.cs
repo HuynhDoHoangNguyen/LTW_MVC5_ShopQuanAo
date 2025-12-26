@@ -119,7 +119,19 @@ namespace WebsiteShopQuanAo.Controllers
                 return RedirectToAction("Login", "User");
             }
 
+
+            if (Session["Cart"] == null)
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+
             var cart = (Dictionary<string, CTGioHang>)Session["Cart"];
+
+            if (cart.Count() == 0)
+            {
+                return RedirectToAction("Index", "Cart");
+
+            }
 
             var ctspKeys = cart.Keys.ToList();
 

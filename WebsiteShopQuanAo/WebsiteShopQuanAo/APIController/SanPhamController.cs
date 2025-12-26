@@ -27,6 +27,7 @@ namespace WebsiteShopQuanAo.APIController
                 TenSanPham = sp.TENSP,
                 TenDanhMuc = sp.DANH_MUC.TENDM,
                 MoTa = sp.MOTA,
+                GiaBan = sp.CHI_TIET_SP.Min(ct => (decimal?)ct.GIABAN) ?? 0,
                 SoLuongTon = sp.SOLUONGTON,
                 HinhAnh = sp.HINH_ANH_SP
                         .OrderBy(h => h.TENHINHANH)
@@ -38,13 +39,13 @@ namespace WebsiteShopQuanAo.APIController
         // POST: api/SanPham?maDanhMuc=DM01
         [HttpPost]
         [Route("")]
-        public IHttpActionResult Post(ProductItemVM model, string maDanhMuc)
-        {
-            if (string.IsNullOrWhiteSpace(model.TenSanPham))
-                return BadRequest("Tên sản phẩm không được rỗng");
-            db.SP_SANPHAM_ADD(model.TenSanPham, maDanhMuc, model.MoTa);
-            return Ok("Thêm sản phẩm thành công ");
-        }
+            public IHttpActionResult Post(ProductItemVM model, string maDanhMuc)
+            {
+                if (string.IsNullOrWhiteSpace(model.TenSanPham))
+                    return BadRequest("Tên sản phẩm không được rỗng");
+                db.SP_SANPHAM_ADD(model.TenSanPham, maDanhMuc, model.MoTa);
+                return Ok("Thêm sản phẩm thành công ");
+            }
 
         // PUT: api/SanPham/SP01?maDanhMuc=DM01
         [HttpPut]
