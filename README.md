@@ -1,10 +1,5 @@
 # LTW_MVC5_ShopQuanAo
 Website quản lý shop quần áo - ASP.NET MVC5
-## 👨‍💻 Nhóm thực hiện
-- Huỳnh Đổ Hoàng Nguyên – Leader
-- Bạch Ngọc Hợp
-- Bùi Tấn Phước
-- Nguyễn Phát Huy
 
 ## 🛠️ Công nghệ sử dụng
 - ASP.NET MVC5 (VS 2022)
