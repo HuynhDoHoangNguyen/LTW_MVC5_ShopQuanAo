@@ -4,9 +4,32 @@
     ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_MainUserLayout.cshtml";
 
-    // base path ảnh nhỏ (bạn đổi nếu dự án để chỗ khác)
     string imgBase = Url.Content("~/UI_User/assets/img/product/small-product/");
     string noImg = Url.Content("~/Content/assets/img/no-image.png");
+
+    int pageSize = 5;
+    int totalItems = Model != null ? Model.Count() : 0;
+    int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+    // Đọc page từ query string, mặc định = 1
+    int currentPage = 1;
+    int.TryParse(Request.QueryString["page"], out currentPage);
+    if (currentPage < 1) { currentPage = 1; } 
+    if (currentPage > totalPages && totalPages > 0) { currentPage = totalPages; }
+
+
+    // Cắt danh sách theo trang
+    var pagedProducts = Model != null
+        ? Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList()
+        : new List<WebsiteShopQuanAo.Models.ProductItemVM>();
+
+    // Helper: build URL giữ nguyên tất cả query string, chỉ thay "page"
+    Func<int, string> pageUrl = pg =>
+    {
+        var qs = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+        qs["page"] = pg.ToString();
+        return Request.Url.AbsolutePath + "?" + qs.ToString();
+    };
 }
 
 <div class="shop_section shop_reverse">
@@ -34,8 +57,19 @@
                     </div>
                 </div>
 
+                @* ── Thông tin trang ── *@
+                @if (totalItems > 0)
+                {
+                    int from = (currentPage - 1) * pageSize + 1;
+                    int to = Math.Min(currentPage * pageSize, totalItems);
+                    <p class="shop-page-info text-muted mb-2">
+                        Hiển thị <strong>@from–@to</strong> / <strong>@totalItems</strong> sản phẩm
+                    </p>
+                }
+
+                @* ── Lưới sản phẩm ── *@
                 <div class="row shop_wrapper">
-                    @if (Model == null || !Model.Any())
+                    @if (!pagedProducts.Any())
                     {
                         <div class="col-12">
                             <div class="section_title text-center mb-130">
@@ -45,9 +79,8 @@
                     }
                     else
                     {
-                        foreach (var sp in Model)
+                        foreach (var sp in pagedProducts)
                         {
-                            // build url ảnh
                             var imgUrl = string.IsNullOrWhiteSpace(sp.HinhAnh)
                                 ? noImg
                                 : (imgBase + sp.HinhAnh.Trim());
@@ -64,7 +97,7 @@
 
                                     <figcaption class="product_content text-center">
                                         <h4 class="product_name">
-                                            <a href="@Url.Action("Details","Products", new {id = sp.MaSanPham})">
+                                            <a href="@Url.Action("Details","Products", new { id = sp.MaSanPham })">
                                                 @sp.TenSanPham
                                             </a>
                                         </h4>
@@ -73,13 +106,11 @@
                                             <span class="current_price">
                                                 @sp.GiaBan.ToString("N0") ₫
                                             </span>
-
-                                           
                                         </div>
 
                                         <div class="add_to_cart">
                                             <a class="btn btn-primary"
-                                               href="@Url.Action("Details","Products", new {id = sp.MaSanPham})">
+                                               href="@Url.Action("Details","Products", new { id = sp.MaSanPham })">
                                                 See more
                                             </a>
                                         </div>
@@ -90,6 +121,82 @@
                     }
                 </div>
 
+                @* ── Phân trang ── *@
+                @if (totalPages > 1)
+                {
+                    <nav class="shop-pagination d-flex justify-content-center mt-4" aria-label="Phân trang sản phẩm">
+                        <ul class="pagination">
+
+                            @* Nút « Trước *@
+                            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                                <a class="page-link"
+                                   href="@(currentPage > 1 ? pageUrl(currentPage - 1) : "#")"
+                                   aria-label="Trang trước">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            @* Các nút số trang *@
+                            @{
+                                // Hiển thị tối đa 5 nút số, căn giữa trang hiện tại
+                                int maxButtons = 5;
+                                int startPage = Math.Max(1, currentPage - maxButtons / 2);
+                                int endPage = Math.Min(totalPages, startPage + maxButtons - 1);
+                                // Căn lại nếu gần cuối
+                                if (endPage - startPage < maxButtons - 1)
+                                {
+
+                                    startPage = Math.Max(1, endPage - maxButtons + 1);
+                                }
+
+                            }
+
+                            @if (startPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@pageUrl(1)">1</a>
+                                </li>
+                                if (startPage > 2)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">…</span>
+                                    </li>
+                                }
+                            }
+
+                            @for (int p = startPage; p <= endPage; p++)
+                            {
+                                <li class="page-item @(p == currentPage ? "active" : "")">
+                                    <a class="page-link" href="@pageUrl(p)">@p</a>
+                                </li>
+                            }
+
+                            @if (endPage < totalPages)
+                            {
+                                if (endPage < totalPages - 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">…</span>
+                                    </li>
+                                }
+                                <li class="page-item">
+                                    <a class="page-link" href="@pageUrl(totalPages)">@totalPages</a>
+                                </li>
+                            }
+
+                            @* Nút Sau » *@
+                            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                                <a class="page-link"
+                                   href="@(currentPage < totalPages ? pageUrl(currentPage + 1) : "#")"
+                                   aria-label="Trang sau">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                }
+
             </div>
         </div>
     </div>
@@ -98,6 +205,7 @@
 @section scripts{
     <script>
         $(function () {
+            // ── Slider lọc giá ──
             if (!$.ui || !$.ui.slider) return;
 
             var minDefault = 0;
@@ -114,81 +222,22 @@
                 step: 50000,
                 values: [minQ, maxQ],
                 slide: function (event, ui) {
-                    $("#amount").val(ui.values[0].toLocaleString("vi-VN") + " ₫ - " + ui.values[1].toLocaleString("vi-VN") + " ₫");
+                    $("#amount").val(
+                        ui.values[0].toLocaleString("vi-VN") + " ₫ – " +
+                        ui.values[1].toLocaleString("vi-VN") + " ₫"
+                    );
                     $("#minPrice").val(ui.values[0]);
                     $("#maxPrice").val(ui.values[1]);
                 }
             });
 
-            var initValues = $("#slider-range").slider("values");
-            $("#amount").val(initValues[0].toLocaleString("vi-VN") + " ₫ - " + initValues[1].toLocaleString("vi-VN") + " ₫");
-            $("#minPrice").val(initValues[0]);
-            $("#maxPrice").val(initValues[1]);
+            var init = $("#slider-range").slider("values");
+            $("#amount").val(
+                init[0].toLocaleString("vi-VN") + " ₫ – " +
+                init[1].toLocaleString("vi-VN") + " ₫"
+            );
+            $("#minPrice").val(init[0]);
+            $("#maxPrice").val(init[1]);
         });
     </script>
 }
-
-
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenSanPham)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HinhAnhChinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgayTao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChatLieu.TenChatLieu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DanhMuc.TenDanhMuc)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnhChinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChatLieu.TenChatLieu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DanhMuc.TenDanhMuc)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MaSanPham }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MaSanPham }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MaSanPham })
-            </td>
-        </tr>
-    }
-
-    </table>*@
