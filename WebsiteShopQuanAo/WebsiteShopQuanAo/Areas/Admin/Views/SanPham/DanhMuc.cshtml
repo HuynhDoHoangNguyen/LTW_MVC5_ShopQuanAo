@@ -2,37 +2,52 @@
     ViewBag.Title = "Quản lý danh mục";
 }
 
-<h2>Quản lý danh mục</h2>
+<main>
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">Quản Lý Danh Mục (API)</h2>
 
-<button class="btn btn-success mb-2" onclick="openAdd()">Thêm danh mục</button>
-
-<table class="table table-bordered" id="tbl">
-    <thead>
-        <tr>
-            <th>Mã</th>
-            <th>Tên</th>
-            <th>Nhóm</th>
-            <th>Trạng thái</th>
-            <th>Chức năng</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+        <div class="card card-modern mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-list me-1"></i> Danh Sách Danh Mục</span>
+                <button class="btn btn-modern btn-dark" onclick="openAdd()">THÊM MỚI</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="tbl">
+                        <thead>
+                            <tr>
+                                <th>Mã</th>
+                                <th>Tên</th>
+                                <th>Nhóm</th>
+                                <th>Trạng thái</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 <!-- MODAL -->
 <div class="modal fade" id="modal">
     <div class="modal-dialog">
-        <div class="modal-content p-3">
+        <div class="modal-content p-3 border-0 shadow" style="border-radius: 12px;">
+            <h5 class="mb-3">Danh Mục</h5>
             <input id="MaDM" hidden />
             <input id="TenDM" class="form-control mb-2" placeholder="Tên danh mục" />
-            <input id="MaNhom" class="form-control mb-2" placeholder="Mã nhóm" />
+            <input id="MaNhom" class="form-control mb-3" placeholder="Mã nhóm" />
 
-            <div class="form-check mb-2">
+            <div class="form-check mb-3">
                 <input type="checkbox" id="TrangThai" class="form-check-input" checked />
                 <label class="form-check-label">Hoạt động</label>
             </div>
 
-            <button class="btn btn-primary" onclick="save()">Lưu</button>
+            <div class="text-end">
+                <button class="btn btn-modern btn-primary" onclick="save()">Lưu</button>
+            </div>
         </div>
     </div>
 </div>
@@ -53,10 +68,10 @@
                     <td>${dm.MADM}</td>
                     <td>${dm.TENDM}</td>
                     <td>${dm.MANHOM ?? ''}</td>
-                    <td>${dm.TRANGTHAI ? 'Hoạt động' : 'Ngưng'}</td>
+                    <td><span class="badge ${dm.TRANGTHAI ? 'bg-success' : 'bg-secondary'}">${dm.TRANGTHAI ? 'Hoạt động' : 'Ngưng'}</span></td>
                     <td>
-                        <button onclick="edit('${dm.MADM}')">Sửa</button>
-                        <button onclick="del('${dm.MADM}')">Xóa</button>
+                        <button class="btn btn-sm btn-outline-warning me-1" onclick="edit('${dm.MADM}')"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="del('${dm.MADM}')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>`;
             });

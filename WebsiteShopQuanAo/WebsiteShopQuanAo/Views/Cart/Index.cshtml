@@ -39,9 +39,9 @@
                                     <tr>
                                         <th>product </th>
                                         <th>information</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
+                                        <th style="min-width: 130px; text-align: center;">Price</th>
+                                        <th style="min-width: 160px; text-align: center;">Quantity</th>
+                                        <th style="min-width: 130px; text-align: center;">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,22 +90,25 @@
                                                 </td>
 
                                                 <td>
-                                                    <div class="cart_product_price">
+                                                    <div class="cart_product_price text-center" style="white-space: nowrap;">
                                                         <span>@item.Gia.ToString("N0") ₫</span>
                                                     </div>
                                                 </td>
 
                                                 <td class="product_quantity">
-                                                    <div class="cart_product_quantity">
+                                                    <div class="cart_product_quantity d-flex align-items-center justify-content-center">
+                                                        <a href="@Url.Action("UpdateQuantity", "Cart", new { MaCTSP = ctsp.MACTSP, qty = item.SoLuong - 1 })" class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">-</a>
                                                         <input type="number"
                                                                min="1"
                                                                value="@item.SoLuong"
-                                                               readonly>
+                                                               readonly
+                                                               class="form-control text-center mx-2" style="width: 60px; height: 32px; padding: 0;">
+                                                        <a href="@Url.Action("UpdateQuantity", "Cart", new { MaCTSP = ctsp.MACTSP, qty = item.SoLuong + 1 })" class="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: bold;">+</a>
                                                     </div>
                                                 </td>
 
                                                 <td>
-                                                    <div class="cart_product_price">
+                                                    <div class="cart_product_price text-center" style="white-space: nowrap;">
                                                         <span>@thanhTien.ToString("N0") ₫</span>
                                                     </div>
                                                 </td>

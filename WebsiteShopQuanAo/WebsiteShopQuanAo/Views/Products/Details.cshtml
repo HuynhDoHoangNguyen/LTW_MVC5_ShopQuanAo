@@ -38,10 +38,30 @@
         font-size: 18px;
         margin-right: 10px;
     }
+    .thumb-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: border-color 0.2s;
+    }
+
+    .zoom_tabimg_list:hover .thumb-img {
+        border-color: #2196f3;
+    }
+
+    .main-img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
 </style>
 
 <!--breadcrumbs area start-->
-<div class="breadcrumbs_area breadcrumbs_product">
+<div class="breadcrumbs_area breadcrumbs_product mt-5">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -67,10 +87,10 @@
                     <div class="zoom_gallery_inner d-flex gap-3">
 
                         <!-- THUMBNAIL -->
-                        <div class="zoom_tab_img d-flex flex-column gap-2">
+                        <div class="zoom_tab_img d-flex flex-column gap-2" style="max-height: 500px; overflow-y: auto;">
                             @foreach (var img in Model.SanPham.HINH_ANH_SP)
                             {
-                                <a class="zoom_tabimg_list" href="javascript:void(0)">
+                                <a class="zoom_tabimg_list" href="javascript:void(0)" onclick="document.getElementById('mainProductImage').src = '@Url.Content("~/UI_User/assets/img/product/small-product/" + img.TENHINHANH)'">
                                     <img class="thumb-img"
                                          src="~/UI_User/assets/img/product/small-product/@img.TENHINHANH"
                                          alt="">
@@ -80,14 +100,11 @@
 
                         <!-- MAIN IMAGE -->
                         <div class="product_zoom_main_img flex-grow-1">
-                            @foreach (var img in Model.SanPham.HINH_ANH_SP)
-                            {
-                                <div class="product_zoom_thumb">
-                                    <img class="main-img"
-                                         src="~/UI_User/assets/img/product/small-product/@img.TENHINHANH"
-                                         alt="">
-                                </div>
-                            }
+                            <div class="product_zoom_thumb text-center">
+                                <img id="mainProductImage" class="main-img"
+                                     src="~/UI_User/assets/img/product/small-product/@(Model.SanPham.HINH_ANH_SP.FirstOrDefault()?.TENHINHANH)"
+                                     alt="">
+                            </div>
                         </div>
 
                     </div>

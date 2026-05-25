@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -87,6 +87,34 @@ namespace WebsiteShopQuanAo.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
+        public ActionResult UpdateQuantity(string MaCTSP, int qty)
+        {
+            if (Session["Cart"] != null)
+            {
+                Dictionary<string, CTGioHang> gioHang = (Dictionary<string, CTGioHang>)Session["Cart"];
+                if (gioHang.ContainsKey(MaCTSP))
+                {
+                    if (qty <= 0)
+                    {
+                        gioHang.Remove(MaCTSP);
+                    }
+                    else
+                    {
+                        var ctsp = db.CHI_TIET_SP.FirstOrDefault(x => x.MACTSP == MaCTSP && x.TRANGTHAI == true);
+                        if (ctsp != null)
+                        {
+                            if (qty > ctsp.SOLUONGTON)
+                                gioHang[MaCTSP].SoLuong = ctsp.SOLUONGTON.Value;
+                            else
+                                gioHang[MaCTSP].SoLuong = qty;
+                        }
+                    }
+                }
+                Session["Cart"] = gioHang;
+            }
+
+            return RedirectToAction("Index", "Cart");
+        }
 
         public ActionResult ClearCart()
         {

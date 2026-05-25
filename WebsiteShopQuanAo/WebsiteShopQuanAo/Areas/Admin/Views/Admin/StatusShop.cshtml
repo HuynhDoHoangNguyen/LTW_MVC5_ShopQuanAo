@@ -16,7 +16,7 @@
 
                 @Html.ActionLink("THÊM SẢN PHẨM MỚI", "Create", "Admin", null, new
                 {
-                    @class = "btn btn-dark-admin shadow-sm",
+                    @class = "btn btn-modern btn-dark shadow-sm",
                     @style = "text-decoration: none; color: white;"
                 })
 
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="card mb-4 border-0 shadow-sm">
+        <div class="card card-modern mb-4">
             <div class="card-body">
                 @using (Html.BeginForm("StatusShop", "Admin", FormMethod.Get, new { @class = "row g-3 align-items-center" }))
                 {
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-dark-admin shadow-sm">
+                        <button type="submit" class="btn btn-modern btn-dark shadow-sm">
                             <i class="fas fa-filter me-1"></i> LỌC DỮ LIỆU
                         </button>
                         <a href="@Url.Action("StatusShop", "Admin")" class="btn btn-outline-secondary ms-2">
@@ -105,7 +105,7 @@
                 }
             </div>
         </div>
-        <div class="card mb-4">
+        <div class="card card-modern mb-4">
 
             <div class="card-body p-0">
                 <div class="table-responsive">
