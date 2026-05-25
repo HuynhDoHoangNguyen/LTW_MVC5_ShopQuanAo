@@ -21,20 +21,20 @@
                 <form action="@Url.Action("LogIn","Admin")" method="post">
                     @Html.AntiForgeryToken()
                     <div class="form-floating mb-4">
-                        <input class="form-control" id="inputEmail" name="Email" type="text" placeholder="ten@vidu.com" required />
+                        <input class="form-control" id="inputEmail" name="Email" type="text" placeholder="ten@vidu.com" required tabindex="1" />
                         <label for="inputEmail"><i class="fas fa-envelope me-2"></i>Tên tài khoản</label>
                         <div class="invalid-feedback">Vui lòng nhập tên tài khoản hợp lệ.</div>
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Mật khẩu" required />
+                        <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Mật khẩu" required tabindex="2" />
                         <label for="inputPassword"><i class="fas fa-lock me-2"></i>Mật khẩu</label>
                         <div class="invalid-feedback">Vui lòng nhập mật khẩu của bạn.</div>
                     </div>
 
 
                     <div class="d-flex flex-column align-items-center mt-4 mb-0">
-                        <button type="submit" class="login-btn w-100 mb-3">
+                        <button type="submit" class="login-btn w-100 mb-3" tabindex="3">
                             <i class="fas fa-sign-in-alt me-2"></i>Đăng Nhập
                         </button>
 

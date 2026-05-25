@@ -62,7 +62,7 @@
                         <div class="checkout_form_input">
                             <label>Địa chỉ giao hàng <span>*</span></label>
                             @Html.TextBoxFor(x => x.DiaChiGiao,
-                                new { @class = "form-control", required = "required" })
+                                new { @class = "form-control", required = "required", tabindex = "1" })
                         </div>
 
                         <div class="checkout_form_input">
@@ -70,12 +70,12 @@
 
                             <div class="payment-method">
                                 <label class="payment-item">
-                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "COD", new { @class = "payment-radio" })
+                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "COD", new { @class = "payment-radio", tabindex = "2" })
                                     <span>Thanh toán khi nhận hàng (COD)</span>
                                 </label>
 
                                 <label class="payment-item">
-                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "BANK", new { @class = "payment-radio" })
+                                    @Html.RadioButtonFor(x => x.HinhThucThanhToan, "BANK", new { @class = "payment-radio", tabindex = "3" })
                                     <span>Chuyển khoản ngân hàng</span>
                                 </label>
                             </div>
@@ -130,7 +130,7 @@
                             </div>
 
                             <div class="place_order_btn">
-                                <button type="submit" class="btn btn-primary w-100">
+                                <button type="submit" class="btn btn-primary w-100" tabindex="4">
                                     PLACE ORDER
                                 </button>
                             </div>

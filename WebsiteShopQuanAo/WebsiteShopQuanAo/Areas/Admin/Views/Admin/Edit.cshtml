@@ -55,7 +55,7 @@
                                 <div class="form-group-create">
                                     <label class="btn btn-outline-primary btn-sm w-100">
                                         <i class="fas fa-upload"></i> Thay đổi ảnh mới
-                                        <input type="file" name="imageFile" id="imageFile" hidden accept="image/*" />
+                                        <input type="file" name="imageFile" id="imageFile" hidden accept="image/*" tabindex="1" />
                                     </label>
                                     <div class="form-hint mt-2">Để trống nếu giữ nguyên ảnh cũ</div>
                                 </div>
@@ -65,7 +65,7 @@
                                 <div class="form-group-create">
                                     @Html.LabelFor(model => model.TENSP, "Tên sản phẩm", htmlAttributes: new { @class = "control-label-create required" })
                                     <div class="form-input-create">
-                                        @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control-create", placeholder = "Nhập tên sản phẩm" } })
+                                        @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control-create", placeholder = "Nhập tên sản phẩm", tabindex = "2" } })
                                         @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger-create" })
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="form-group-create">
                                     @Html.LabelFor(model => model.MADM, "Danh mục", htmlAttributes: new { @class = "control-label-create required" })
                                     <div class="form-input-create">
-                                        @Html.DropDownList("MADM", null, htmlAttributes: new { @class = "form-control-create" })
+                                        @Html.DropDownList("MADM", null, htmlAttributes: new { @class = "form-control-create", tabindex = "3" })
                                         @Html.ValidationMessageFor(model => model.MADM, "", new { @class = "text-danger-create" })
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         <div class="form-group-create">
                                             @Html.LabelFor(model => model.SOLUONGTON, "Số lượng tồn", htmlAttributes: new { @class = "control-label-create required" })
                                             <div class="form-input-create">
-                                                @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control-create", type = "number", min = "0" } })
+                                                @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control-create", type = "number", min = "0", tabindex = "4" } })
                                                 @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger-create" })
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                             @Html.LabelFor(model => model.TRANGTHAI, "Trạng thái", htmlAttributes: new { @class = "control-label-create" })
                                             <div class="form-input-create">
                                                 <div class="checkbox-create pt-2">
-                                                    @Html.EditorFor(model => model.TRANGTHAI)
+                                                    @Html.EditorFor(model => model.TRANGTHAI, new { htmlAttributes = new { tabindex = "5" } })
                                                     <label for="TRANGTHAI">Đang hoạt động</label>
                                                 </div>
                                             </div>
@@ -103,7 +103,7 @@
                                 <div class="form-group-create">
                                     @Html.LabelFor(model => model.MOTA, "Mô tả sản phẩm", htmlAttributes: new { @class = "control-label-create" })
                                     <div class="form-input-create">
-                                        @Html.TextAreaFor(model => model.MOTA, new { @class = "form-control-create", rows = "4" })
+                                        @Html.TextAreaFor(model => model.MOTA, new { @class = "form-control-create", rows = "4", tabindex = "6" })
                                         @Html.ValidationMessageFor(model => model.MOTA, "", new { @class = "text-danger-create" })
                                     </div>
                                 </div>
@@ -111,10 +111,10 @@
                         </div>
 
                         <div class="form-actions-create mt-4">
-                            <a href="@Url.Action("StatusShop")" class="btn-create btn-create-secondary">
+                            <a href="@Url.Action("StatusShop")" class="btn-create btn-create-secondary" tabindex="8">
                                 <i class="fas fa-times"></i> Hủy bỏ
                             </a>
-                            <button type="submit" class="btn-create btn-create-primary">
+                            <button type="submit" class="btn-create btn-create-primary" tabindex="7">
                                 <i class="fas fa-save"></i> Lưu thay đổi
                             </button>
                         </div>
