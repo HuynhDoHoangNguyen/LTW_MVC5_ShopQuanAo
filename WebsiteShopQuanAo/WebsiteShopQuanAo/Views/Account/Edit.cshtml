@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MATKHAU, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MATKHAU, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MATKHAU, new { htmlAttributes = new { @class = "form-control", tabindex = "1" } })
                 @Html.ValidationMessageFor(model => model.MATKHAU, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MAVT, "MAVT", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MAVT", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("MAVT", null, htmlAttributes: new { @class = "form-control", tabindex = "2" })
                 @Html.ValidationMessageFor(model => model.MAVT, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -37,7 +37,7 @@
             @Html.LabelFor(model => model.TRANGTHAI, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.TRANGTHAI)
+                    @Html.EditorFor(model => model.TRANGTHAI, new { htmlAttributes = new { tabindex = "3" } })
                     @Html.ValidationMessageFor(model => model.TRANGTHAI, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" tabindex="4" />
             </div>
         </div>
     </div>
