@@ -34,6 +34,7 @@
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__KHACH_HAN__USERN__276EDEB3" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__PHIEU_NHA__MANCC__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="QL_ShopQuanAoNuModel.FK__TAI_KHOAN__MAVT__1FCDBCEB" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_ShopQuanAoNuModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

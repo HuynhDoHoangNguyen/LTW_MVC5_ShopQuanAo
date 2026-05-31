@@ -401,7 +401,16 @@
     <Compile Include="Models\SP_DM_LIST_Result.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_SP_TIMKIEM_Result.cs">
+      <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QL_ShopQuanAoNu.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TAI_KHOAN.cs">
