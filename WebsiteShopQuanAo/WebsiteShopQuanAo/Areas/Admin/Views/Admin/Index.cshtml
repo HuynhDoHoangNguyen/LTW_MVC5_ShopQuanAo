@@ -12,95 +12,134 @@
         <h1 class="mt-4">Trang Chủ</h1>
         @if (Session["AdminName"] != null)
         {
-            <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-                <i class="fas fa-user-shield me-2"></i>
-                Xin chào, <strong>@Session["AdminName"]</strong>
-                <span class="badge bg-light text-dark ms-2">@Session["AdminEmail"]</span>
-                <hr />
-                <p class="mb-0 small">Hệ thống ghi nhận bạn đã đăng nhập thành công vào trang quản trị.</p>
+            <div class="alert alert-welcome alert-dismissible fade show mb-4" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-user-shield fa-2x me-3 text-primary"></i>
+                    <div>
+                        <h5 class="alert-heading mb-1">Xin chào, <strong>@Session["AdminName"]</strong>!</h5>
+                        <p class="mb-0 text-muted">Hệ thống ghi nhận bạn đã đăng nhập thành công. Email: <span class="badge bg-light text-dark">@Session["AdminEmail"]</span></p>
+                    </div>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Trang Quản Lý</li>
         </ol>
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Area Chart
+        <!-- Thống Kê Nhanh -->
+        <div class="row mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card card-modern h-100 bg-primary text-white border-0" style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-uppercase mb-1 small fw-bold" style="opacity: 0.8;">Tổng Sản Phẩm</div>
+                                <div class="h2 mb-0 fw-bold">@Model.Count()</div>
+                            </div>
+                            <div>
+                                <i class="fas fa-box fa-3x" style="opacity: 0.3;"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                 </div>
             </div>
-            <div class="col-xl-6">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-bar me-1"></i>
-                        Bar Chart
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card card-modern h-100 bg-warning text-white border-0" style="background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-uppercase mb-1 small fw-bold" style="opacity: 0.8;">Sắp Hết Hàng (Dưới 10)</div>
+                                <div class="h2 mb-0 fw-bold">@Model.Count(x => x.SOLUONGTON > 0 && x.SOLUONGTON < 10)</div>
+                            </div>
+                            <div>
+                                <i class="fas fa-exclamation-triangle fa-3x" style="opacity: 0.3;"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card card-modern h-100 bg-danger text-white border-0" style="background: linear-gradient(135deg, #e74a3b 0%, #be2617 100%);">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="text-uppercase mb-1 small fw-bold" style="opacity: 0.8;">Đã Hết Hàng</div>
+                                <div class="h2 mb-0 fw-bold">@Model.Count(x => x.SOLUONGTON <= 0)</div>
+                            </div>
+                            <div>
+                                <i class="fas fa-times-circle fa-3x" style="opacity: 0.3;"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                DataTable
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>ProductName</th>
-                            <th>Description</th>
-                            <th>StockQuantity</th>
-                            <th>Status</th>
-                            <th>CategoryName</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>ProductName</th>
-                            <th>Description</th>
-                            <th>StockQuantity</th>
-                            <th>Status</th>
-                            <th>CategoryName</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TENSP)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MOTA)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SOLUONGTON)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TRANGTHAI)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DANH_MUC.TENDM)
-                                </td>
-                            </tr>
-                        }
 
-                    </tbody>
-                </table>
+        <div class="row">
+            <!-- Sản Phẩm Sắp Hết Hàng -->
+            <div class="col-xl-8">
+                <div class="card card-modern mb-4">
+                    <div class="card-header bg-white">
+                        <i class="fas fa-exclamation-circle me-1 text-warning"></i>
+                        <span class="fw-bold">Sản Phẩm Cần Nhập Thêm (Dưới 10 sản phẩm)</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="datatablesSimple" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã SP</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Tồn Kho</th>
+                                        <th>Danh Mục</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(x => x.SOLUONGTON > 0 && x.SOLUONGTON < 10).Take(10))
+                                    {
+                                        <tr>
+                                            <td class="fw-bold">@item.MASP</td>
+                                            <td>@item.TENSP</td>
+                                            <td><span class="badge bg-warning text-dark">@item.SOLUONGTON</span></td>
+                                            <td>@(item.DANH_MUC != null ? item.DANH_MUC.TENDM : "Khác")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hành Động Nhanh -->
+            <div class="col-xl-4">
+                <div class="card card-modern mb-4">
+                    <div class="card-header bg-white">
+                        <i class="fas fa-bolt me-1 text-primary"></i>
+                        <span class="fw-bold">Hành Động Nhanh</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-3">
+                            <a href="@Url.Action("Create", "Admin")" class="btn btn-modern btn-outline-primary text-start">
+                                <i class="fas fa-plus-circle me-2"></i> Thêm Sản Phẩm Mới
+                            </a>
+                            <a href="@Url.Action("Index", "DonHang")" class="btn btn-modern btn-outline-success text-start">
+                                <i class="fas fa-shopping-cart me-2"></i> Quản Lý Đơn Hàng
+                            </a>
+                            <a href="@Url.Action("StatusShop", "Admin")" class="btn btn-modern btn-outline-info text-start">
+                                <i class="fas fa-boxes me-2"></i> Kho Hàng
+                            </a>
+                            <a href="@Url.Action("Index", "ThongKe")" class="btn btn-modern btn-outline-dark text-start">
+                                <i class="fas fa-chart-line me-2"></i> Báo Cáo Thống Kê
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="@Url.Content("~/Areas/Admin/Boot/assets/demo/chart-area-demo.js")"></script>
-    <script src="@Url.Content("~/Areas/Admin/Boot/assets/demo/chart-bar-demo.js")"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="@Url.Content("~/Areas/Admin/Boot/js/datatables-simple-demo.js")"></script>
 }

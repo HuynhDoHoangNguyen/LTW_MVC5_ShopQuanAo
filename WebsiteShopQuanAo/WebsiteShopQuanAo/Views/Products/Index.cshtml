@@ -1,5 +1,22 @@
 ﻿@model IEnumerable<WebsiteShopQuanAo.Models.ProductItemVM>
 
+<style>
+    /* Đồng bộ màu phân trang với theme chính (#6a7964) */
+    .shop-pagination .page-item.active .page-link {
+        background-color: #6a7964 !important;
+        border-color: #6a7964 !important;
+        color: #fff !important;
+    }
+    .shop-pagination .page-link {
+        color: #272727;
+    }
+    .shop-pagination .page-link:hover {
+        color: #6a7964;
+        background-color: #f8f9fa;
+        border-color: #ddd;
+    }
+</style>
+
 @{
     ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_MainUserLayout.cshtml";

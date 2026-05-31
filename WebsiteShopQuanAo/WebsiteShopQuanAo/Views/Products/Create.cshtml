@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MASP, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MASP, new { htmlAttributes = new { @class = "form-control", tabindex = "1" } })
                 @Html.ValidationMessageFor(model => model.MASP, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TENSP, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TENSP, new { htmlAttributes = new { @class = "form-control", tabindex = "2" } })
                 @Html.ValidationMessageFor(model => model.TENSP, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MADM, "MADM", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MADM", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("MADM", null, htmlAttributes: new { @class = "form-control", tabindex = "3" })
                 @Html.ValidationMessageFor(model => model.MADM, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MOTA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MOTA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MOTA, new { htmlAttributes = new { @class = "form-control", tabindex = "4" } })
                 @Html.ValidationMessageFor(model => model.MOTA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SOLUONGTON, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.SOLUONGTON, new { htmlAttributes = new { @class = "form-control", tabindex = "5" } })
                 @Html.ValidationMessageFor(model => model.SOLUONGTON, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,7 @@
             @Html.LabelFor(model => model.TRANGTHAI, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.TRANGTHAI)
+                    @Html.EditorFor(model => model.TRANGTHAI, new { htmlAttributes = new { tabindex = "6" } })
                     @Html.ValidationMessageFor(model => model.TRANGTHAI, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -67,7 +67,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" tabindex="7" />
             </div>
         </div>
     </div>
