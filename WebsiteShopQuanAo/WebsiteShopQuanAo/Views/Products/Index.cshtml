@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebsiteShopQuanAo.Models.ProductItemVM>
+@model IEnumerable<WebsiteShopQuanAo.Models.ProductItemVM>
 
 <style>
     /* Đồng bộ màu phân trang với theme chính (#6a7964) */
@@ -54,7 +54,12 @@
         <div class="row">
 
             <div class="col-lg-3 col-md-12">
-                @Html.Action("Sidebar", "Products")
+                @Html.Action("Sidebar", "Products", new {
+                    maDanhMuc = Request.QueryString["maDanhMuc"],
+                    min       = Request.QueryString["min"],
+                    max       = Request.QueryString["max"],
+                    kw        = Request.QueryString["kw"]
+                })
             </div>
 
             <div class="col-lg-9 col-md-12">
@@ -80,7 +85,7 @@
                     int from = (currentPage - 1) * pageSize + 1;
                     int to = Math.Min(currentPage * pageSize, totalItems);
                     <p class="shop-page-info text-muted mb-2">
-                        Hiển thị <strong>@from–@to</strong> / <strong>@totalItems</strong> sản phẩm
+                        Hi&#7875;n th&#7883; <strong>@(from)&ndash;@(to)</strong> / <strong>@totalItems</strong> s&#7843;n ph&#7849;m
                     </p>
                 }
 
@@ -121,7 +126,7 @@
 
                                         <div class="price_box">
                                             <span class="current_price">
-                                                @sp.GiaBan.ToString("N0") ₫
+                                                @sp.GiaBan.ToString("N0") &#8363;
                                             </span>
                                         </div>
 
@@ -228,9 +233,9 @@
             var minDefault = 0;
             var maxDefault = 2000000;
 
-            var url = new URL(window.location.href);
-            var minQ = parseInt(url.searchParams.get("min")) || minDefault;
-            var maxQ = parseInt(url.searchParams.get("max")) || maxDefault;
+            // Đọc giá trị hiện tại từ server (Razor), không cần parse URL
+            var minQ = @(ViewBag.Min != null ? ViewBag.Min.ToString() : "0");
+            var maxQ = @(ViewBag.Max != null ? ViewBag.Max.ToString() : "2000000");
 
             $("#slider-range").slider({
                 range: true,
@@ -240,21 +245,23 @@
                 values: [minQ, maxQ],
                 slide: function (event, ui) {
                     $("#amount").val(
-                        ui.values[0].toLocaleString("vi-VN") + " ₫ – " +
-                        ui.values[1].toLocaleString("vi-VN") + " ₫"
+                        ui.values[0].toLocaleString("vi-VN") + " \u20AB \u2013 " +
+                        ui.values[1].toLocaleString("vi-VN") + " \u20AB"
                     );
                     $("#minPrice").val(ui.values[0]);
                     $("#maxPrice").val(ui.values[1]);
                 }
             });
 
+            // Hiển thị ban đầu
             var init = $("#slider-range").slider("values");
             $("#amount").val(
-                init[0].toLocaleString("vi-VN") + " ₫ – " +
-                init[1].toLocaleString("vi-VN") + " ₫"
+                init[0].toLocaleString("vi-VN") + " \u20AB \u2013 " +
+                init[1].toLocaleString("vi-VN") + " \u20AB"
             );
             $("#minPrice").val(init[0]);
             $("#maxPrice").val(init[1]);
         });
     </script>
 }
+

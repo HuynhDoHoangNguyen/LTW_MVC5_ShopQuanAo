@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -83,8 +83,14 @@ namespace WebsiteShopQuanAo.Controllers
 
 
 
-        public PartialViewResult Sidebar()
+        public PartialViewResult Sidebar(string maDanhMuc = null, decimal? min = null, decimal? max = null, string kw = null)
         {
+            // Set ViewBag để _Sidebar.cshtml có thể đọc trạng thái filter hiện tại
+            ViewBag.MaDanhMuc = maDanhMuc;
+            ViewBag.Min       = min;
+            ViewBag.Max       = max;
+            ViewBag.Keyword   = kw;
+
             var data = db.NHOM_DANH_MUC
                 .Where(n => n.TRANGTHAI == true)
                 .ToList();
