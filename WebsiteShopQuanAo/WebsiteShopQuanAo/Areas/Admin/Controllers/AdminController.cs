@@ -18,23 +18,38 @@ namespace WebsiteShopQuanAo.Areas.Admin.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogIn(string Email, string Password)
         {
-            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(Email))
             {
-                ViewBag.Error = "Vui lòng nhập đầy đủ Email và Mật khẩu!";
-                return View();
+                ViewBag.Error1 = "Vui lòng nhập Username!";
+                hasError = true;
             }
-            var admin =db.TAI_KHOAN.FirstOrDefault(t => t.USERNAME == Email && t.MATKHAU == Password && t.MAVT == "VT01");
-         
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                ViewBag.Error2 = "Vui lòng nhập Password!";
+                hasError = true;
+            }
+
+            if (hasError)
+                return View();
+
+            var admin = db.TAI_KHOAN.FirstOrDefault(t => t.USERNAME == Email && t.MATKHAU == Password && t.MAVT == "VT01");
+
             if (admin != null)
             {
                 Session["AdminName"] = "Quản Trị Viên";
-                Session["AdminEmail"] = admin.USERNAME;
+                Session["AdminUserName"] = admin.USERNAME;
                 return RedirectToAction("Index", "Admin");
             }
+
             ViewBag.Error = "Email hoặc mật khẩu không chính xác!";
             return View();
         }

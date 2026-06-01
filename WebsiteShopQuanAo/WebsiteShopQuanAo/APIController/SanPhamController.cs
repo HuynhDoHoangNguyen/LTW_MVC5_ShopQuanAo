@@ -43,6 +43,9 @@ namespace WebsiteShopQuanAo.APIController
         {
             if (string.IsNullOrWhiteSpace(model.TenSanPham))
                 return BadRequest("Tên sản phẩm không được rỗng");
+            if (string.IsNullOrWhiteSpace(maDanhMuc))
+                return BadRequest("Mã danh mục không được rỗng");
+
             db.SP_SANPHAM_ADD(model.TenSanPham, maDanhMuc, model.MoTa);
             return Ok("Thêm sản phẩm thành công ");
         }
@@ -53,6 +56,8 @@ namespace WebsiteShopQuanAo.APIController
         public IHttpActionResult Put(string id, ProductItemVM model, string maDanhMuc)
         {
             var sp = db.SAN_PHAM.Find(id);
+
+
             if (sp == null) return NotFound();
 
             if (!string.IsNullOrWhiteSpace(model.TenSanPham))
@@ -78,11 +83,37 @@ namespace WebsiteShopQuanAo.APIController
         public IHttpActionResult Delete(string id)
         {
             var sp = db.SAN_PHAM.Find(id);
+            var hd = db.CT_DON_HANG.Any(ct => ct.MASP == id); 
             if (sp == null) return NotFound();
 
-            db.SAN_PHAM.Remove(sp);
-            db.SaveChanges();
-            return Ok("Đã xóa");
+            // 1. KIỂM TRA RÀNG BUỘC (Proactive Check)
+            // Kiểm tra xem sản phẩm quần áo này đã có chi tiết (size, màu) hay đã được khách mua (nằm trong hóa đơn) chưa
+            // Lưu ý: Tên property (CHI_TIET_SP, CTHOADON) cần khớp với navigation property trong model của bạn.
+            bool hasDetails = sp.CHI_TIET_SP != null && sp.CHI_TIET_SP.Any();
+            
+            bool hasOrders = hd; 
+            if (hasDetails || hasOrders)
+            {
+                return BadRequest("Không thể xóa! Sản phẩm này đang có chi tiết sản phẩm hoặc đã nằm trong hóa đơn.");
+            }
+
+            try
+            {
+                // 2. THỰC HIỆN XÓA (Xóa cứng)
+                db.SAN_PHAM.Remove(sp);
+                db.SaveChanges();
+                return Ok("Đã xóa");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                // 3. BẮT LỖI KHÓA NGOẠI TỪ DATABASE (Safety Net)
+                // Đề phòng trường hợp sót bảng liên kết nào đó chưa check ở bước 1
+                return BadRequest("Lỗi ràng buộc: Không thể xóa sản phẩm đang được liên kết với dữ liệu khác.");
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
         }
 
     }
