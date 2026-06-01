@@ -58,7 +58,7 @@ namespace WebsiteShopQuanAo.APIController
             return Ok("Cập nhật danh mục thành công");
         }
 
-        // DELETE (soft): api/DanhMuc/DM01
+        // DELETE: api/DanhMuc/DM01
         [HttpDelete]
         [Route("{id}")]
         public IHttpActionResult Delete(string id)
@@ -66,11 +66,31 @@ namespace WebsiteShopQuanAo.APIController
             var dm = db.DANH_MUC.Find(id);
             if (dm == null) return NotFound();
 
-            // XÓA MỀM
-            db.DANH_MUC.Remove(dm);
-            db.SaveChanges();
+           
+            if (dm.SAN_PHAM.Any())
+            {
+                return BadRequest("Không thể xóa! Đang có sản phẩm thuộc danh mục này.");
+            }
 
-            return Ok("Đã xóa danh mục");
+            try
+            {
+                // 2. THỰC HIỆN XÓA
+                db.DANH_MUC.Remove(dm); // Lưu ý: Đây là xóa vật lý (Hard delete)
+                db.SaveChanges();
+
+                return Ok("Đã xóa danh mục thành công.");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException)
+            {
+                // 3. BẮT LỖI KHÓA NGOẠI (Safety Net)
+                // Bắt lỗi khi database từ chối lệnh xóa do dính FK ở một bảng nào đó
+                return BadRequest("Lỗi ràng buộc dữ liệu: Danh mục đang được sử dụng.");
+            }
+            catch (Exception ex)
+            {
+                // Bắt các lỗi hệ thống khác
+                return InternalServerError(ex);
+            }
         }
     }
 }

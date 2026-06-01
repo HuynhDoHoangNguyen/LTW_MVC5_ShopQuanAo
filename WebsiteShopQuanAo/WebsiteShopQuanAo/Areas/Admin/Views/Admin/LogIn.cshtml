@@ -21,15 +21,30 @@
                 <form action="@Url.Action("LogIn","Admin")" method="post">
                     @Html.AntiForgeryToken()
                     <div class="form-floating mb-4">
-                        <input class="form-control" id="inputEmail" name="Email" type="text" placeholder="ten@vidu.com" required tabindex="1" />
+                        <input class="form-control" id="inputEmail" name="Email" type="text" placeholder="ten@vidu.com" tabindex="1" />
                         <label for="inputEmail"><i class="fas fa-envelope me-2"></i>Tên tài khoản</label>
                         <div class="invalid-feedback">Vui lòng nhập tên tài khoản hợp lệ.</div>
+
+                        @if (ViewBag.Error1 != null)
+                        {
+
+                            <div class="alert alert-danger border-0 shadow-sm w-100 text-center" role="alert" style="font-size: 0.85rem;">
+                                <i class="fas fa-exclamation-triangle me-2"></i> @ViewBag.Error1
+                            </div>
+                        }
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Mật khẩu" required tabindex="2" />
+                        <input class="form-control" id="inputPassword" name="Password" type="password" placeholder="Mật khẩu" tabindex="2" />
                         <label for="inputPassword"><i class="fas fa-lock me-2"></i>Mật khẩu</label>
                         <div class="invalid-feedback">Vui lòng nhập mật khẩu của bạn.</div>
+
+                        @if (ViewBag.Error2 != null)
+                        {
+                            <div class="alert alert-danger border-0 shadow-sm w-100 text-center" role="alert" style="font-size: 0.85rem;">
+                                <i class="fas fa-exclamation-triangle me-2"></i> @ViewBag.Error2
+                            </div>
+                        }
                     </div>
 
 
