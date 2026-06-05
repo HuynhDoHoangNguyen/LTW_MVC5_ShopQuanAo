@@ -20,21 +20,28 @@ namespace WebsiteShopQuanAo.Controllers
 
         // GET: Products
 
-
+        [ValidateInput(false)]
         public ActionResult Index(string kw, string maDanhMuc, decimal? min, decimal? max, int page = 1)
         {
             int pageSize = 6;
 
+            if (!string.IsNullOrWhiteSpace(kw))
+            {
+                kw = HttpUtility.HtmlEncode(kw);
+            }
+
+            string decodedKw = HttpUtility.HtmlDecode(kw);
+
             // ViewBag để giữ filter khi click menu / phân trang
-            ViewBag.Keyword = kw;
+            ViewBag.Keyword = decodedKw;
             ViewBag.MaDanhMuc = maDanhMuc;
             ViewBag.Min = min;
             ViewBag.Max = max;
 
             var query = db.SAN_PHAM.Where(sp => sp.TRANGTHAI == true);
 
-            if (!string.IsNullOrWhiteSpace(kw))
-                query = query.Where(sp => sp.TENSP.Contains(kw));
+            if (!string.IsNullOrWhiteSpace(decodedKw))
+                query = query.Where(sp => sp.TENSP.Contains(decodedKw));
 
             if (!string.IsNullOrWhiteSpace(maDanhMuc))
                 query = query.Where(sp => sp.MADM == maDanhMuc);
@@ -83,13 +90,21 @@ namespace WebsiteShopQuanAo.Controllers
 
 
 
+        [ValidateInput(false)]
         public PartialViewResult Sidebar(string maDanhMuc = null, decimal? min = null, decimal? max = null, string kw = null)
         {
+            if (!string.IsNullOrWhiteSpace(kw))
+            {
+                kw = HttpUtility.HtmlEncode(kw);
+            }
+
+            string decodedKw = HttpUtility.HtmlDecode(kw);
+
             // Set ViewBag để _Sidebar.cshtml có thể đọc trạng thái filter hiện tại
             ViewBag.MaDanhMuc = maDanhMuc;
             ViewBag.Min       = min;
             ViewBag.Max       = max;
-            ViewBag.Keyword   = kw;
+            ViewBag.Keyword   = decodedKw;
 
             var data = db.NHOM_DANH_MUC
                 .Where(n => n.TRANGTHAI == true)
