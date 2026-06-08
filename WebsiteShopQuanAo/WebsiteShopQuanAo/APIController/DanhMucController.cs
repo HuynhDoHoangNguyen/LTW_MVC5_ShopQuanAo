@@ -37,6 +37,10 @@ namespace WebsiteShopQuanAo.APIController
             if (string.IsNullOrWhiteSpace(model.TENDM))
                 return BadRequest("Tên danh mục không được rỗng");
 
+            bool isDuplicate = db.DANH_MUC.Any(d => d.TENDM == model.TENDM);
+            if (isDuplicate)
+                return BadRequest("Tên danh mục đã tồn tại");
+
             db.SP_DM_ADD(model.TENDM, model.MANHOM);
 
             return Ok("Thêm danh mục thành công");
